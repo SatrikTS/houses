@@ -1,0 +1,17 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node_modules/.bin/nuxt build",
+    "dev": "node_modules/.bin/nuxt dev",
+    "generate": "node_modules/.bin/nuxt generate",
+    "preview": "node_modules/.bin/nuxt preview",
+    "postinstall": "node_modules/.bin/nuxt prepare"
+  },
+  "devDependencies": {
+    "nuxt": "^3.9.0",
+    "vue": "^3.3.13",
+    "vue-router": "^4.2.5"
+  }
+}
