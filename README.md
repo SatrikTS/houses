@@ -7,8 +7,8 @@ Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introdu
 Make sure to install the dependencies:
 
 ```bash
-# npm (use "sudo" if have error)
-npm install
+# npm
+npm install --legacy-peer-deps
 
 # pnpm
 pnpm install
