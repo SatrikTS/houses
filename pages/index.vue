@@ -1,5 +1,4 @@
 <template>
-  <Header text="asd" />
   <div>index</div>
   <v-btn variant="outlined">
     Button

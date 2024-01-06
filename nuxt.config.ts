@@ -40,7 +40,6 @@ export default defineNuxtConfig({
   ],
   components: {
     dirs: [
-      '~/features',
       '~/components',
     ],
     // extensions: ['vue'],
