@@ -2,18 +2,35 @@
   <div class="phones">
     <span class="phones__label">Телефоны</span>
     <a
-      href="tel:+7978787878"
+      v-if="phone_1"
+      :href="`tel:${phone_1}`"
       class="phones__text"
-    >7978787878
+    >{{ phone_1 }}
     </a>
     <a
-      href="tel:+7978787878"
+      v-if="phone_2"
+      :href="`tel:${phone_2}`"
       class="phones__text"
-    >7978787878
+    >{{ phone_2 }}
     </a>
   </div>
 </template>
-<script>
+<script
+  setup
+  lang="ts"
+>
+interface Props {
+  /**
+   * Телефон1
+   */
+  phone_1: string,
+  /**
+   * Телефон2
+   */
+  phone_2: string,
+}
+
+defineProps<Props>();
 </script>
 <style
   scoped

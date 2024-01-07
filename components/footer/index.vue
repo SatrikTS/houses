@@ -1,14 +1,23 @@
 <template>
-  <footer class="footer">
+  <footer
+    :class="{'is-loading' : isLoading}"
+    class="footer"
+  >
     <div class="container">
       <div class="footer__top">
         <Logo />
         <Menu />
       </div>
       <div class="footer__bottom">
-        <Address class="address" />
+        <Address
+          :address="contacts?.address"
+          class="address"
+        />
         <span class="copyright">© ООО «Строительство», 2016—2024</span>
-        <Phones />
+        <Phones
+          :phone_1="contacts?.phone_1"
+          :phone_2="contacts?.phone_2"
+        />
       </div>
     </div>
   </footer>
@@ -17,12 +26,32 @@
   setup
   lang="ts"
 >
+interface Contacts {
+  address: string,
+  email_1: string,
+  email_2: string,
+  phone_1: string,
+  phone_2: string,
+  schedule: string,
+  whereabouts: string
+}
+
+interface Props {
+  contacts: Contacts,
+  isLoading: boolean
+}
+
+const props = defineProps<Props>();
 </script>
 <style
   lang="scss"
 >
 .footer {
   background: $bg-dark;
+
+  &.is-loading {
+    @include skeleton(100%, 170px);
+  }
 
   &__top {
     padding: 16px 0;

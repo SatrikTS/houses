@@ -1,5 +1,8 @@
 <template>
-  <header class="header">
+  <header
+    :class="{'is-loading' : isLoading}"
+    class="header"
+  >
     <div class="container">
       <div class="header__wrap">
         <div class="header__logo">
@@ -7,14 +10,17 @@
         </div>
         <div class="header__contact-info">
           <span class="header__label">Время работы</span>
-          <span class="header__text">пн-сб: 9:00-18:00</span>
+          <span class="header__text">{{ contacts?.schedule }}</span>
           <span class="header__text">вс: выходной</span>
         </div>
         <div class="header__contact-info">
-          <Phones />
+          <Phones
+            :phone_1="contacts?.phone_1"
+            :phone_2="contacts?.phone_2"
+          />
         </div>
         <div class="header__contact-info header__contact-info--last">
-          <Address />
+          <Address :address="contacts?.address" />
         </div>
       </div>
     </div>
@@ -24,6 +30,22 @@
   setup
   lang="ts"
 >
+interface Contacts {
+  address: string,
+  email_1: string,
+  email_2: string,
+  phone_1: string,
+  phone_2: string,
+  schedule: string,
+  whereabouts: string
+}
+
+interface Props {
+  contacts: Contacts,
+  isLoading: boolean
+}
+
+const props = defineProps<Props>();
 </script>
 <style
   scoped
@@ -33,6 +55,10 @@
   background-color: $bg-light;
   color: $bg-dark;
   padding: 10px;
+
+  &.is-loading {
+    @include skeleton(100%, 90px);
+  }
 
   &__wrap {
     display: flex;
