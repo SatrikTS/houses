@@ -1,10 +1,18 @@
 <template>
   <div class="address">
     <span class="address__label">Наш адрес</span>
-    <span class="address__text">Cанкт-Петербург, ул.Достоевского д.138</span>
+    <span class="address__text">{{ address }}</span>
   </div>
 </template>
-<script>
+<script
+  setup
+  lang="ts"
+>
+interface Props {
+  address: string;
+}
+
+defineProps<Props>();
 </script>
 <style
   scoped
