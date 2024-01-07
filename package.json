@@ -23,6 +23,8 @@
     "vuetify": "^3.4.9"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^40.2.0",
+    "@ckeditor/ckeditor5-vue": "^5.1.0",
     "@mdi/font": "^7.4.47",
     "@nuxt/vite-builder": "^3.1.0",
     "@nuxtjs/dotenv": "^1.4.1",
