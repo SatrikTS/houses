@@ -7,7 +7,11 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint:js": "eslint --ext \".ts,.vue\" --ignore-path .gitignore .",
+    "lint:prettier": "prettier --check .",
+    "lint": "yarn lint:js",
+    "lintfix": "prettier --write --list-different . && yarn lint:js --fix"
   },
   "devDependencies": {
     "@types/node": "^18.15.3",
@@ -28,8 +32,14 @@
     "@mdi/font": "^7.4.47",
     "@nuxt/vite-builder": "^3.1.0",
     "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@pinia/nuxt": "^0.5.1",
+    "@typescript-eslint/parser": "^6.18.0",
     "cookie-universal-nuxt": "^2.2.2",
-    "pinia": "^2.1.7"
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.2",
+    "pinia": "^2.1.7",
+    "prettier": "^3.1.1"
   }
 }

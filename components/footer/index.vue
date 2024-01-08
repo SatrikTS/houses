@@ -15,8 +15,8 @@
         />
         <span class="copyright">© ООО «Строительство», 2016—2024</span>
         <Phones
-          :phone_1="contacts?.phone_1"
-          :phone_2="contacts?.phone_2"
+          :phone1="contacts?.phone_1"
+          :phone2="contacts?.phone_2"
         />
       </div>
     </div>
@@ -41,7 +41,7 @@ interface Props {
   isLoading: boolean
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 </script>
 <style
   lang="scss"

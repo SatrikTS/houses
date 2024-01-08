@@ -1,26 +1,26 @@
 export const menuList = [
   {
     link: '/',
-    text: 'Главная'
+    text: 'Главная',
   },
   {
     link: '/projects',
-    text: 'Готовые проекты'
+    text: 'Готовые проекты',
   },
   {
     link: '/building',
-    text: 'Строительство'
+    text: 'Строительство',
   },
   {
     link: '/engineering',
-    text: 'Проектирование'
+    text: 'Проектирование',
   },
   {
     link: '/about',
-    text: 'О компании'
+    text: 'О компании',
   },
   {
     link: '/contacts',
-    text: 'Контакты'
-  }
-]
+    text: 'Контакты',
+  },
+];

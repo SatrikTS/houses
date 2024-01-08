@@ -9,9 +9,9 @@ export const useContactsStore = defineStore('contactsStore', () => {
   /**
    * получение контактов для отображения сайте
    */
-  const getContacts = async () => {
+  const getContacts = async (): Promise<void> => {
     isLoading.value = true;
-    return fetch(`${serverUrl}/contacts`)
+    return await fetch(`${serverUrl}/contacts`)
     .then(response => response.json())
     .then((response) => {
       contacts.value = response;
