@@ -2,16 +2,16 @@
   <div class="phones">
     <span class="phones__label">Телефоны</span>
     <a
-      v-if="phone_1"
-      :href="`tel:${phone_1}`"
+      v-if="phone1"
+      :href="`tel:${phone1}`"
       class="phones__text"
-    >{{ phone_1 }}
+    >{{ phone1 }}
     </a>
     <a
-      v-if="phone_2"
-      :href="`tel:${phone_2}`"
+      v-if="phone2"
+      :href="`tel:${phone2}`"
       class="phones__text"
-    >{{ phone_2 }}
+    >{{ phone2 }}
     </a>
   </div>
 </template>
@@ -23,11 +23,11 @@ interface Props {
   /**
    * Телефон1
    */
-  phone_1: string,
+  phone1: string,
   /**
    * Телефон2
    */
-  phone_2: string,
+  phone2: string,
 }
 
 defineProps<Props>();
@@ -39,7 +39,7 @@ defineProps<Props>();
 .phones {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
 
   &__label {
     font-size: 0.9em;

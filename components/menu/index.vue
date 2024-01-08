@@ -1,69 +1,60 @@
 <template>
   <nav
-    class='menu'
+    class="menu"
     :class="{ active: isActiveMenu }"
   >
     <div class="container">
-      <div v-if='isMobileSize' class='menu__service'>
+      <div
+        v-if="isMobileSize"
+        class="menu__service"
+      >
         <Button
-          buttonStyle='inverse'
-          class='menu__btn'
-          @click='isActiveMenu = !isActiveMenu'
+          buttonStyle="inverse"
+          class="menu__btn"
+          @click="isActiveMenu = !isActiveMenu"
         >
           <span></span>
           <span></span>
           <span></span>
         </Button>
         <Logo />
-        <div class='menu__cart'>
-          <HeaderCart
-            :count='totalCount'
-            :sum='totalSum'
-          />
-        </div>
       </div>
-      <ul class='menu__list'>
+      <ul class="menu__list">
         <li
-          v-for='item in menuList'
-          :key='item.text'
-          class='menu-item'
+          v-for="item in menuList"
+          :key="item.text"
+          class="menu-item"
         >
           <NuxtLink
-            :href='item.link'
+            :href="item.link"
             @click="handleMenu(item)"
-          >{{ item.text }}</NuxtLink>
+          >{{ item.text }}
+          </NuxtLink>
         </li>
       </ul>
     </div>
-
   </nav>
 </template>
 <script
   setup
-  lang='ts'
+  lang="ts"
 >
-import {ref, onMounted, watch} from 'vue'
-import {menuList} from './menuList'
+import { ref } from 'vue';
+import { menuList } from './menuList';
 
 interface Props {
-  isMobileSize: boolean
+  isMobileSize: boolean;
 }
 
-defineProps<Props>()
+defineProps<Props>();
 
-const route = useRoute()
-const totalSum = ref(0)
-const totalCount = ref(0)
-const isActiveMenu = ref(false)
-
-
+const isActiveMenu = ref(false);
 </script>
 <style
   scoped
-  lang='scss'
+  lang="scss"
 >
 .menu {
-
 
   @media (max-width: $mobile) {
     padding: 8px 0;

@@ -23,10 +23,13 @@
     </div>
   </div>
 </template>
-<script setup>
-const logOut = () => {
-  navigateTo('/')
-}
+<script
+  setup
+  lang="ts"
+>
+const logOut = (): void => {
+  navigateTo('/');
+};
 </script>
 <style
   scoped
