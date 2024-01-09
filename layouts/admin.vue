@@ -27,7 +27,12 @@
   setup
   lang="ts"
 >
+import { useAuthStore } from '../store/auth';
+
+const { logUserOut } = useAuthStore();
+
 const logOut = (): void => {
+  logUserOut()
   navigateTo('/');
 };
 </script>

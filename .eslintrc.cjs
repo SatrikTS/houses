@@ -15,7 +15,8 @@ module.exports = {
     "api-templates",
     "node_modules",
     "icons",
-    "*.config.ts"
+    "*.config.ts",
+    "utils/validation.ts"
   ],
   "overrides": [
     {
@@ -121,7 +122,7 @@ module.exports = {
     "vue/v-on-event-hyphenation": "off",
     "unicorn/no-null": "off",
     "unicorn/prefer-code-point": "off",
-    "unicorn/numeric-separators-style": "warn",
+    "unicorn/numeric-separators-style": "off",
     "unicorn/prefer-export-from": "off",
     "unicorn/prevent-abbreviations": [
       "warn",
