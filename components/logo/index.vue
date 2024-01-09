@@ -4,7 +4,7 @@
       <LogoIcon/>
     </div>
     <div class="logo__wrap">
-      <span class="logo__name">Строительство</span>
+      <span class="logo__name">Монолит Строй</span>
       <div class="logo__slogan">
         Проектирование и строительство
         загородных домов
