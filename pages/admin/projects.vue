@@ -9,6 +9,7 @@
 >
 definePageMeta({
   layout: 'admin',
+  middleware: 'auth',
 });
 </script>
 <style scoped>

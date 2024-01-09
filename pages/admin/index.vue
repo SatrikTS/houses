@@ -14,6 +14,7 @@
 >
 definePageMeta({
   layout: 'admin',
+  middleware: 'auth',
 });
 
 const content = ref('asd');
