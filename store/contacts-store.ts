@@ -4,6 +4,7 @@ import { ref } from 'vue';
 export const useContactsStore = defineStore('contactsStore', () => {
   const serverUrl = `${useRuntimeConfig().public.SERVER_URL}`;
   const contacts = ref();
+  const successMsg = ref();
   const isLoading = ref(false);
   const token = useCookie('token');
   
@@ -33,7 +34,10 @@ export const useContactsStore = defineStore('contactsStore', () => {
     })
     .then(response => response.json())
     .then((response) => {
-      console.log('response', response);
+      successMsg.value = response.message;
+      setTimeout(() => {
+        successMsg.value = null
+      }, 3000)
     })
     .finally(() => isLoading.value = false);
   };
@@ -42,6 +46,7 @@ export const useContactsStore = defineStore('contactsStore', () => {
     getContacts,
     putContacts,
     contacts,
+    successMsg,
     isLoading,
   };
 });

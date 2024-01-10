@@ -4,7 +4,6 @@
     <v-form 
         @submit.prevent
         class="form"
-        ref="form"
         @submit="submitContacts"
     >
         <v-text-field
@@ -47,14 +46,21 @@
             v-model="whereabouts"
             label="Cсылка на карту"
         />
-
-        <v-btn
-            class="btn submit-btn"
-            type="submit"
-        >
-            ОТПРАВИТЬ
-        </v-btn>
-
+        <div v-if="successMsg">
+            <v-alert
+                class="alert-success"
+                type="success"
+            >{{ successMsg }}
+            </v-alert>
+        </div>
+        <div v-else>
+            <v-btn
+                class="btn submit-btn"
+                type="submit"
+            >
+                ОТПРАВИТЬ
+            </v-btn>
+        </div>
     </v-form>
 </template>
 
@@ -72,8 +78,7 @@ definePageMeta({
 });
 
 const { getContacts, putContacts } = useContactsStore();
-const { contacts } = storeToRefs(useContactsStore());
-const form = ref();
+const { contacts, successMsg } = storeToRefs(useContactsStore());
 
 await getContacts();
 
@@ -103,10 +108,19 @@ const submitContacts = () => {
     scoped
     lang="scss"
 >
+    h2 {
+        margin-bottom: 30px;
+    }
+
+    h4 {
+        width: 100%;
+        max-width: 600px;
+        margin-bottom: 20px;
+    }
     .form {
         padding-top: 30px;
         width: 100%;
-        max-width: 540px;
+        max-width: 600px;
     }
     .input {
         margin-bottom: 20px;
@@ -117,6 +131,10 @@ const submitContacts = () => {
     }
 
     .submit-btn {
-        margin-right: 20px;
+        margin: 0 20px 24px 0;
+    }
+
+    .alert-success {
+        position: relative;
     }
 </style>
