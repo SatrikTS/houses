@@ -1,5 +1,5 @@
 <template>
-  <div class="logo">
+  <NuxtLink to="/" class="logo">
     <div class="logo__icon">
       <LogoIcon/>
     </div>
@@ -10,7 +10,7 @@
         загородных домов
       </div>
     </div>
-  </div>
+  </NuxtLink>
 </template>
 <script setup lang="ts">
 import LogoIcon from '../../assets/icons/logo-icon.vue'

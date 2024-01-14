@@ -2,44 +2,29 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const useContactsStore = defineStore('contactsStore', () => {
-  const serverUrl = `${useRuntimeConfig().public.SERVER_URL}`;
   const contacts = ref();
   const successMsg = ref();
   const isLoading = ref(false);
-  const token = useCookie('token');
-  
+  const { $api } = useNuxtApp();
+
   /**
    * получение контактов для отображения сайте
    */
   const getContacts = async (): Promise<void> => {
-    
     isLoading.value = true;
-    return await fetch(`${serverUrl}/contacts`)
-    .then(response => response.json())
-    .then((response) => {
-      contacts.value = response;
-    })
-    .finally(() => isLoading.value = false);
+    const { data } = await $api.get('/contacts');
+    contacts.value = data;
+    isLoading.value = false;
   };
 
-  const putContacts = async (param): Promise<void> => {
-    
-    isLoading.value = true;
-    return await fetch(`${serverUrl}/contacts/1`, {
-      headers: {
-        'Authorization': 'Bearer ' + token.value,
-      },
-      method: 'PUT',
-      body: JSON.stringify(param),
-    })
-    .then(response => response.json())
-    .then((response) => {
-      successMsg.value = response.message;
-      setTimeout(() => {
-        successMsg.value = null
-      }, 3000)
-    })
-    .finally(() => isLoading.value = false);
+  const putContacts = async (params: any): Promise<void> => {
+    const { data } = await $api.put('/contacts/1', {
+      ...params,
+    });
+    successMsg.value = data.message;
+    setTimeout(() => {
+      successMsg.value = null;
+    }, 3000);
   };
 
   return {

@@ -23,26 +23,9 @@
         </div>
       </div>
     </div>
-    <div v-if="errorText">
-      <v-alert
-        class="alert"
-        color="error"
-        icon="$error"
-      >{{ errorText }}
-      </v-alert>
-    </div>
+    <ErrorAlert />
   </div>
 </template>
-<script
-  setup
-  lang="ts"
->
-import { useAuthStore } from '../store/auth';
-import { storeToRefs } from 'pinia';
-
-const { errorText } = storeToRefs(useAuthStore());
-
-</script>
 <style
   scoped
   lang="scss"

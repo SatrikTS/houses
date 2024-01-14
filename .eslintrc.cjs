@@ -139,7 +139,10 @@ module.exports = {
           "params": true,
           "Params": true,
           "Props": true,
-          "Ref": true
+          "Ref": true,
+          "successMsg": true,
+          "updateMsg": true,
+          "updateMsgStatus": true,
         }
       }
     ],

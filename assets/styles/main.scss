@@ -12,6 +12,7 @@ body {
 .container {
   width: 1200px;
   margin: 0 auto;
+  position: relative;
 
   @media (max-width: 1366px) {
     width: 100%;
@@ -55,6 +56,7 @@ ul.list {
 p {
   line-height: 1.5;
   font-size: 16px;
+  margin: 0 0 16px;
 }
 
 .row {
@@ -127,4 +129,9 @@ ul.special-list {
   top: 32px;
   right: 32px;
   width: content-box;
+}
+
+.modal {
+  max-width: 100%;
+  width: 500px;
 }

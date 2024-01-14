@@ -12,6 +12,8 @@
           <NuxtLink to="/admin">Главная</NuxtLink>
           <NuxtLink to="/admin/projects">Проекты</NuxtLink>
           <NuxtLink to="/admin/contacts">Контакты</NuxtLink>
+          <div class="admin-service-item">Служебные</div>
+          <NuxtLink to="/admin/roof-materials">Материал крыши</NuxtLink>
         </div>
         <div class="admin-service">
           <v-btn @click="logOut">Выход из админ-панели</v-btn>
@@ -21,18 +23,19 @@
         <slot />
       </div>
     </div>
+    <ErrorAlert />
   </div>
 </template>
 <script
   setup
   lang="ts"
 >
-import { useAuthStore } from '../store/auth';
+import { useAuthStore } from '@/store/auth';
 
 const { logUserOut } = useAuthStore();
 
 const logOut = (): void => {
-  logUserOut()
+  logUserOut();
   navigateTo('/');
 };
 </script>
@@ -55,6 +58,12 @@ const logOut = (): void => {
 .admin-menu {
   display: flex;
   flex-direction: column;
+}
+
+.admin-service-item {
+  background: $danger;
+  color: $bg-light;
+  padding: $offset-base;
 }
 
 .admin-column {

@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
+import { useApiErrorsStore } from '@/store/api-errors-store';
 
 export const useAuthStore = defineStore('auth-store', () => {
-  const errorText = ref();
   const successText = ref();
-
+  const { createErrorMessage } = useApiErrorsStore();
   /**
    * Авторизация админа
    * @param dataForm
@@ -29,11 +29,9 @@ export const useAuthStore = defineStore('auth-store', () => {
       successText.value = responseData.message;
 
       return responseData;
-    } catch (error) {
-      errorText.value = error;
-      setTimeout(() => {
-        errorText.value = null
-      }, 3000)
+    }
+    catch (error) {
+      createErrorMessage(error);
     }
   };
 
@@ -48,7 +46,6 @@ export const useAuthStore = defineStore('auth-store', () => {
   return {
     authenticateAdmin,
     logUserOut,
-    errorText,
     successText,
   };
 });
