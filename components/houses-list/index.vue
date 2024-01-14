@@ -16,6 +16,5 @@
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  padding: 16px 0;
 }
 </style>

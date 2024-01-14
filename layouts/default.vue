@@ -5,11 +5,8 @@
       :contacts="contacts"
     />
     <Menu class="menu"/>
-    <main>
-      <div class="container">
-        main
+    <main class="main">
         <slot />
-      </div>
     </main>
     <Footer
       :isLoading="isLoading"
@@ -24,6 +21,9 @@ const {isLoading, contacts} = storeToRefs(useContactsStore())
 useContactsStore().getContacts()
 </script>
 <style scoped lang="scss">
+.main {
+}
+
 .menu {
   background: $danger;
 }

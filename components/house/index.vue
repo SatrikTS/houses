@@ -35,11 +35,6 @@
           <span class="house__char-dots"></span>
           <span class="house__char-value">5</span>
         </div>
-        <div class="house__char-item">
-          <span class="house__char-key">Спальни:</span>
-          <span class="house__char-dots"></span>
-          <span class="house__char-value">5</span>
-        </div>
       </div>
     </div>
   </article>
@@ -55,7 +50,7 @@ import IconHeart from '@/assets/icons/icon-heart.vue';
   lang="scss"
 >
 .house {
-  border-radius: 15px;
+  border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -73,6 +68,15 @@ import IconHeart from '@/assets/icons/icon-heart.vue';
     position: relative;
     overflow: hidden;
     background: linear-gradient(45deg, #ff7e5f, #feb47b);
+    transition: all 0.25s ease-in-out;
+
+    &::before {
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.25);
+    }
 
     img {
       width: 100%;
@@ -102,7 +106,7 @@ import IconHeart from '@/assets/icons/icon-heart.vue';
 
   &__btn-group {
     display: flex;
-    bottom: 122px;
+    bottom: 94px;
     right: 8px;
     position: absolute;
   }
