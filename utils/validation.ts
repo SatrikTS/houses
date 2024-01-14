@@ -21,7 +21,12 @@ export const phoneRules = ref([
   },
 ])
 
+
 export const requiredRules = ref([
   value => !!value || 'Заполните поле.',
   value => (value || '').length > 2 || 'Минимум 8 символов',
+])
+
+export const emptyRules = ref([
+  value => !!value || 'Заполните поле.',
 ])
