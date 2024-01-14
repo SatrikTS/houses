@@ -14,6 +14,7 @@
           <NuxtLink to="/admin/contacts">Контакты</NuxtLink>
           <div class="admin-service-item">Служебные</div>
           <NuxtLink to="/admin/roof-materials">Материал крыши</NuxtLink>
+          <NuxtLink to="/admin/wall-materials">Материал стен</NuxtLink>
         </div>
         <div class="admin-service">
           <v-btn @click="logOut">Выход из админ-панели</v-btn>

@@ -20,3 +20,8 @@ export const phoneRules = ref([
     return pattern.test(value) || 'Невалидный телефон'
   },
 ])
+
+export const requiredRules = ref([
+  value => !!value || 'Заполните поле.',
+  value => (value || '').length > 2 || 'Минимум 8 символов',
+])

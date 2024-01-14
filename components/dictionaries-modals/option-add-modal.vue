@@ -4,20 +4,21 @@
     class="modal"
   >
     <v-card>
-      <v-toolbar
-        color="#27ae60"
-        title="Создать новый элемент в список"
-      ></v-toolbar>
-      <v-card-text>
-        <v-form
-          class="form"
-          @submit.prevent
-          @submit="emit('confirm')"
-        >
+      <v-form
+        ref="form"
+        class="form"
+        @submit.prevent
+      >
+        <v-toolbar
+          color="#27ae60"
+          title="Создать новый элемент в список"
+        ></v-toolbar>
+        <v-card-text>
           <v-text-field
             v-model="title"
+            :rules="requiredRules"
             class="input"
-            label="Название "
+            label="Название"
           />
           <v-textarea
             v-model="description"
@@ -25,20 +26,21 @@
             clear-icon="mdi-close-circle"
             label="Описание"
           ></v-textarea>
-        </v-form>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn
-          color="primary"
-          @click="emit('update:modelValue', false)"
-        >Отмена
-        </v-btn>
-        <v-btn
-          color="#27ae60"
-          @click="emit('confirm')"
-        >Добавить элемент
-        </v-btn>
-      </v-card-actions>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn
+            color="primary"
+            @click="emit('update:modelValue', false)"
+          >Отмена
+          </v-btn>
+          <v-btn
+            color="#27ae60"
+            type="submit"
+            @click="submitForm"
+          >Добавить элемент
+          </v-btn>
+        </v-card-actions>
+      </v-form>
     </v-card>
   </v-dialog>
 </template>
@@ -46,10 +48,11 @@
   setup
   lang="ts"
 >
+import { requiredRules } from '@/utils/validation';
 import { watch, ref } from 'vue';
 
 interface Props {
-  modelValue: boolean
+  modelValue: boolean;
 }
 
 interface IEmits {
@@ -65,6 +68,14 @@ const emit = defineEmits<IEmits>();
 const showModal = ref();
 const title = ref();
 const description = ref();
+const form = ref();
+
+const submitForm = () => {
+  if (form.value.isValid) {
+    emit('confirm');
+  }
+
+};
 
 watch(() => title.value, () => {
   emit('update:titleOption', title.value);
@@ -76,9 +87,9 @@ watch(() => description.value, () => {
 
 watch(() => props.modelValue, (oldState) => {
   showModal.value = oldState;
-  if(!showModal.value) {
-    title.value = ''
-    description.value = ''
+  if (!showModal.value) {
+    title.value = '';
+    description.value = '';
   }
 });
 
