@@ -20,3 +20,7 @@ export const phoneRules = ref([
     return pattern.test(value) || 'Невалидный телефон'
   },
 ])
+
+export const emptyRules = ref([
+  value => !!value || 'Заполните поле.',
+])
