@@ -19,10 +19,10 @@
         label="Email"
       />
       <v-text-field
-        v-model="topic"
+        v-model="phone"
         class="input"
-        :rules="emptyRules"
-        label="Тема"
+        :rules="phoneRules"
+        label="Номер телефона"
       />
       <v-textarea 
         v-model="message"
@@ -55,7 +55,7 @@ import { emailRules, emptyRules } from '@/utils/validation';
 
 const name = ref();
 const email = ref();
-const topic = ref();
+const phone = ref();
 const message = ref();
 const form = ref();
 const successMsg = ref();
@@ -65,7 +65,7 @@ const submitMessage = async (): Promise<void> => {
     const data = {
       name: name.value,
       email: email.value,
-      topic: topic.value,
+      phone: phone.value,
       message: message.value,
     };
     console.log('data', data);
@@ -73,7 +73,6 @@ const submitMessage = async (): Promise<void> => {
     setTimeout(() => {
       successMsg.value = null;
     }, 3000);
-    topic.value = '';
     message.value = '';
   }
 };
