@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import { RoofMaterials } from '@/utils/types';
+import { OptionsListItem } from '@/utils/types';
 
 export const useRoofsStore = defineStore('dictionariesStore', () => {
   const roofMaterials = ref();
@@ -19,7 +19,7 @@ export const useRoofsStore = defineStore('dictionariesStore', () => {
    * @param param
    * @param id
    */
-  const putRoofMaterial = async (params: RoofMaterials, id: number): Promise<string> => {
+  const putRoofMaterial = async (params: OptionsListItem, id: number): Promise<string> => {
     const { data } = await $api.put(`/roof_materials/${id}`, {
       ...params,
     });
@@ -31,7 +31,7 @@ export const useRoofsStore = defineStore('dictionariesStore', () => {
    * @param param
    * @param id
    */
-  const postRoofMaterial = async (params: RoofMaterials): Promise<string> => {
+  const postRoofMaterial = async (params: OptionsListItem): Promise<string> => {
     const { data } = await $api.post('/roof_materials', {
       ...params,
     });

@@ -7,3 +7,9 @@ export interface Contacts {
   schedule: string,
   whereabouts: string
 }
+
+export interface OptionListItem {
+  id?: number,
+  title: string,
+  description?: string
+}

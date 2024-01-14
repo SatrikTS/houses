@@ -27,13 +27,12 @@ export default defineNuxtPlugin(() => {
   api.interceptors.response.use(
     (response) => response,
     (error) => {
-
       if (error.response && error.response.status >= 500) {
         createErrorMessage(error.message);
       }
 
-      if (error.message) {
-        createErrorMessage(error.message);
+      if (error.response && error.response.data) {
+        createErrorMessage(error.response.data.message);
       }
 
       return Promise.reject(error);
