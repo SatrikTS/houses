@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h2 class="title">{{ title }}</h2>
+  <div class="form-feedback">
+    <h2 class="form-feedback__title">Обратная связь:</h2>
     <v-form
       ref="form"
       @submit.prevent
@@ -8,30 +8,32 @@
     >
       <v-text-field
         v-model="name"
-        class="input"
+        class="form-feedback__input"
         :rules="emptyRules"
         label="Имя"
       />
       <v-text-field
         v-model="email"
-        class="input"
+        class="form-feedback__input"
         :rules="emailRules"
         label="Email"
       />
       <v-text-field
         v-model="phone"
-        class="input"
+        class="form-feedback__input"
         :rules="phoneRules"
         label="Номер телефона"
       />
-      <v-textarea 
+      <v-textarea
         v-model="message"
-        class="input"
+        class="form-feedback__input"
         :rules="emptyRules"
         label="Сообщение"
       />
       <v-btn
+        color="#27ae60"
         class="btn submit-btn"
+        block
         type="submit"
       >
         ОТПРАВИТЬ
@@ -88,11 +90,14 @@ defineProps<Props>();
   scoped
   lang="scss"
 >
-.title {
-  margin-bottom: 20px;
-}
+.form-feedback {
 
-.input {
-  margin-bottom: 20px;
+  &__input {
+    margin: 0 0 $offset-small;
+  }
+
+  &__title {
+    margin-bottom: $offset-base;
+  }
 }
 </style>

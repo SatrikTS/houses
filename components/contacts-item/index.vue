@@ -1,15 +1,15 @@
 <template>
-  <div class="contacts__item">
-      <h2 class="title">{{ title }}</h2>
-      <h3 class="subtitle">Телефон: </h3>
-      <a 
-          class="link" 
+  <div class="contacts-item">
+      <h2 class="contacts-item__title">{{ title }}</h2>
+      <div class="contacts-item__subtitle">Телефон: </div>
+      <a
+          class="link"
           href="tel:{{ phone }}">
           {{ phone }}
       </a>
-      <h3 class="subtitle">Электронная почта: </h3>
-      <a 
-          class="link" 
+      <div class="contacts-item__subtitle">Электронная почта: </div>
+      <a
+          class="link"
           href="mailto:{{ email }}">
           {{ email }}
       </a>
@@ -33,16 +33,21 @@ defineProps<Props>();
   scoped
   lang="scss"
 >
-.contacts__item {
+.contacts-item {
   display: flex;
   flex-direction: column;
-}
-.title {
-  margin-bottom: 20px;
+
+  &__title {
+    margin-bottom: $offset-base;
+  }
+
+  &__subtitle {
+    font-size: 16px;
+    font-weight: 700;
+  }
 }
 
 .link {
-  display: block;
 
   &:not(:last-child) {
     margin-bottom: 10px;
