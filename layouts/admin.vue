@@ -15,6 +15,7 @@
           <div class="admin-service-item">Служебные</div>
           <NuxtLink to="/admin/roof-materials">Материал крыши</NuxtLink>
           <NuxtLink to="/admin/wall-materials">Материал стен</NuxtLink>
+          <NuxtLink to="/admin/foundation-types">Тип фундамента</NuxtLink>
         </div>
         <div class="admin-service">
           <v-btn @click="logOut">Выход из админ-панели</v-btn>

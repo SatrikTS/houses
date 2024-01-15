@@ -1,53 +1,49 @@
 <template>
-  <div class="contacts">
-    <h1>Контакты</h1>
-    <div class="contacts__wrap">
-      <div class="contacts__info">
-        <div class="contacts__row">
-          <ContactsItem
-            class="contacts__item" 
-            :title="contact_1.title"
-            :phone="contact_1.phone"
-            :email="contact_1.email"
-          /> 
-          <ContactsItem 
-            class="contacts__item" 
-            :title="contact_2.title"
-            :phone="contact_2.phone"
-            :email="contact_2.email"
-          /> 
+    <div class="contacts">
+      <TitleItem class="contacts__caption" caption="Контакты"/>
+      <div class="container">
+      <div class="contacts__wrap">
+        <div class="contacts__info">
+          <div class="contacts__row">
+            <ContactsItem
+              class="contacts__item"
+              :title="contact1.title"
+              :phone="contact1.phone"
+              :email="contact1.email"
+            />
+            <ContactsItem
+              class="contacts__item"
+              :title="contact2.title"
+              :phone="contact2.phone"
+              :email="contact2.email"
+            />
+          </div>
+          <div class="contacts__address">
+            <h2 class="contacts__title">Наш адрес:</h2>
+            <h3 class="subtitle">{{contacts.address}}</h3>
+          </div>
+          <iframe
+            :src="mapLink"
+            width="100%"
+            height="400"
+            frameborder="1"
+            allowfullscreen="true"
+            style="position:relative;"
+          >
+            </iframe>
         </div>
-        <ContactsAddress 
-          class="contacts__address"
-          :title="address.title"
-          :address="address.address"
-        />
-        <div style="position:relative;overflow:hidden;">
-          <iframe 
-            :src="mapLink" 
-            width="100%" 
-            height="400" 
-            frameborder="1" 
-            allowfullscreen="true" 
-            style="position:relative;">
-          </iframe>
+        <div class="contacts__form">
+          <FormFeedback />
         </div>
-      </div>
-      <div class="contacts__form">
-        <form-feedback 
-          class="contacts__feedback"
-          :title="feedback.title"
-        />
       </div>
     </div>
   </div>
 </template>
-
 <script
   setup
   lang="ts"
 >
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
 import { useContactsStore } from '@/store/contacts-store';
 
 const { getContacts } = useContactsStore();
@@ -56,63 +52,61 @@ const { contacts } = storeToRefs(useContactsStore());
 await getContacts();
 
 const mapLink = ref(contacts.value.whereabouts);
-const contact_1 = ref({
+const contact1 = reactive({
   title: 'Отдел продаж:',
   phone: contacts.value.phone_1,
   email: contacts.value.email_1,
 });
-const contact_2 = ref({
+const contact2 = reactive({
   title: 'Технический отдел:',
   phone: contacts.value.phone_2,
   email: contacts.value.email_2,
 });
-const address = ref({
-  title: 'Наш адрес:',
-  address: contacts.value.address,
-});
-const feedback = ref({
-  title: 'Обратная связь:',
-});
-
 </script>
-
 <style
   scoped
   lang="scss"
 >
 .contacts {
-  margin: 30px 0 100px;
-  padding: 0 40px;
-}
-.contacts__wrap {
-  display: flex;
-  justify-content: space-between;
-}
+  margin-bottom: $offset-large-2;
 
-h1 {
-  margin-bottom: 50px;
-}
-
-.contacts__info {
-  width: 55%;
-}
-
-.contacts__row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 70px;
-}
-
-.contacts__item {
-  &:not(:last-child) {
-    margin-right: 90px;
+  &__caption {
+    margin-bottom: $offset-large-2;
   }
+
+  &__title {
+    margin-bottom: $offset-base;
+  }
+
+  &__wrap {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__info {
+    width: 55%;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $offset-large-2;
+  }
+
+  &__item {
+    &:not(:last-child) {
+      margin-right: 90px;
+    }
+  }
+
+  &__address {
+    margin-bottom: $offset-large-2;
+  }
+
+  &__form {
+    width: 30%;
+  }
+
 }
 
-.contacts__address {
-  margin-bottom: 30px;
-}
-.contacts__form {
-  width: 30%;
-}
 </style>

@@ -5,7 +5,7 @@ export const menuList = [
   },
   {
     link: '/projects',
-    text: 'Готовые проекты',
+    text: 'Проекты',
   },
   {
     link: '/building',

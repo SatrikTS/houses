@@ -70,7 +70,7 @@ const title = ref();
 const description = ref();
 const form = ref();
 
-const submitForm = () => {
+const submitForm = (): void => {
   if (form.value.isValid) {
     emit('confirm');
   }
