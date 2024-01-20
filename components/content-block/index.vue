@@ -5,20 +5,14 @@
     </div>
   </div>
 </template>
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 interface Props {
   text: string;
 }
 
 defineProps<Props>();
 </script>
-<style
-  scoped
-  lang="scss"
->
+<style scoped lang="scss">
 .content-block {
   display: flex;
   flex-direction: column;

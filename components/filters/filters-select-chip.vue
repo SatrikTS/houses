@@ -1,31 +1,19 @@
 <template>
-  <v-chip
-    v-if="index < 2"
-    size="x-small"
-  >
+  <v-chip v-if="index < 2" size="x-small">
     <span>{{ item.title }}</span>
   </v-chip>
-  <span
-    v-if="index === 2"
-    class="select-slot"
-  >(+{{ value.length - 2 }})</span>
+  <span v-if="index === 2" class="select-slot">(+{{ value.length - 2 }})</span>
 </template>
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 interface Props {
-  value: any,
-  item: any,
-  index: number
+  value: any;
+  item: any;
+  index: number;
 }
 
 defineProps<Props>();
 </script>
-<style
-  scoped
-  lang="scss"
->
+<style scoped lang="scss">
 .select-slot {
   background: $bg-light;
   border-radius: 4px;

@@ -1,22 +1,17 @@
 <template>
   <div class="banner">
     <div class="banner__wrap">
-      <img
-        src="@/assets/images/banner2.jpg"
-        alt="Строительство домов"
-      >
+      <img src="@/assets/images/banner2.jpg" alt="Строительство домов" />
       <div class="container">
-        <h1 class="main-title">Строительство монолитных домов в Санкт-Петербурге и области</h1>
+        <h1 class="main-title">
+          Строительство монолитных домов в Санкт-Петербурге и области
+        </h1>
       </div>
     </div>
   </div>
 </template>
-<script>
-</script>
-<style
-  scoped
-  lang="scss"
->
+<script></script>
+<style scoped lang="scss">
 .banner {
   position: relative;
 
@@ -27,7 +22,7 @@
 
     &::before {
       position: absolute;
-      content: '';
+      content: "";
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.25);

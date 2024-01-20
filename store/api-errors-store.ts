@@ -11,7 +11,7 @@ export const useApiErrorsStore = defineStore('api-errors', () => {
   const createErrorMessage = (message: string): void => {
     errorMessage.value = message;
 
-    setTimeout(() => errorMessage.value = '', 4000);
+    setTimeout(() => (errorMessage.value = ''), 4000);
   };
 
   return {

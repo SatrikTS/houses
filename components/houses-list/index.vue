@@ -1,20 +1,29 @@
 <template>
   <div class="houses-list">
-    <House v-for="item in 4" :key="item"/>
+    <div class="container">
+      <div class="houses-list__wrap">
+        <House v-for="item in projects?.data" :key="item.id" :data="item" />
+      </div>
+    </div>
   </div>
 </template>
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
+interface Props {
+  projects: any;
+}
+
+defineProps<Props>();
 </script>
-<style
-  scoped
-  lang="scss"
->
+<style scoped lang="scss">
 .houses-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  background: $bg-base;
+  padding: $offset-xlarge 0;
+  min-height: 500px;
+
+  &__wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
 }
 </style>

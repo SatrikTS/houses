@@ -4,71 +4,57 @@ module.exports = {
     browser: true,
     node: true,
   },
-  parser: 'vue-eslint-parser',
+  parser: "vue-eslint-parser",
   parserOptions: {
-    parser: '@typescript-eslint/parser',
+    parser: "@typescript-eslint/parser",
   },
-  extends: ['@nuxtjs/eslint-config-typescript', 'plugin:prettier/recommended'],
+  extends: ["@nuxtjs/eslint-config-typescript", "plugin:prettier/recommended"],
   plugins: [],
-  "ignorePatterns": [
+  ignorePatterns: [
     "api",
     "api-templates",
     "node_modules",
     "icons",
     "*.config.ts",
-    "utils/validation.ts"
+    "utils/validation.ts",
   ],
-  "overrides": [
+  overrides: [
     {
-      "files": [
-        "*.json",
-        "*.json5",
-        "*.jsonc",
-      ],
-      "parser": "jsonc-eslint-parser"
-    }
+      files: ["*.json", "*.json5", "*.jsonc"],
+      parser: "jsonc-eslint-parser",
+    },
   ],
   rules: {
     "no-secrets/no-secrets": "off",
-    "indent": "off",
+    indent: "off",
     "max-len": [
       "warn",
       {
-        "code": 300,
-        "ignoreComments": true,
-        "ignoreStrings": true,
-        "ignoreTemplateLiterals": true,
-        "ignoreRegExpLiterals": true,
-      }
+        code: 300,
+        ignoreComments: true,
+        ignoreStrings: true,
+        ignoreTemplateLiterals: true,
+        ignoreRegExpLiterals: true,
+      },
     ],
     "no-else-return": 1,
     "newline-before-return": "off",
     "no-new": "off",
     "space-before-function-paren": "off",
-    "eqeqeq": "off",
-    "quotes": [
-      "error",
-      "single"
-    ],
-    "vue/html-quotes": [ "error", "double", { "avoidEscape": false } ],
+    eqeqeq: "off",
+    quotes: ["error", "single"],
+    "vue/html-quotes": ["error", "double", { avoidEscape: false }],
     "no-extra-boolean-cast": "off",
     "no-async-promise-executor": "off",
     "no-implicit-coercion": "off",
     "no-useless-escape": "off",
-    "comma-dangle": [
-      "error",
-      "always-multiline"
-    ],
+    "comma-dangle": ["error", "always-multiline"],
     "import/order": "off",
     "import/no-unresolved": [
       "error",
       {
-        "ignore": [
-          "\\.vue$",
-          "\\.svg$",
-          "\\.(scss)$"
-        ]
-      }
+        ignore: ["\\.vue$", "\\.svg$", "\\.(scss)$"],
+      },
     ],
     "@typescript-eslint/indent": "off",
     "@typescript-eslint/space-before-function-paren": "off",
@@ -86,8 +72,8 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": [
       "error",
       {
-        "argsIgnorePattern": "^_"
-      }
+        argsIgnorePattern: "^_",
+      },
     ],
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-empty-function": "off",
@@ -98,7 +84,7 @@ module.exports = {
     "@typescript-eslint/member-ordering": [
       "error",
       {
-        "default": [
+        default: [
           "static-field",
           "decorated-field",
           "abstract-field",
@@ -107,9 +93,9 @@ module.exports = {
           "static-method",
           "instance-method",
           "abstract-method",
-          "decorated-method"
-        ]
-      }
+          "decorated-method",
+        ],
+      },
     ],
     "@typescript-eslint/explicit-function-return-type": "warn",
     "@typescript-eslint/no-non-null-assertion": "off",
@@ -127,30 +113,30 @@ module.exports = {
     "unicorn/prevent-abbreviations": [
       "warn",
       {
-        "allowList": {
-          "props": true,
-          "env": true,
-          "e": true,
-          "acc": true,
-          "el": true,
-          "ref": true,
-          "args": true,
-          "arg": true,
-          "params": true,
-          "Params": true,
-          "Props": true,
-          "Ref": true,
-          "successMsg": true,
-          "updateMsg": true,
-          "updateMsgStatus": true,
-        }
-      }
+        allowList: {
+          props: true,
+          env: true,
+          e: true,
+          acc: true,
+          el: true,
+          ref: true,
+          args: true,
+          arg: true,
+          params: true,
+          Params: true,
+          Props: true,
+          Ref: true,
+          successMsg: true,
+          updateMsg: true,
+          updateMsgStatus: true,
+        },
+      },
     ],
     "unicorn/consistent-function-scoping": [
       "error",
       {
-        "checkArrowFunctions": false
-      }
+        checkArrowFunctions: false,
+      },
     ],
     "unicorn/no-array-reduce": "off",
     "prettier/prettier": "off",
@@ -204,6 +190,6 @@ module.exports = {
     "import/no-duplicates": "off",
     "ino-extra-boolean-cast": "off",
     "sonarjs/no-identical-functions": "off",
-    "vue/no-reserved-component-names": "off"
-  }
-}
+    "vue/no-reserved-component-names": "off",
+  },
+};

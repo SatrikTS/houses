@@ -8,10 +8,7 @@
     @createData="createData"
   />
 </template>
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useWallsStore } from '@/store/wall-store';
@@ -22,9 +19,9 @@ definePageMeta({
 });
 
 interface OptionListItem {
-  id?: number,
-  title: string,
-  description?: string
+  id?: number;
+  title: string;
+  description?: string;
 }
 
 const {
@@ -53,7 +50,10 @@ const removeData = async (id: number): Promise<void> => {
  * @param item
  * @param index
  */
-const updateData = async (params: OptionListItem, id: number): Promise<void> => {
+const updateData = async (
+  params: OptionListItem,
+  id: number,
+): Promise<void> => {
   const response = await putWallMaterial(params, id);
   updateMsgStatus(response);
 };
@@ -73,8 +73,6 @@ const createData = async (params: OptionListItem): Promise<void> => {
  */
 const updateMsgStatus = (response: string): void => {
   updateMsg.value = response;
-  setTimeout(() => updateMsg.value = '', 2000);
+  setTimeout(() => (updateMsg.value = ''), 2000);
 };
 </script>
-<style scoped>
-</style>

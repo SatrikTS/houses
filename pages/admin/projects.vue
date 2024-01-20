@@ -1,16 +1,10 @@
 <template>
-  <div>
-    admin projects page
-  </div>
+  <div>admin projects page</div>
 </template>
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 definePageMeta({
   layout: 'admin',
   middleware: 'auth',
 });
 </script>
-<style scoped>
-</style>
+<style scoped></style>

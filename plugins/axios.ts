@@ -12,14 +12,14 @@ export default defineNuxtPlugin(() => {
       common: {},
       put: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token.value,
+        Authorization: 'Bearer ' + token.value,
       },
       post: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token.value,
+        Authorization: 'Bearer ' + token.value,
       },
       delete: {
-        'Authorization': 'Bearer ' + token.value,
+        Authorization: 'Bearer ' + token.value,
       },
     },
   });

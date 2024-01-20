@@ -1,24 +1,19 @@
 <template>
   <div>
-    <Header
-      :isLoading="isLoading"
-      :contacts="contacts"
-    />
-    <Menu class="menu"/>
+    <Header :isLoading="isLoading" :contacts="contacts" />
+    <Menu class="menu" />
     <main class="main">
-        <slot />
+      <slot />
     </main>
-    <Footer
-      :isLoading="isLoading"
-      :contacts="contacts"/>
+    <Footer :isLoading="isLoading" :contacts="contacts" />
   </div>
 </template>
 <script setup>
 import { storeToRefs } from 'pinia';
 import { useContactsStore } from '../store/contacts-store';
 
-const {isLoading, contacts} = storeToRefs(useContactsStore())
-useContactsStore().getContacts()
+const { isLoading, contacts } = storeToRefs(useContactsStore());
+useContactsStore().getContacts();
 </script>
 <style scoped lang="scss">
 .main {

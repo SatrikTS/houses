@@ -11,10 +11,13 @@ export const useAuthStore = defineStore('auth-store', () => {
    */
   const authenticateAdmin = async (dataForm: any): Promise<any> => {
     try {
-      const response = await fetch(`${useRuntimeConfig().public.SERVER_URL}/admin`, {
-        method: 'POST',
-        body: dataForm,
-      });
+      const response = await fetch(
+        `${useRuntimeConfig().public.SERVER_URL}/admin`,
+        {
+          method: 'POST',
+          body: dataForm,
+        },
+      );
 
       if (!response.ok) {
         const errorResponse = await response.json();
@@ -29,8 +32,7 @@ export const useAuthStore = defineStore('auth-store', () => {
       successText.value = responseData.message;
 
       return responseData;
-    }
-    catch (error) {
+    } catch (error) {
       createErrorMessage(error);
     }
   };

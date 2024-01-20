@@ -7,10 +7,7 @@
     </div>
   </div>
 </template>
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 interface Props {
   /**
    * Заголовок
@@ -20,10 +17,7 @@ interface Props {
 
 defineProps<Props>();
 </script>
-<style
-  scoped
-  lang="scss"
->
+<style scoped lang="scss">
 .title {
   background: $bg-base;
   padding: $offset-base 0;

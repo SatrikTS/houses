@@ -8,10 +8,7 @@
     @createData="createData"
   />
 </template>
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useFoundationsStore } from '@/store/foundation-store';
@@ -22,9 +19,9 @@ definePageMeta({
 });
 
 interface OptionListItem {
-  id?: number,
-  title: string,
-  description?: string
+  id?: number;
+  title: string;
+  description?: string;
 }
 
 const {
@@ -52,7 +49,10 @@ const removeData = async (id: number): Promise<void> => {
  * @param item
  * @param index
  */
-const updateData = async (params: OptionListItem, id: number): Promise<void> => {
+const updateData = async (
+  params: OptionListItem,
+  id: number,
+): Promise<void> => {
   const response = await putFoundationMaterial(params, id);
   updateMsgStatus(response);
 };
@@ -72,61 +72,6 @@ const createData = async (params: OptionListItem): Promise<void> => {
  */
 const updateMsgStatus = (response: string): void => {
   updateMsg.value = response;
-  setTimeout(() => updateMsg.value = '', 2000);
+  setTimeout(() => (updateMsg.value = ''), 2000);
 };
 </script>
-<style
-  scoped
-  lang="scss"
->
-.category-list {
-  min-height: 600px;
-  margin: 0 0 $offset-base;
-
-  &__header {
-    display: flex;
-    width: 100%;
-    font-size: 13px;
-    line-height: 1.5;
-
-    & > div {
-      background: #f3f3f3;
-    }
-  }
-
-  &__content {
-    display: flex;
-    width: 100%;
-    font-size: 13px;
-    line-height: 1.5;
-
-    &:hover {
-      background: rgba($bg-base, 0.5);
-    }
-  }
-
-  &__item {
-    border: 1px solid $bg-base;
-    border-bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 4px;
-    flex: 1;
-
-    &--btns {
-      width: 250px;
-      flex: none;
-
-      button {
-        margin: 0 4px;
-      }
-    }
-
-    &--id {
-      width: 100px;
-      flex: none;
-    }
-  }
-}
-</style>

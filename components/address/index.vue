@@ -4,20 +4,14 @@
     <span class="address__text">{{ address }}</span>
   </div>
 </template>
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 interface Props {
   address: string;
 }
 
 defineProps<Props>();
 </script>
-<style
-  scoped
-  lang="scss"
->
+<style scoped lang="scss">
 .address {
   display: flex;
   flex-direction: column;

@@ -1,13 +1,7 @@
 <template>
-  <nav
-    class="menu"
-    :class="{ active: isActiveMenu }"
-  >
+  <nav class="menu" :class="{ active: isActiveMenu }">
     <div class="container">
-      <div
-        v-if="isMobileSize"
-        class="menu__service"
-      >
+      <div v-if="isMobileSize" class="menu__service">
         <Button
           buttonStyle="inverse"
           class="menu__btn"
@@ -20,25 +14,16 @@
         <Logo />
       </div>
       <ul class="menu__list">
-        <li
-          v-for="item in menuList"
-          :key="item.text"
-          class="menu-item"
-        >
-          <NuxtLink
-            :href="item.link"
-            @click="handleMenu(item)"
-          >{{ item.text }}
+        <li v-for="item in menuList" :key="item.text" class="menu-item">
+          <NuxtLink :href="item.link" @click="handleMenu(item)"
+            >{{ item.text }}
           </NuxtLink>
         </li>
       </ul>
     </div>
   </nav>
 </template>
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 import { ref } from 'vue';
 import { menuList } from './menuList';
 
@@ -50,12 +35,8 @@ defineProps<Props>();
 
 const isActiveMenu = ref(false);
 </script>
-<style
-  scoped
-  lang="scss"
->
+<style scoped lang="scss">
 .menu {
-
   @media (max-width: $mobile) {
     padding: 8px 0;
   }
@@ -66,7 +47,7 @@ const isActiveMenu = ref(false);
     justify-content: space-between;
     margin: 0;
     padding: $offset-base 0;
-    transition: all .55s ease-in-out;
+    transition: all 0.55s ease-in-out;
 
     @media (max-width: $mobile) {
       overflow: hidden;
@@ -94,7 +75,7 @@ const isActiveMenu = ref(false);
       transition: transform 0.25s ease-in-out;
 
       &:first-child {
-        top: 12px
+        top: 12px;
       }
 
       &:nth-child(2) {
@@ -125,12 +106,10 @@ const isActiveMenu = ref(false);
   }
 
   &__cart {
-
   }
 
   &.active {
     .menu__btn {
-
       span:first-child {
         top: 18px;
         transform: rotate(45deg);

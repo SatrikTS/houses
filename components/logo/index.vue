@@ -1,22 +1,20 @@
 <template>
   <NuxtLink to="/" class="logo">
     <div class="logo__icon">
-      <LogoIcon/>
+      <LogoIcon />
     </div>
     <div class="logo__wrap">
       <span class="logo__name">Монолит Строй</span>
       <div class="logo__slogan">
-        Проектирование и строительство
-        загородных домов
+        Проектирование и строительство загородных домов
       </div>
     </div>
   </NuxtLink>
 </template>
 <script setup lang="ts">
-import LogoIcon from '../../assets/icons/logo-icon.vue'
+import LogoIcon from '../../assets/icons/logo-icon.vue';
 </script>
 <style scoped lang="scss">
-
 .logo {
   display: flex;
   align-items: center;
@@ -28,7 +26,6 @@ import LogoIcon from '../../assets/icons/logo-icon.vue'
     height: 70px;
     display: flex;
   }
-
 
   &__wrap {
     display: flex;
