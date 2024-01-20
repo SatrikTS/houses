@@ -1,14 +1,7 @@
 <template>
-  <v-dialog
-    v-model="showModal"
-    class="modal"
-  >
+  <v-dialog v-model="showModal" class="modal">
     <v-card>
-      <v-form
-        ref="form"
-        class="form"
-        @submit.prevent
-      >
+      <v-form ref="form" class="form" @submit.prevent>
         <v-toolbar
           color="#27ae60"
           title="Создать новый элемент в список"
@@ -28,26 +21,18 @@
           ></v-textarea>
         </v-card-text>
         <v-card-actions>
-          <v-btn
-            color="primary"
-            @click="emit('update:modelValue', false)"
-          >Отмена
+          <v-btn color="primary" @click="emit('update:modelValue', false)"
+            >Отмена
           </v-btn>
-          <v-btn
-            color="#27ae60"
-            type="submit"
-            @click="submitForm"
-          >Добавить элемент
+          <v-btn color="#27ae60" type="submit" @click="submitForm"
+            >Добавить элемент
           </v-btn>
         </v-card-actions>
       </v-form>
     </v-card>
   </v-dialog>
 </template>
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 import { requiredRules } from '@/utils/validation';
 import { watch, ref } from 'vue';
 
@@ -56,9 +41,9 @@ interface Props {
 }
 
 interface IEmits {
-  (e: 'update:modelValue', value: boolean): void,
-  (e: 'update:titleOption', value: string): void,
-  (e: 'update:descriptionOption', value: string): void,
+  (e: 'update:modelValue', value: boolean): void;
+  (e: 'update:titleOption', value: string): void;
+  (e: 'update:descriptionOption', value: string): void;
   (e: 'confirm'): void;
 }
 
@@ -74,26 +59,37 @@ const submitForm = (): void => {
   if (form.value.isValid) {
     emit('confirm');
   }
-
 };
 
-watch(() => title.value, () => {
-  emit('update:titleOption', title.value);
-});
+watch(
+  () => title.value,
+  () => {
+    emit('update:titleOption', title.value);
+  },
+);
 
-watch(() => description.value, () => {
-  emit('update:descriptionOption', description.value);
-});
+watch(
+  () => description.value,
+  () => {
+    emit('update:descriptionOption', description.value);
+  },
+);
 
-watch(() => props.modelValue, (oldState) => {
-  showModal.value = oldState;
-  if (!showModal.value) {
-    title.value = '';
-    description.value = '';
-  }
-});
+watch(
+  () => props.modelValue,
+  (oldState) => {
+    showModal.value = oldState;
+    if (!showModal.value) {
+      title.value = '';
+      description.value = '';
+    }
+  },
+);
 
-watch(() => showModal.value, () => {
-  if (!showModal.value) emit('update:modelValue', false);
-});
+watch(
+  () => showModal.value,
+  () => {
+    if (!showModal.value) emit('update:modelValue', false);
+  },
+);
 </script>

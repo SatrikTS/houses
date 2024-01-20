@@ -1,25 +1,45 @@
 <template>
   <div class="filters">
-    <div class="filters-item">
-      <label
-        for=""
-        class="filters-label"
-      >Площадь
-      </label>
-      <div class="filters__group filters__group--wide">
+    <div class="filters__group filters__group--triple">
+      <div class="filters__caption">Фильтр по проектам</div>
+      <v-select
+        v-model="filtersList.roof_types"
+        label="Тип крыши"
+        :items="roofsTypeOptions"
+        clearable
+        multiple
+        density="compact"
+        variant="outlined"
+        class="filters__item-single"
+      >
+        <template #selection="{ item, index }">
+          <FiltersSelectChip
+            :value="filtersList.roof_types"
+            :item="item"
+            :index="index"
+          />
+        </template>
+      </v-select>
+      <div class="filters__slider">
+        <label
+          for=""
+          class="filters-label"
+        >Площадь
+        </label>
         <v-range-slider
-          v-model="rangeSquare"
+          v-model="totalArea"
           :max="1000"
           :min="0"
           :step="1"
           hide-details
-          class="filters__slider"
+          density="compact"
         >
           <template #prepend>
             <v-text-field
-              v-model="rangeSquare[0]"
+              v-model="totalArea[0]"
               hide-details
               single-line
+              disabled
               type="number"
               variant="outlined"
               density="compact"
@@ -30,9 +50,10 @@
           </template>
           <template #append>
             <v-text-field
-              v-model="rangeSquare[1]"
+              v-model="totalArea[1]"
               hide-details
               single-line
+              disabled
               type="number"
               min="0"
               max="1000"
@@ -46,55 +67,109 @@
     </div>
     <div class="filters__group">
       <v-select
+        v-model="filtersList.wall_materials"
         label="Материалы стен"
-        v-model="walls"
         :items="wallsOptions"
+        density="compact"
         clearable
         multiple
         variant="outlined"
       >
-        <template v-slot:selection="{ item, index }">
+        <template #selection="{ item, index }">
           <FiltersSelectChip
-            :value="walls"
+            :value="filtersList.wall_materials"
             :item="item"
             :index="index"
           />
         </template>
       </v-select>
       <v-select
+        v-model="filtersList.roof_materials"
         label="Материалы крыши"
         :items="roofsOptions"
-        v-model="roofs"
         clearable
         multiple
+        density="compact"
         variant="outlined"
       >
-        <template v-slot:selection="{ item, index }">
+        <template #selection="{ item, index }">
           <FiltersSelectChip
-            :value="roofs"
+            :value="filtersList.roof_materials"
             :item="item"
             :index="index"
           />
         </template>
       </v-select>
       <v-select
+        v-model="filtersList.foundation_types"
         label="Тип фундамента"
         :items="foundationsOptions"
-        v-model="founds"
         clearable
         multiple
+        density="compact"
         variant="outlined"
       >
-        <template v-slot:selection="{ item, index }">
+        <template #selection="{ item, index }">
           <FiltersSelectChip
-            :value="founds"
+            :value="filtersList.foundation_types"
+            :item="item"
+            :index="index"
+          />
+        </template>
+      </v-select>
+      <v-select
+        v-model="filtersList.room_counts"
+        label="Количество комнат"
+        :items="roomsOptions"
+        clearable
+        multiple
+        density="compact"
+        variant="outlined"
+      >
+        <template #selection="{ item, index }">
+          <FiltersSelectChip
+            :value="filtersList.room_counts"
             :item="item"
             :index="index"
           />
         </template>
       </v-select>
     </div>
-    <div class="filters-item">
+    <div class="filters__group filters__group--wide">
+      <v-select
+        v-model="filtersList.heating_types"
+        label="Тип отопления"
+        :items="heatingOptions"
+        clearable
+        multiple
+        density="compact"
+        variant="outlined"
+      >
+        <template #selection="{ item, index }">
+          <FiltersSelectChip
+            :value="filtersList.heating_types"
+            :item="item"
+            :index="index"
+          />
+        </template>
+      </v-select>
+      <v-select
+        v-model="filtersList.level_types"
+        label="Кол-во этажей"
+        :items="levelsOptions"
+        clearable
+        multiple
+        density="compact"
+        variant="outlined"
+      >
+        <template #selection="{ item, index }">
+          <FiltersSelectChip
+            :value="filtersList.level_types"
+            :item="item"
+            :index="index"
+          />
+        </template>
+      </v-select>
     </div>
   </div>
 </template>
@@ -102,29 +177,67 @@
   setup
   lang="ts"
 >
-import { ref } from 'vue';
-import type { OptionsListItem } from '@/utils/types';
+import { ref, watch, reactive } from 'vue';
+import type { OptionsListItem, FiltersList } from '@/utils/types';
 import FiltersSelectChip from './filters-select-chip.vue';
+import debounce from '~/utils/debounce';
 
 interface Props {
-  wallsOptions: OptionsListItem[],
-  roofsOptions: OptionsListItem[],
-  foundationsOptions: OptionsListItem[]
+  wallsOptions: OptionsListItem[];
+  roofsOptions: OptionsListItem[];
+  foundationsOptions: OptionsListItem[];
+  heatingOptions: OptionsListItem[];
+  roomsOptions: OptionsListItem[];
+  levelsOptions: OptionsListItem[];
+  roofsTypeOptions: OptionsListItem[];
+}
+
+interface IEmits {
+  /**
+   * Фильтруем проекты
+   * @param e
+   * @param value
+   */
+  (e: 'filters', value: FiltersList): void;
 }
 
 defineProps<Props>();
+const emit = defineEmits<IEmits>();
 
-const rangeSquare = ref([0, 100]);
-const walls = ref();
-const roofs = ref();
-const founds = ref();
+const totalArea = ref([0, 1000]);
+const filtersList = reactive<FiltersList>({
+  roof_materials: [],
+  wall_materials: [],
+  foundation_types: [],
+  roof_types: [],
+  heating_types: [],
+  level_types: [],
+  room_counts: [],
+});
+
+watch(filtersList, () => {
+  emit('filters', {
+    ...filtersList,
+    min_area: totalArea.value[0],
+    max_area: totalArea.value[1],
+  });
+});
+
+watch(totalArea, () => {
+  debounce(() => {
+    emit('filters', {
+      ...filtersList,
+      min_area: totalArea.value[0],
+      max_area: totalArea.value[1],
+    });
+  }, 1000);
+});
 </script>
 <style
   scoped
   lang="scss"
 >
 .filters {
-  gap: $offset-base;
   display: flex;
   flex-direction: column;
 
@@ -136,11 +249,41 @@ const founds = ref();
     &--wide {
       grid-template-columns: repeat(2, 1fr);
     }
+
+    &--triple {
+      display: grid;
+      align-items: flex-end;
+      gap: 16px;
+      margin: 0 0 22px;
+    }
   }
 
   &__slider {
-    margin: 0 !important;
+    grid-column: span 2;
+
+    & > div {
+      margin: 0 !important;
+    }
   }
 
+  &__item-single {
+    grid-column: span 1;
+    position: relative;
+    top: 23px;
+  }
+
+  &__item {
+    padding: $offset-base 0 0;
+  }
+
+  &__caption {
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    grid-column: span 1;
+  }
 }
 </style>

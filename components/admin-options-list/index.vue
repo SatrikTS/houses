@@ -3,10 +3,8 @@
     <h2>{{ title }}</h2>
     <div class="row">
       <div class="column-4">
-        <v-btn
-          color="#27ae60"
-          @click="optionModal = true"
-        >Добавить элемент
+        <v-btn color="#27ae60" @click="optionModal = true"
+          >Добавить элемент
         </v-btn>
       </div>
     </div>
@@ -15,48 +13,44 @@
         <div class="category-list__item category-list__item--id">ID</div>
         <div class="category-list__item">Название материала</div>
         <div class="category-list__item">Описание</div>
-        <div class="category-list__item category-list__item--btns">Управление</div>
+        <div class="category-list__item category-list__item--btns">
+          Управление
+        </div>
       </div>
       <div
         v-for="(item, index) in list"
         :key="item.title"
         class="category-list__content"
       >
-        <div class="category-list__item category-list__item--id">{{ item.id }}</div>
+        <div class="category-list__item category-list__item--id">
+          {{ item.id }}
+        </div>
         <div
           ref="titleElement"
           class="category-list__item"
           contenteditable="true"
-        >{{ item.title }}
+        >
+          {{ item.title }}
         </div>
         <div
           ref="descriptionElement"
           class="category-list__item"
           contenteditable="true"
-        >{{ item.description }}
+        >
+          {{ item.description }}
         </div>
         <div class="category-list__item category-list__item--btns">
-          <v-btn
-            color="#f1c40f"
-            @click="saveItemOption(item, index)"
-          >
+          <v-btn color="#f1c40f" @click="saveItemOption(item, index)">
             Сохранить
             <IconEdit />
           </v-btn>
-          <v-btn
-            color="#e74c3c"
-            @click="showRemoveModal(item.id)"
-          >
+          <v-btn color="#e74c3c" @click="showRemoveModal(item.id)">
             <IconRemove />
           </v-btn>
         </div>
       </div>
     </div>
-    <v-alert
-      v-if="updateMsg"
-      type="success"
-      class="alert"
-    >
+    <v-alert v-if="updateMsg" type="success" class="alert">
       {{ updateMsg }}
     </v-alert>
     <OptionAddModal
@@ -65,16 +59,10 @@
       v-model:descriptionOption="descriptionOption"
       @confirm="submitNewOption"
     />
-    <RemoveOptionModal
-      v-model="removeModal"
-      @confirm="confirmRemoveModal"
-    />
+    <RemoveOptionModal v-model="removeModal" @confirm="confirmRemoveModal" />
   </div>
 </template>
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 import { ref } from 'vue';
 import IconEdit from '@/assets/icons/IconEdit.vue';
 import IconRemove from '@/assets/icons/IconDelete.vue';
@@ -87,24 +75,24 @@ definePageMeta({
 });
 
 interface OptionListItem {
-  id?: number,
-  title: string,
-  description?: string
+  id?: number;
+  title: string;
+  description?: string;
 }
 
 interface Props {
   /**
    * Заголовок блока
    */
-  title: string,
+  title: string;
   /**
    * Сообщение об успешной операции
    */
-  updateMsg: string,
+  updateMsg: string;
   /**
    * Список опций
    */
-  list: OptionListItem[]
+  list: OptionListItem[];
 }
 
 interface IEmits {
@@ -180,10 +168,7 @@ const submitNewOption = (): void => {
   optionModal.value = false;
 };
 </script>
-<style
-  scoped
-  lang="scss"
->
+<style scoped lang="scss">
 .category-list {
   min-height: 600px;
   margin: 0 0 $offset-base;

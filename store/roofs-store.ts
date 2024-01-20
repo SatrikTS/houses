@@ -19,7 +19,10 @@ export const useRoofsStore = defineStore('dictionariesStore', () => {
    * @param param
    * @param id
    */
-  const putRoofMaterial = async (params: OptionsListItem, id: number): Promise<string> => {
+  const putRoofMaterial = async (
+    params: OptionsListItem,
+    id: number,
+  ): Promise<string> => {
     const { data } = await $api.put(`/roof_materials/${id}`, {
       ...params,
     });

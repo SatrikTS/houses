@@ -1,7 +1,5 @@
 <template>
-  <div>
-    item of forrs list
-  </div>
+  <div>item of forrs list</div>
 </template>
 <script setup lang="ts">
 definePageMeta({
@@ -9,5 +7,4 @@ definePageMeta({
   middleware: 'auth',
 });
 </script>
-<style scoped>
-</style>
+<style scoped></style>

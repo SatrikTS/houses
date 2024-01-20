@@ -7,20 +7,14 @@
     </div>
   </div>
 </template>
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 interface Props {
   caption: string;
 }
 
 defineProps<Props>();
 </script>
-<style
-  scoped
-  lang="scss"
->
+<style scoped lang="scss">
 .caption {
   background: $bg-base;
   padding: $offset-base 0;

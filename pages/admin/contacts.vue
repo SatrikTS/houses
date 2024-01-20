@@ -1,22 +1,13 @@
 <template>
   <div>
     <h2>Контакты бизнеса</h2>
-    <h4>Сохраните контактные данные которые будут отображаться на старнице "контакты", в шапке сайта и футере</h4>
-    <v-form
-      class="form"
-      @submit.prevent
-      @submit="submitContacts"
-    >
-      <v-text-field
-        v-model="phone1"
-        class="input"
-        label="Номер телефона 1"
-      />
-      <v-text-field
-        v-model="phone2"
-        class="input"
-        label="Номер телефона 2"
-      />
+    <h4>
+      Сохраните контактные данные которые будут отображаться на старнице
+      "контакты", в шапке сайта и футере
+    </h4>
+    <v-form class="form" @submit.prevent @submit="submitContacts">
+      <v-text-field v-model="phone1" class="input" label="Номер телефона 1" />
+      <v-text-field v-model="phone2" class="input" label="Номер телефона 2" />
       <v-text-field
         v-model="email1"
         class="input"
@@ -29,37 +20,17 @@
         :rules="emailRules"
         label="Электронная почта 2"
       />
-      <v-text-field
-        v-model="address"
-        label="Адрес"
-      />
-      <v-text-field
-        v-model="schedule"
-        label="Время работы"
-      />
-      <v-text-field
-        v-model="whereabouts"
-        label="Cсылка на карту"
-      />
-      <v-btn
-        class="btn submit-btn"
-        type="submit"
-      >
-        ОТПРАВИТЬ
-      </v-btn>
+      <v-text-field v-model="address" label="Адрес" />
+      <v-text-field v-model="schedule" label="Время работы" />
+      <v-text-field v-model="whereabouts" label="Cсылка на карту" />
+      <v-btn class="btn submit-btn" type="submit"> ОТПРАВИТЬ </v-btn>
     </v-form>
-    <v-alert
-      v-if="successMsg"
-      class="alert"
-      type="success"
-    >{{ successMsg }}
+    <v-alert v-if="successMsg" class="alert" type="success"
+      >{{ successMsg }}
     </v-alert>
   </div>
 </template>
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 import { ref } from 'vue';
 import { emailRules } from '@/utils/validation';
 import { useContactsStore } from '@/store/contacts-store';
@@ -95,10 +66,7 @@ const submitContacts = async (): Promise<void> => {
   await putContacts(params);
 };
 </script>
-<style
-  scoped
-  lang="scss"
->
+<style scoped lang="scss">
 h2 {
   margin-bottom: 30px;
 }

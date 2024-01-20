@@ -35,4 +35,3 @@ export const useContactsStore = defineStore('contactsStore', () => {
     isLoading,
   };
 });
-

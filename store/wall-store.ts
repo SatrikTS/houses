@@ -19,7 +19,10 @@ export const useWallsStore = defineStore('wallsStore', () => {
    * @param param
    * @param id
    */
-  const putWallMaterial = async (params: OptionsListItem, id: number): Promise<string> => {
+  const putWallMaterial = async (
+    params: OptionsListItem,
+    id: number,
+  ): Promise<string> => {
     const { data } = await $api.put(`/wall_materials/${id}`, {
       ...params,
     });

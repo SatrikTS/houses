@@ -17,7 +17,7 @@
               size="large"
               color="red-darken-2"
               @click="navigateTo({ path: `/` })"
-            >Вернуться на главную
+              >Вернуться на главную
             </v-btn>
           </div>
         </div>
@@ -26,10 +26,7 @@
     <ErrorAlert />
   </div>
 </template>
-<style
-  scoped
-  lang="scss"
->
+<style scoped lang="scss">
 .auth {
   display: flex;
   flex-direction: column;

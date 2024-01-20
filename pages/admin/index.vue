@@ -8,10 +8,7 @@
     <div>content is:{{ content }}</div>
   </div>
 </template>
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 definePageMeta({
   layout: 'admin',
   middleware: 'auth',
@@ -19,5 +16,4 @@ definePageMeta({
 
 const content = ref('asd');
 </script>
-<style scoped>
-</style>
+<style scoped></style>

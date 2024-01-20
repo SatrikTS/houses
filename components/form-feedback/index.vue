@@ -1,11 +1,7 @@
 <template>
   <div class="form-feedback">
     <h2 class="form-feedback__title">Обратная связь:</h2>
-    <v-form
-      ref="form"
-      @submit.prevent
-      @submit="submitMessage"
-    >
+    <v-form ref="form" @submit.prevent @submit="submitMessage">
       <v-text-field
         v-model="name"
         class="form-feedback__input"
@@ -24,34 +20,29 @@
         :rules="phoneRules"
         label="Номер телефона"
       />
+      <v-select
+        v-model="preferConnection"
+        label="Предпочтительный cпособ связи"
+        :items="['Звонок', 'Telegram', 'WatsApp', 'Viber', 'Email']"
+        clearable
+      />
       <v-textarea
         v-model="message"
         class="form-feedback__input"
         :rules="emptyRules"
         label="Сообщение"
       />
-      <v-btn
-        color="#27ae60"
-        class="btn submit-btn"
-        block
-        type="submit"
-      >
+      <v-btn color="#27ae60" class="btn submit-btn" block type="submit">
         ОТПРАВИТЬ
       </v-btn>
     </v-form>
-    <v-alert
-      v-if="successMsg"
-      class="alert"
-      type="success"
-    >{{ successMsg }}
+    <v-alert v-if="successMsg" class="alert" type="success"
+      >{{ successMsg }}
     </v-alert>
   </div>
 </template>
 
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 import { ref } from 'vue';
 import { emailRules, emptyRules } from '@/utils/validation';
 
@@ -61,8 +52,9 @@ const phone = ref();
 const message = ref();
 const form = ref();
 const successMsg = ref();
+const preferConnection = ref();
 
-const submitMessage = async (): Promise<void> => {
+const submitMessage = (): void => {
   if (form.value.isValid) {
     const data = {
       name: name.value,
@@ -86,12 +78,8 @@ interface Props {
 defineProps<Props>();
 </script>
 
-<style
-  scoped
-  lang="scss"
->
+<style scoped lang="scss">
 .form-feedback {
-
   &__input {
     margin: 0 0 $offset-small;
   }

@@ -1,22 +1,17 @@
 <template>
   <article class="house">
     <div class="house__wrap">
-      <NuxtLink
-        to="/"
-      >
+      <NuxtLink :to="{ path: `/projects/${data.id}` }">
         <div class="house__title">
-          Dom
+          {{ data.title }}
         </div>
       </NuxtLink>
       <div class="house__img">
         <NuxtLink
-          to="/"
+          :to="{ path: `/projects/${data.id}` }"
           class="house__img-link"
         >
-          <img
-            src="@/assets/images/house.jpeg"
-            alt="house type"
-          >
+          <img :src="MAIN_URL + data.images[0]?.img" alt="house type" />
         </NuxtLink>
       </div>
       <div class="house__btn-group">
@@ -28,32 +23,41 @@
         <div class="house__char-item">
           <span class="house__char-key">Площадь: </span>
           <span class="house__char-dots"></span>
-          <span class="house__char-value">300м</span>
+          <span class="house__char-value"
+            >{{ data.total_area }} м<sup>2</sup></span
+          >
         </div>
         <div class="house__char-item">
-          <span class="house__char-key">Комнаты:</span>
+          <span class="house__char-key">Количество комнат: </span>
           <span class="house__char-dots"></span>
-          <span class="house__char-value">5</span>
+          <span class="house__char-value">{{ data.room_count.title }}</span>
+        </div>
+        <div class="house__char-item">
+          <span class="house__char-key">Этажи: </span>
+          <span class="house__char-dots"></span>
+          <span class="house__char-value">{{ data.level_type.title }}</span>
         </div>
       </div>
     </div>
   </article>
 </template>
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 import IconHeart from '@/assets/icons/icon-heart.vue';
+const MAIN_URL = useRuntimeConfig().public.MAIN_URL;
+interface Props {
+  data: any;
+}
+
+defineProps<Props>();
 </script>
-<style
-  scoped
-  lang="scss"
->
+<style scoped lang="scss">
 .house {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition:
+    transform 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
   width: calc(25% - 15px);
 
   &:hover {
@@ -72,7 +76,7 @@ import IconHeart from '@/assets/icons/icon-heart.vue';
 
     &::before {
       position: absolute;
-      content: '';
+      content: "";
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.25);
@@ -80,9 +84,10 @@ import IconHeart from '@/assets/icons/icon-heart.vue';
 
     img {
       width: 100%;
-      height: auto;
+      height: 100%;
       display: block;
       transition: transform 0.3s ease-in-out;
+      object-fit: cover;
     }
 
     &:hover img {
@@ -91,7 +96,7 @@ import IconHeart from '@/assets/icons/icon-heart.vue';
   }
 
   &__title {
-    font-size: 24px;
+    font-size: 16px;
     font-weight: bold;
     margin: 10px 0;
     color: #fff;
@@ -126,11 +131,12 @@ import IconHeart from '@/assets/icons/icon-heart.vue';
       align-items: center;
     }
 
-    &__key {
+    &-key {
       font-size: 13px;
     }
 
-    &__value {
+    &-value {
+      font-size: 14px;
       font-weight: 600;
     }
 
@@ -144,6 +150,7 @@ import IconHeart from '@/assets/icons/icon-heart.vue';
     display: block;
     text-decoration: none;
     color: inherit;
+    height: 200px;
   }
 
   &-btn {

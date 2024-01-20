@@ -1,9 +1,5 @@
 <template>
-  <v-form
-    ref="form"
-    @submit.prevent
-    @submit="getAuth"
-  >
+  <v-form ref="form" @submit.prevent @submit="getAuth">
     <v-text-field
       v-model="email"
       :rules="emailRules"
@@ -14,19 +10,12 @@
       :rules="passwordRules"
       label="Пароль"
     ></v-text-field>
-    <v-btn
-      color="indigo-darken-3"
-      type="submit"
-      block
-      class="mt-2"
-    >Войти
+    <v-btn color="indigo-darken-3" type="submit" block class="mt-2"
+      >Войти
     </v-btn>
   </v-form>
 </template>
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 import { ref } from 'vue';
 import { emailRules, passwordRules } from '@/utils/validation';
 import { useAuthStore } from '../store/auth';
@@ -54,5 +43,4 @@ const getAuth = async (): Promise<void> => {
   }
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

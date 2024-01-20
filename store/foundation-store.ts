@@ -19,7 +19,10 @@ export const useFoundationsStore = defineStore('foundationsStore', () => {
    * @param param
    * @param id
    */
-  const putFoundationMaterial = async (params: OptionsListItem, id: number): Promise<string> => {
+  const putFoundationMaterial = async (
+    params: OptionsListItem,
+    id: number,
+  ): Promise<string> => {
     const { data } = await $api.put(`/foundation_types/${id}`, {
       ...params,
     });
@@ -31,7 +34,9 @@ export const useFoundationsStore = defineStore('foundationsStore', () => {
    * @param param
    * @param id
    */
-  const postFoundationMaterial = async (params: OptionsListItem): Promise<string> => {
+  const postFoundationMaterial = async (
+    params: OptionsListItem,
+  ): Promise<string> => {
     const { data } = await $api.post('/foundation_types', {
       ...params,
     });

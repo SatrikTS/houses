@@ -1,8 +1,5 @@
 <template>
-  <header
-    :class="{'is-loading' : isLoading}"
-    class="header"
-  >
+  <header :class="{ 'is-loading': isLoading }" class="header">
     <div class="container">
       <div class="header__wrap">
         <div class="header__logo">
@@ -14,10 +11,7 @@
           <span class="header__text">вс: выходной</span>
         </div>
         <div class="header__contact-info">
-          <Phones
-            :phone1="contacts?.phone_1"
-            :phone2="contacts?.phone_2"
-          />
+          <Phones :phone1="contacts?.phone_1" :phone2="contacts?.phone_2" />
         </div>
         <div class="header__contact-info header__contact-info--last">
           <Address :address="contacts?.address" />
@@ -26,31 +20,25 @@
     </div>
   </header>
 </template>
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 interface Contacts {
-  address: string,
-  email_1: string,
-  email_2: string,
-  phone_1: string,
-  phone_2: string,
-  schedule: string,
-  whereabouts: string
+  address: string;
+  email_1: string;
+  email_2: string;
+  phone_1: string;
+  phone_2: string;
+  schedule: string;
+  whereabouts: string;
 }
 
 interface Props {
-  contacts: Contacts,
-  isLoading: boolean
+  contacts: Contacts;
+  isLoading: boolean;
 }
 
 defineProps<Props>();
 </script>
-<style
-  scoped
-  lang="scss"
->
+<style scoped lang="scss">
 .header {
   background-color: $bg-light;
   color: $bg-dark;

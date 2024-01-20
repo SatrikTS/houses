@@ -1,7 +1,7 @@
 <template>
-    <div class="contacts">
-      <TitleItem class="contacts__caption" caption="Контакты"/>
-      <div class="container">
+  <div class="contacts">
+    <TitleItem class="contacts__caption" caption="Контакты" />
+    <div class="container">
       <div class="contacts__wrap">
         <div class="contacts__info">
           <div class="contacts__row">
@@ -20,7 +20,7 @@
           </div>
           <div class="contacts__address">
             <h2 class="contacts__title">Наш адрес:</h2>
-            <h3 class="subtitle">{{contacts.address}}</h3>
+            <h3 class="subtitle">{{ contacts.address }}</h3>
           </div>
           <iframe
             :src="mapLink"
@@ -28,9 +28,9 @@
             height="400"
             frameborder="1"
             allowfullscreen="true"
-            style="position:relative;"
+            style="position: relative"
           >
-            </iframe>
+          </iframe>
         </div>
         <div class="contacts__form">
           <FormFeedback />
@@ -39,10 +39,7 @@
     </div>
   </div>
 </template>
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 import { ref, reactive } from 'vue';
 import { useContactsStore } from '@/store/contacts-store';
 
@@ -63,10 +60,7 @@ const contact2 = reactive({
   email: contacts.value.email_2,
 });
 </script>
-<style
-  scoped
-  lang="scss"
->
+<style scoped lang="scss">
 .contacts {
   margin-bottom: $offset-large-2;
 
@@ -106,7 +100,5 @@ const contact2 = reactive({
   &__form {
     width: 30%;
   }
-
 }
-
 </style>
