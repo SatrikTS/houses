@@ -37,6 +37,9 @@
         </div>
       </div>
     </div>
+    <div class="slider__wrap" style="width: 70%; height: 700px; padding-left: 20px;">
+      <card-slider />
+    </div>
   </div>
 </template>
 <script setup lang="ts">
