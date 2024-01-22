@@ -11,7 +11,10 @@
           :to="{ path: `/projects/${data.id}` }"
           class="house__img-link"
         >
-          <img :src="MAIN_URL + data.images[0]?.img" alt="house type" />
+          <img
+            :src="MAIN_URL + data.images[0]?.img"
+            alt="house type"
+          />
         </NuxtLink>
       </div>
       <div class="house__btn-group">
@@ -23,8 +26,9 @@
         <div class="house__char-item">
           <span class="house__char-key">Площадь: </span>
           <span class="house__char-dots"></span>
-          <span class="house__char-value"
-            >{{ data.total_area }} м<sup>2</sup></span
+          <span
+            class="house__char-value"
+          >{{ data.total_area }} м<sup>2</sup></span
           >
         </div>
         <div class="house__char-item">
@@ -41,23 +45,30 @@
     </div>
   </article>
 </template>
-<script setup lang="ts">
+<script
+  setup
+  lang="ts"
+>
 import IconHeart from '@/assets/icons/icon-heart.vue';
+
 const MAIN_URL = useRuntimeConfig().public.MAIN_URL;
+
 interface Props {
   data: any;
 }
 
 defineProps<Props>();
 </script>
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .house {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  transition:
-    transform 0.3s ease-in-out,
-    box-shadow 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out,
+  box-shadow 0.3s ease-in-out;
   width: calc(25% - 15px);
 
   &:hover {

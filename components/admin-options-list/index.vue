@@ -1,17 +1,19 @@
 <template>
   <div>
-    <h2>{{ title }}</h2>
-    <div class="row">
+    <h2 v-if="!noneEdit">{{ title }}</h2>
+    <div v-if="!noneEdit" class="row">
       <div class="column-4">
-        <v-btn color="#27ae60" @click="optionModal = true"
-          >Добавить элемент
+        <v-btn
+          color="#27ae60"
+          @click="optionModal = true"
+        >Добавить элемент
         </v-btn>
       </div>
     </div>
     <div class="category-list">
       <div class="category-list__header">
         <div class="category-list__item category-list__item--id">ID</div>
-        <div class="category-list__item">Название материала</div>
+        <div class="category-list__item">Название</div>
         <div class="category-list__item">Описание</div>
         <div class="category-list__item category-list__item--btns">
           Управление
@@ -28,29 +30,48 @@
         <div
           ref="titleElement"
           class="category-list__item"
-          contenteditable="true"
+          :contenteditable="noneEdit ? false : true"
         >
           {{ item.title }}
         </div>
         <div
           ref="descriptionElement"
           class="category-list__item"
-          contenteditable="true"
+          :contenteditable="noneEdit ? false : true"
         >
           {{ item.description }}
         </div>
         <div class="category-list__item category-list__item--btns">
-          <v-btn color="#f1c40f" @click="saveItemOption(item, index)">
+          <v-btn
+            v-if="!noneEdit"
+            color="#f1c40f"
+            @click="saveItemOption(item, index)"
+          >
             Сохранить
             <IconEdit />
           </v-btn>
-          <v-btn color="#e74c3c" @click="showRemoveModal(item.id)">
+          <v-btn
+            v-if="noneEdit"
+            color="#f1c40f"
+            @click="navigateTo({ path: `/admin/projects/${item.id}` })"
+          >
+            Редакт.
+            <IconEdit />
+          </v-btn>
+          <v-btn
+            color="#e74c3c"
+            @click="showRemoveModal(item.id)"
+          >
             <IconRemove />
           </v-btn>
         </div>
       </div>
     </div>
-    <v-alert v-if="updateMsg" type="success" class="alert">
+    <v-alert
+      v-if="updateMsg"
+      type="success"
+      class="alert"
+    >
       {{ updateMsg }}
     </v-alert>
     <OptionAddModal
@@ -59,15 +80,21 @@
       v-model:descriptionOption="descriptionOption"
       @confirm="submitNewOption"
     />
-    <RemoveOptionModal v-model="removeModal" @confirm="confirmRemoveModal" />
+    <RemoveOptionModal
+      v-model="removeModal"
+      @confirm="confirmRemoveModal"
+    />
   </div>
 </template>
-<script setup lang="ts">
+<script
+  setup
+  lang="ts"
+>
 import { ref } from 'vue';
 import IconEdit from '@/assets/icons/IconEdit.vue';
 import IconRemove from '@/assets/icons/IconDelete.vue';
-import OptionAddModal from '@/components/dictionaries-modals/option-add-modal.vue';
-import RemoveOptionModal from '@/components/dictionaries-modals/option-remove-modal.vue';
+import OptionAddModal from '@/components/modals/option-add-modal.vue';
+import RemoveOptionModal from '@/components/modals/option-remove-modal.vue';
 
 definePageMeta({
   layout: 'admin',
@@ -93,6 +120,7 @@ interface Props {
    * Список опций
    */
   list: OptionListItem[];
+  noneEdit?: boolean;
 }
 
 interface IEmits {
@@ -168,7 +196,10 @@ const submitNewOption = (): void => {
   optionModal.value = false;
 };
 </script>
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .category-list {
   min-height: 600px;
   margin: 0 0 $offset-base;

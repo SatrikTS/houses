@@ -23,11 +23,13 @@ export const phoneRules = ref([
   },
 ]);
 
-export const requiredRules = ref([(value) => !!value || "Поле обязательно"]);
+export const numbersRules = ref([
+  (value) => {
+    const pattern = /^\d+$/;
+    return pattern.test(value) || "Введите только цифры";
+  },
+]);
 
-// export const requiredRules = ref([
-//   value => !!value || 'Заполните поле.',
-//   value => (value || '').length > 2 || 'Минимум 2 символа',
-// ])
+export const requiredRules = ref([(value) => !!value || "Поле обязательно"]);
 
 export const emptyRules = ref([(value) => !!value || "Заполните поле."]);

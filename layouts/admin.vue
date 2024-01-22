@@ -12,6 +12,7 @@
           <NuxtLink class="admin-link" to="/admin">Главная</NuxtLink>
           <NuxtLink class="admin-link" to="/admin/projects">Проекты</NuxtLink>
           <NuxtLink class="admin-link" to="/admin/contacts">Контакты</NuxtLink>
+          <NuxtLink class="admin-link" to="/admin/about">О Компании</NuxtLink>
           <div class="admin-service-item">Служебные</div>
           <NuxtLink
             class="admin-link admin-link--small"

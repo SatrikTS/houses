@@ -2,9 +2,7 @@
   <div class="main-page">
     <Banner />
     <TitleItem caption="Проекты" />
-    <div class="container">
-      <HousesList />
-    </div>
+    <HousesList :projects="projectsList"/>
     <TitleItem caption="О Компании" />
     <ContentBlock>
       <p>
@@ -31,7 +29,15 @@
     </ContentBlock>
   </div>
 </template>
-<script setup></script>
+<script setup lang="ts">
+import { storeToRefs } from 'pinia';
+import { useProjectsStore } from '@/store/projects-store';
+
+const { getProjectsList } = useProjectsStore();
+const { projectsList } = storeToRefs(useProjectsStore());
+
+await getProjectsList();
+</script>
 <style lang="scss" scoped>
 .main-page {
   display: flex;
