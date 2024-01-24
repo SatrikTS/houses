@@ -1,6 +1,6 @@
 <template>
   <div class="form-feedback">
-    <h2 class="form-feedback__title">Обратная связь:</h2>
+    <h2 class="form-feedback__title">{{ title }}</h2>
     <v-form ref="form" @submit.prevent @submit="submitMessage">
       <v-text-field
         v-model="name"

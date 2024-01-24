@@ -33,12 +33,9 @@
           </iframe>
         </div>
         <div class="contacts__form">
-          <FormFeedback />
+          <FormFeedback :title="title"/>
         </div>
       </div>
-    </div>
-    <div class="slider__wrap" style="width: 70%; height: 700px; padding-left: 20px;">
-      <card-slider />
     </div>
   </div>
 </template>
@@ -48,6 +45,7 @@ import { useContactsStore } from '@/store/contacts-store';
 
 const { getContacts } = useContactsStore();
 const { contacts } = storeToRefs(useContactsStore());
+const title = ref('Обратная связь:');
 
 await getContacts();
 
