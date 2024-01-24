@@ -33,7 +33,7 @@
           </iframe>
         </div>
         <div class="contacts__form">
-          <FormFeedback />
+          <FormFeedback :title="title"/>
         </div>
       </div>
     </div>
@@ -45,6 +45,7 @@ import { useContactsStore } from '@/store/contacts-store';
 
 const { getContacts } = useContactsStore();
 const { contacts } = storeToRefs(useContactsStore());
+const title = ref('Обратная связь:');
 
 await getContacts();
 

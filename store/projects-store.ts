@@ -46,6 +46,15 @@ export const useProjectsStore = defineStore('projectsStore', () => {
   };
 
   /**
+   * Получить один проект
+   */
+  const getProjectsItem = async (id: number): Promise<void> => {
+
+    const { data } = await $api.get(`/projects/${id}`);
+    projectsItem.value = data;
+  };
+
+  /**
    * Изменить
    * @param param
    * @param id
@@ -114,11 +123,11 @@ export const useProjectsStore = defineStore('projectsStore', () => {
 
   return {
     getProjectsList,
+    getProjectsItem,
     putProjectsItem,
     postProjectsItem,
     deleteProjectsItem,
     uploadProjectImages,
-    getProjectsItem,
     deleteProjectImage,
     projectsList,
     projectsItem,
