@@ -12,6 +12,7 @@ export default defineNuxtConfig({
         { name: 'description', content: 'Монтаж домов' },
       ],
     },
+    pageTransition: { name: 'page', mode: 'out-in' },
   },
   runtimeConfig: {
     public: {

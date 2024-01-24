@@ -34,12 +34,12 @@
         <div class="house__char-item">
           <span class="house__char-key">Количество комнат: </span>
           <span class="house__char-dots"></span>
-          <span class="house__char-value">{{ data.room_count.title }}</span>
+          <span class="house__char-value">{{ data.room_count?.title }}</span>
         </div>
         <div class="house__char-item">
           <span class="house__char-key">Этажи: </span>
           <span class="house__char-dots"></span>
-          <span class="house__char-value">{{ data.level_type.title }}</span>
+          <span class="house__char-value">{{ data.level_type?.title }}</span>
         </div>
       </div>
     </div>
@@ -67,12 +67,12 @@ defineProps<Props>();
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease-in-out,
+  transition: all 0.3s ease-in-out,
   box-shadow 0.3s ease-in-out;
   width: calc(25% - 15px);
 
   &:hover {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 20px #0003, 0 0 10px #0000001a;
   }
 
   &__wrap {

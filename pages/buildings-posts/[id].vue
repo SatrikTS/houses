@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <TitleItem
-      :caption="aboutPost.data.title"
+      :caption="article.data.title"
     />
     <div class="container">
       <img
@@ -12,7 +12,7 @@
       >
       <div
         class="content"
-        v-html="aboutPost.data.html_content"
+        v-html="article.data.html_content"
       ></div>
       <div class="clear">
       </div>
@@ -22,11 +22,11 @@
         />
       </div>
       <div
-        v-if="aboutPost.data.company_video "
+        v-if="article.data.video "
         class="about__video"
       >
         <h2>Видео</h2>
-        <div v-html="aboutPost.data.company_video"></div>
+        <div v-html="article.data.video"></div>
       </div>
     </div>
   </div>
@@ -34,13 +34,14 @@
 <script setup>
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useAboutStore } from '@/store/about-store'
+import { useArticlesBuildingsStore } from '@/store/articles-buildings-store'
+import { useRoute } from 'nuxt/app'
 
-const { aboutPost } = storeToRefs(useAboutStore())
-const { getAboutData } = useAboutStore()
+const { article } = storeToRefs(useArticlesBuildingsStore())
+const { getPostItem } = useArticlesBuildingsStore()
 const MAIN_URL = useRuntimeConfig().public.MAIN_URL
-await getAboutData()
-const images = ref(aboutPost.value.data.images)
+await getPostItem(useRoute().params.id)
+const images = ref(article.value.data.images)
 </script>
 <style
   scoped

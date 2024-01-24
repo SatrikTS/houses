@@ -3,9 +3,9 @@
     <v-form
       ref="form"
       @submit.prevent
-      @submit="postProject"
+      @submit="submitPortfolioItem"
     >
-      <h2>Создание нового проекта</h2>
+      <h2>{{ portfolioItem.title }}</h2>
       <v-btn
         color="#27ae60"
         type="submit"
@@ -15,57 +15,51 @@
       <br>
       <h3>Изображения проекта</h3>
       <Uploader
+        :file="portfolioItem.images"
+        @removeImage="handleRemoveImage"
         @uploadImage="uploadImage"
-        @removeImage="(id) => deleteProjectImage(id)"
       />
       <br>
       <h3>Характеристики проекта</h3>
       <div class="admin-projects-add__group">
         <v-text-field
-          v-model="projectFields.title"
+          v-model="portfolioItem.title"
           :rules="requiredRules"
           label="Название проекта"
         />
         <v-text-field
-          v-model="projectFields.article"
-          :rules="requiredRules"
-          label="Артикул"
-        />
-        <v-text-field
-          v-model="projectFields.project_video"
+          v-model="portfolioItem.video_house"
           label="Ссылка на видео в ютуб"
         />
         <v-text-field
-          v-model="projectFields.price_turnkey"
-          min="0"
-          label="Стоимость под ключ"
+          v-model="portfolioItem.location_house"
+          label="Локация"
         />
         <v-text-field
-          v-model="projectFields.price_per_project"
-          min="0"
-          label="Стоимость проектирования"
+          v-model="portfolioItem.map_link"
+          label="Ссылка на карту Яндекс"
         />
         <v-text-field
-          v-model="projectFields.total_area"
+          v-model="portfolioItem.total_area"
           type="number"
           min="0"
           max="1000"
           label="Общая площадь"
         />
         <v-text-field
-          v-model="projectFields.construction_period"
+          v-model="portfolioItem.construction_period"
           type="number"
           min="0"
           label="Сроки строительства"
         />
         <v-text-field
-          v-model="projectFields.project_period"
+          v-model="portfolioItem.year_house"
           type="number"
           min="0"
-          label="Сроки проектирования"
+          label="Год постройки"
         />
         <v-text-field
-          v-model="projectFields.additional_buildings"
+          v-model="portfolioItem.additional_building"
           label="Дополнительные строения"
         />
       </div>
@@ -73,63 +67,55 @@
       <div class="admin-projects-add__options">
         <v-select
           v-if="roofTypesList?.data"
-          v-model="projectFields.roof_type_id"
+          v-model="portfolioItem.roof_type"
           label="Тип крыши"
           :items="roofTypesList.data"
           clearable
-          return-object
         />
         <v-select
-          v-model="projectFields.roof_material_id"
+          v-model="portfolioItem.roof_material"
           label="Материал крыши"
           :items="roofMaterials.data"
-          return-object
           clearable
         />
         <v-select
           v-if="wallMaterials?.data"
-          v-model="projectFields.wall_material_id"
+          v-model="portfolioItem.wall_material"
           label="Материал стен"
           :items="wallMaterials.data"
-          return-object
           clearable
         />
         <v-select
           v-if="foundationsTypes?.data"
-          v-model="projectFields.foundation_type_id"
+          v-model="portfolioItem.foundation_type"
           label="Тип фундамента"
           :items="foundationsTypes.data"
-          return-object
           clearable
         />
         <v-select
           v-if="heatingList?.data"
-          v-model="projectFields.heating_type_id"
+          v-model="portfolioItem.heating_type"
           label="Тип отопления"
           :items="heatingList.data"
-          return-object
           clearable
         />
         <v-select
           v-if="levelsList?.data"
-          v-model="projectFields.level_type_id"
+          v-model="portfolioItem.level_type"
           label="Кол-во этажей"
           :items="levelsList.data"
-          return-object
           clearable
         />
         <v-select
           v-if="roomList?.data"
-          v-model="projectFields.room_count_id"
+          v-model="portfolioItem.room_count"
           label="Кол-во комнат"
           :items="roomList.data"
-          return-object
           clearable
         />
       </div>
-      <h3>Описание проекта</h3>
       <v-textarea
-        v-model="projectFields.description"
+        v-model="portfolioItem.description"
         label="Описание"
       />
       <v-btn
@@ -140,9 +126,9 @@
       <br>
       <br>
     </v-form>
-    <h3>Расширенное описание</h3>
+    <h3>Расширенное описание проекта</h3>
     <ClientOnly>
-      <Editor v-model="content" />
+      <Editor v-model="portfolioItem.info_house" />
     </ClientOnly>
     <SuccessAlert :successMessage="successMessage" />
   </div>
@@ -151,7 +137,7 @@
   setup
   lang="ts"
 >
-import { reactive, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useWallsStore } from '@/store/wall-store';
 import { useRoofsStore } from '@/store/roofs-store';
@@ -160,8 +146,8 @@ import { useHeatingStore } from '@/store/heating-store';
 import { useRoomsStore } from '@/store/rooms-store';
 import { useLevelsStore } from '@/store/levels-store';
 import { useRoofsTypeStore } from '@/store/roofs-type-store';
-import { useProjectsStore } from '@/store/projects-store';
 import { requiredRules } from '@/utils/validation';
+import { usePortfolioStore } from '@/store/portfolio-store';
 
 definePageMeta({
   layout: 'admin',
@@ -175,7 +161,7 @@ const { getHeatingList } = useHeatingStore();
 const { getRoomsList } = useRoomsStore();
 const { getLevelsList } = useLevelsStore();
 const { getRoofsTypeList } = useRoofsTypeStore();
-const { postProjectsItem, uploadProjectImages, deleteProjectImage } = useProjectsStore();
+const { getPortfolioItem, putPortfolioItem, uploadPortfolioImages, deletePortfolioImage } = usePortfolioStore();
 
 const { wallMaterials } = storeToRefs(useWallsStore());
 const { roofMaterials } = storeToRefs(useRoofsStore());
@@ -184,11 +170,13 @@ const { heatingList } = storeToRefs(useHeatingStore());
 const { roomList } = storeToRefs(useRoomsStore());
 const { levelsList } = storeToRefs(useLevelsStore());
 const { roofTypesList } = storeToRefs(useRoofsTypeStore());
+const { portfolioItem } = storeToRefs(usePortfolioStore());
 const newImagesList = ref();
 const successMessage = ref();
 const form = ref();
-const content = ref()
 
+const projectID = useRoute().params.id;
+await getPortfolioItem(projectID);
 await getWallsMaterials();
 await getRoofMaterials();
 await getFoundationsTypes();
@@ -197,65 +185,40 @@ await getRoomsList();
 await getLevelsList();
 await getRoofsTypeList();
 
-const projectFields = reactive({
-  title: '',
-  article: '',
-  description: '',
-  extende_info: '',
-  project_video: '',
-  characteristics: '',
-  price_turnkey: '',
-  price_per_project: '',
-  total_area: '',
-  construction_period: '',
-  project_period: '',
-  additional_buildings: '',
-  roof_material_id: null,
-  wall_material_id: null,
-  foundation_type_id: null,
-  roof_type_id: null,
-  heating_type_id: null,
-  level_type_id: null,
-  room_count_id: null,
-});
-
-const postProject = async (e: Event): Promise<void> => {
-  e.preventDefault();
-
+const submitPortfolioItem = async (): Promise<void> => {
   if (form.value.isValid) {
 
     const data = {
-      ...projectFields,
-      roof_type_id: projectFields.roof_type_id?.id,
-      roof_material_id: projectFields.roof_material_id?.id,
-      wall_material_id: projectFields.wall_material_id?.id,
-      foundation_type_id: projectFields.foundation_type_id?.id,
-      heating_type_id: projectFields.heating_type_id?.id,
-      level_type_id: projectFields.level_type_id?.id,
-      room_count_id: projectFields.room_count_id?.id,
-      extende_info: content.value,
+      ...portfolioItem.value,
     };
 
-    const response = await postProjectsItem(data);
-    successMessage.value = response.message;
-    if (newImagesList.value && response?.product?.id) {
-      await saveImage(response?.product?.id);
+    const response = await putPortfolioItem(data, projectID);
+    successMessage.value = response;
+    if (newImagesList.value) {
+      await saveImage();
     }
   }
 };
 
-const saveImage = async (id: number): Promise<void> => {
+const saveImage = async (): Promise<void> => {
   const formData = new FormData();
-  formData.append('project_id', id);
+  formData.append('portfolio_id', projectID);
   for (let index = 0; index < newImagesList.value.length; index++) {
     formData.append('images[]', newImagesList.value[index]);
   }
-  await uploadProjectImages(formData);
+  await uploadPortfolioImages(formData);
   setTimeout(() => location.reload(), 3000);
 };
 
 const uploadImage = (value: File[]): void => {
   newImagesList.value = value;
+};
+
+const handleRemoveImage = async (id: number): Promise<void> => {
+  const response = await deletePortfolioImage(id);
+  successMessage.value = response;
+  await submitPortfolioItem();
+  setTimeout(() => location.reload(), 3000);
 };
 
 watch(successMessage, () => {

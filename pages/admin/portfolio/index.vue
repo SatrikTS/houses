@@ -1,22 +1,21 @@
 <template>
   <div>
-    <h2>Проекты</h2>
+    <h2>Проекты из портфолио</h2>
     <v-btn
       color="#27ae60"
-      @click="navigateTo({ path: `/admin/projects/add` })"
+      @click="navigateTo({ path: `/admin/portfolio/add` })"
     >
-      Добавить новый проект
+      Добавить новый проект в портфолио
     </v-btn>
     <br>
     <br>
     <AdminOptionsList
-      title="Проекты"
-      :list="projectsList.data"
+      :list="portfolioList.data"
       :noneEdit="true"
-      :updateMsg="updateMsg"
       :hasImage="true"
+      :updateMsg="updateMsg"
       @removeData="removeData"
-      @handleEdit="(id) => navigateTo({ path: `/admin/projects/${id}` })"
+      @handleEdit="(id) => navigateTo({ path: `/admin/portfolio/${id}` })"
     />
   </div>
 </template>
@@ -26,23 +25,23 @@
 >
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
-import { useProjectsStore } from '@/store/projects-store';
+import { usePortfolioStore } from '@/store/portfolio-store';
 
 definePageMeta({
   layout: 'admin',
   middleware: 'auth',
 });
 
-const { getProjectsList, deleteProjectsItem } = useProjectsStore();
-const { projectsList } = storeToRefs(useProjectsStore());
+const { getPortfolioList, deletePortfolioItem } = usePortfolioStore();
+const { portfolioList } = storeToRefs(usePortfolioStore());
 const updateMsg = ref();
 
-await getProjectsList();
+await getPortfolioList();
 
 const removeData = async (id: number): Promise<void> => {
-  const response = await deleteProjectsItem(id);
+  const response = await deletePortfolioItem(id);
   updateMsgStatus(response);
-  await getProjectsList();
+  await getPortfolioList();
 };
 
 /**
@@ -54,4 +53,3 @@ const updateMsgStatus = (response: string): void => {
   setTimeout(() => (updateMsg.value = ''), 2000);
 };
 </script>
-<style scoped></style>

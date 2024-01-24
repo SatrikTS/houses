@@ -16,7 +16,7 @@ defineProps<Props>();
 </script>
 <style scoped lang="scss">
 .houses-list {
-  background: $bg-base;
+  //background: $bg-base;
   padding: $offset-xlarge 0;
   min-height: 500px;
 

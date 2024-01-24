@@ -14,10 +14,10 @@ export const useProjectsStore = defineStore('projectsStore', () => {
   /**
    * Получить список
    */
-  const getProjectsList = async (args?: FiltersList | null): Promise<void> => {
+  const getProjectsList = async (args?: FiltersList | null, limit?: number): Promise<void> => {
     const getParams = {
       page: 1,
-      limit: 100,
+      limit: limit || 100,
       ...args,
     };
 

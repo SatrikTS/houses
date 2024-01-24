@@ -2,7 +2,35 @@
   <div class="main-page">
     <Banner />
     <TitleItem caption="Проекты" />
-    <HousesList :projects="projectsList"/>
+    <div class="project-list">
+      <HousesList :projects="projectsList" />
+      <div class="container">
+        <v-btn
+          color="#e84118"
+          @click="navigateTo({ path: `/projects` })"
+        >
+          Смотреть все проекты
+        </v-btn>
+      </div>
+    </div>
+    <TitleItem caption="Наши работы" />
+    <div class="project-list">
+      <PortfolioList :list="portfolioList" />
+      <div class="container">
+        <v-btn
+          color="#e84118"
+          @click="navigateTo({ path: `/portfolio` })"
+        >
+          Смотреть все проекты
+        </v-btn>
+      </div>
+    </div>
+    <TitleItem caption="Партнеры" />
+    <div class="container">
+      <Partners
+        :data="partnersList?.data"
+      />
+    </div>
     <TitleItem caption="О Компании" />
     <ContentBlock>
       <p>
@@ -29,19 +57,47 @@
     </ContentBlock>
   </div>
 </template>
-<script setup lang="ts">
+<script
+  setup
+  lang="ts"
+>
 import { storeToRefs } from 'pinia';
-import { useProjectsStore } from '@/store/projects-store';
+import { useProjectsStore } from '~/store/projects-store';
+import { usePartnersStore } from '~/store/partners-store';
+import { usePortfolioStore } from '~/store/portfolio-store';
 
 const { getProjectsList } = useProjectsStore();
 const { projectsList } = storeToRefs(useProjectsStore());
+const { getPortfolioList } = usePortfolioStore();
+const { portfolioList } = storeToRefs(usePortfolioStore());
 
-await getProjectsList();
+const { getPartnersList } = usePartnersStore();
+const { partnersList } = storeToRefs(usePartnersStore());
+
+await getProjectsList(null, 4);
+await getPortfolioList(3);
+await getPartnersList();
 </script>
-<style lang="scss" scoped>
+<style
+  lang="scss"
+  scoped
+>
 .main-page {
   display: flex;
   flex-direction: column;
   gap: 32px;
+}
+
+.project-list {
+  .houses-list {
+    padding: 0 0 $offset-large;
+    min-height: auto;
+  }
+
+  .portfolio-list {
+    padding: 0 0 $offset-large;
+    min-height: auto;
+  }
+
 }
 </style>
