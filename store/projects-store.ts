@@ -7,6 +7,7 @@ import type { FiltersList } from '@/utils/types';
  */
 export const useProjectsStore = defineStore('projectsStore', () => {
   const projectsList = ref();
+  const projectsItem = ref();
   const { $api } = useNuxtApp();
 
   /**
@@ -45,6 +46,15 @@ export const useProjectsStore = defineStore('projectsStore', () => {
   };
 
   /**
+   * Получить один проект
+   */
+  const getProjectsItem = async (id: number): Promise<void> => {
+
+    const { data } = await $api.get(`/projects/${id}`);
+    projectsItem.value = data;
+  };
+
+  /**
    * Изменить
    * @param param
    * @param id
@@ -79,9 +89,11 @@ export const useProjectsStore = defineStore('projectsStore', () => {
 
   return {
     getProjectsList,
+    getProjectsItem,
     putProjectsItem,
     postProjectsItem,
     deleteProjectsItem,
     projectsList,
+    projectsItem,
   };
 });
