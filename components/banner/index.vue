@@ -4,13 +4,19 @@
       <img src="@/assets/images/banner2.jpg" alt="Строительство домов" />
       <div class="container">
         <h1 class="main-title">
-          Строительство монолитных домов в Санкт-Петербурге и области
+          {{ title }}
         </h1>
       </div>
     </div>
   </div>
 </template>
-<script></script>
+<script setup lang="ts">
+interface Props {
+  title: string
+}
+
+defineProps<Props>()
+</script>
 <style scoped lang="scss">
 .banner {
   position: relative;

@@ -2,7 +2,7 @@
   <div class="portfolio-page">
     <div class="container">
       <h1>{{ portfolioItem.title }}</h1>
-      <v-breadcrumbs :items="items">
+      <v-breadcrumbs :items="breadcrumbs">
         <template v-slot:divider>
           <v-icon icon="mdi-chevron-right"></v-icon>
         </template>
@@ -63,21 +63,14 @@
           </li>
         </ul>
       </div>
-      <div class="portfolio-page__description">
+      <div v-if="portfolioItem.description" class="portfolio-page__description">
         {{ portfolioItem.description }}
       </div>
       <h2>Фотогалерея</h2>
       <div class="portfolio-page__images">
-        <div
-          v-for="image in portfolioItem.images"
-          :key="image.id"
-          class="portfolio-page__images-item"
-        >
-          <img
-            :src="MAIN_URL +image.img"
-            alt=""
-          >
-        </div>
+        <card-slider
+          :images="portfolioItem?.images"
+        />
       </div>
       <div
         v-if="portfolioItem.info_house"
@@ -85,7 +78,7 @@
         v-html="portfolioItem.info_house"
       />
     </div>
-    <div class="portfolio-page__map">
+    <div v-if="portfolioItem.map_link" class="portfolio-page__map">
       <div class="container">
         <h2>Объект на карте</h2>
       </div>
@@ -110,11 +103,10 @@ import { storeToRefs } from 'pinia';
 
 const { getPortfolioItem } = usePortfolioStore();
 const { portfolioItem } = storeToRefs(usePortfolioStore());
-const MAIN_URL = useRuntimeConfig().public.MAIN_URL;
 
 await getPortfolioItem(useRoute().params.id);
 
-const items = [
+const breadcrumbs = [
   {
     title: 'Наши работы',
     disabled: false,
@@ -135,7 +127,8 @@ const items = [
   padding: $offset-large 0 0;
 
   &__images {
-    margin: 0 0 $offset-large;
+    max-width: 1000px;
+    margin: 0 auto $offset-large;
 
     img {
       max-width: 100%;
@@ -149,6 +142,11 @@ const items = [
 
   &__description {
     margin-bottom: $offset-large;
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    padding: 40px 30px 40px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 15px rgba(0, 0, 0, 0.25);
   }
 }
 

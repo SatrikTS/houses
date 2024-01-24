@@ -1,6 +1,6 @@
 <template>
   <div class="main-page">
-    <Banner />
+    <Banner :title="aboutPost?.data?.main_title" />
     <TitleItem caption="Проекты" />
     <div class="project-list">
       <HousesList :projects="projectsList" />
@@ -32,29 +32,11 @@
       />
     </div>
     <TitleItem caption="О Компании" />
-    <ContentBlock>
-      <p>
-        Добро пожаловать на сайт нашей компании по строительству домов в
-        Санкт-Петербурге и области! Мы - команда профессионалов,
-        специализирующихся на создании уютных и функциональных жилых
-        пространств, которые сочетают в себе высокое качество, современные
-        технологии и индивидуальный подход.
-      </p>
-      <p>
-        Наши услуги включают в себя полный цикл строительства, начиная от
-        проектирования и заканчивая сдачей готового объекта. Мы предоставляем
-        широкий спектр строительных услуг: от возведения каркасных и кирпичных
-        домов до ремонта и реконструкции существующих строений. Независимо от
-        размера и сложности проекта, мы гарантируем высокий уровень
-        профессионализма и внимание к деталям.
-      </p>
-      <p>
-        Наша цель - воплотить мечты клиентов в реальность, предоставляя надежные
-        и стильные жилья. Мы сотрудничаем с опытными архитекторами, дизайнерами
-        и строителями, чтобы обеспечить нашим заказчикам результат, который
-        превосходит их ожидания.
-      </p>
-    </ContentBlock>
+    <div class="container">
+      <ContentBlock>
+        <p><div v-html="aboutPost.data?.main_text" /></p>
+      </ContentBlock>
+    </div>
   </div>
 </template>
 <script
@@ -65,6 +47,7 @@ import { storeToRefs } from 'pinia';
 import { useProjectsStore } from '~/store/projects-store';
 import { usePartnersStore } from '~/store/partners-store';
 import { usePortfolioStore } from '~/store/portfolio-store';
+import { useAboutStore } from '@/store/about-store';
 
 const { getProjectsList } = useProjectsStore();
 const { projectsList } = storeToRefs(useProjectsStore());
@@ -74,9 +57,13 @@ const { portfolioList } = storeToRefs(usePortfolioStore());
 const { getPartnersList } = usePartnersStore();
 const { partnersList } = storeToRefs(usePartnersStore());
 
+const { aboutPost } = storeToRefs(useAboutStore());
+const { getAboutData } = useAboutStore();
+
 await getProjectsList(null, 4);
 await getPortfolioList(3);
 await getPartnersList();
+await getAboutData();
 </script>
 <style
   lang="scss"
