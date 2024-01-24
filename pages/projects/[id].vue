@@ -1,135 +1,155 @@
 <template>
   <div class="project">
-    <TitleItem 
-      class="contacts__caption" 
-      :caption="projectsItem?.data.title" 
-    /> 
+    <TitleItem
+      class="contacts__caption"
+      :caption="projectsItem?.data.title"
+    />
     <div class="container">
       <div class="project__row">
         <div class="project__left">
           <div class="project__images">
-            <card-slider 
+            <card-slider
               :images="projectsItem?.data.images"
             />
           </div>
-          <div 
+          <div
             v-if="projectsItem.data.project_video"
             class="project__video"
           >
             <div class="project__video-wrap">
-              <iframe width="100%" height="100%" title="RAM Effect Vehicle" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen
-              src="https://www.youtube.com/embed/6W53qbR7fsI"
-              ></iframe> {# :src="projectsItem?.data.project_video" #}
+              <iframe
+                width="100%"
+                height="100%"
+                title="RAM Effect Vehicle"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                src="https://www.youtube.com/embed/6W53qbR7fsI"
+              ></iframe>
+              {# :src="projectsItem?.data.project_video" #}
             </div>
           </div>
           <div class="project__text">
             <h2 class="project__text-title">{{ projectsItem?.data.description }}</h2>
             <div class="project__text-body">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam nam obcaecati aliquam sint illo, reiciendis quia a fugit ipsa exercitationem repellat amet. Fugiat, ducimus vero accusamus officia nobis porro minus.
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam nam obcaecati aliquam sint illo, reiciendis quia a fugit ipsa exercitationem repellat amet. Fugiat, ducimus vero accusamus officia nobis porro minus.
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam nam obcaecati aliquam sint illo, reiciendis quia a fugit ipsa exercitationem repellat amet. Fugiat, ducimus vero accusamus officia nobis porro minus.
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam nam obcaecati aliquam sint illo, reiciendis quia a fugit ipsa exercitationem repellat amet. Fugiat, ducimus vero accusamus officia nobis porro minus.
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam nam obcaecati aliquam sint illo, reiciendis quia a fugit ipsa exercitationem repellat amet. Fugiat, ducimus vero accusamus officia nobis porro minus.
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam nam obcaecati aliquam sint illo, reiciendis quia a fugit ipsa exercitationem repellat amet. 
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam nam obcaecati aliquam sint illo,
+              reiciendis quia a fugit ipsa exercitationem repellat amet. Fugiat, ducimus vero accusamus officia nobis
+              porro minus.
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam nam obcaecati aliquam sint illo,
+              reiciendis quia a fugit ipsa exercitationem repellat amet. Fugiat, ducimus vero accusamus officia nobis
+              porro minus.
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam nam obcaecati aliquam sint illo,
+              reiciendis quia a fugit ipsa exercitationem repellat amet. Fugiat, ducimus vero accusamus officia nobis
+              porro minus.
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam nam obcaecati aliquam sint illo,
+              reiciendis quia a fugit ipsa exercitationem repellat amet. Fugiat, ducimus vero accusamus officia nobis
+              porro minus.
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam nam obcaecati aliquam sint illo,
+              reiciendis quia a fugit ipsa exercitationem repellat amet. Fugiat, ducimus vero accusamus officia nobis
+              porro minus.
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam nam obcaecati aliquam sint illo,
+              reiciendis quia a fugit ipsa exercitationem repellat amet.
             </div>
           </div>
         </div>
         <div class="project__right">
           <div class="project__desc">
-            <div 
+            <div
               v-if="projectsItem.data.total_area"
               class="project__desc-item"
             >
               <div class="project__desc-title">площадь</div>
-              <div class="project__desc-text">{{ projectsItem?.data.total_area }} м<sup>2</sup></div>
+              <div class="project__desc-text">{{ projectsItem?.data.total_area }} м
+                <sup>2</sup>
+              </div>
             </div>
-            <div 
+            <div
               v-if="projectsItem.data.level_type.title"
               class="project__desc-item"
             >
               <div class="project__desc-title">этажность</div>
-              <div class="project__desc-text">{{ projectsItem?.data.level_type.title }} </div>
+              <div class="project__desc-text">{{ projectsItem?.data.level_type.title }}</div>
             </div>
-            <div 
+            <div
               v-if="projectsItem.data.room_count.title"
               class="project__desc-item"
             >
               <div class="project__desc-title">количество комнат</div>
-              <div class="project__desc-text">{{ projectsItem?.data.room_count.title }} </div>
+              <div class="project__desc-text">{{ projectsItem?.data.room_count.title }}</div>
             </div>
-            <div 
+            <div
               v-if="projectsItem.data.additional_buildings"
               class="project__desc-item"
             >
               <div class="project__desc-title">дополнительно</div>
-              <div class="project__desc-text">{{ projectsItem?.data.additional_buildings }} </div>
+              <div class="project__desc-text">{{ projectsItem?.data.additional_buildings }}</div>
             </div>
             <hr>
-            <div 
+            <div
               v-if="projectsItem.data.roof_type.title"
               class="project__desc-item"
             >
               <div class="project__desc-title">тип крыши</div>
-              <div class="project__desc-text">{{ projectsItem?.data.roof_type.title }} </div>
+              <div class="project__desc-text">{{ projectsItem?.data.roof_type.title }}</div>
             </div>
-            <div 
+            <div
               v-if="projectsItem.data.roof_material.title"
               class="project__desc-item"
             >
               <div class="project__desc-title">материал крыши</div>
-              <div class="project__desc-text">{{ projectsItem?.data.roof_material.title }} </div>
+              <div class="project__desc-text">{{ projectsItem?.data.roof_material.title }}</div>
             </div>
-            <div 
+            <div
               v-if="projectsItem.data.wall_material.title"
               class="project__desc-item"
             >
               <div class="project__desc-title">материал стены</div>
-              <div class="project__desc-text">{{ projectsItem?.data.wall_material.title }} </div>
+              <div class="project__desc-text">{{ projectsItem?.data.wall_material.title }}</div>
             </div>
-            <div 
+            <div
               v-if="projectsItem.data.foundation_type.title"
               class="project__desc-item"
             >
               <div class="project__desc-title">тип фундамента</div>
-              <div class="project__desc-text">{{ projectsItem?.data.foundation_type.title }} </div>
+              <div class="project__desc-text">{{ projectsItem?.data.foundation_type.title }}</div>
             </div>
-            <div 
+            <div
               v-if="projectsItem.data.heating_type.title"
               class="project__desc-item"
             >
               <div class="project__desc-title">тип отопления</div>
-              <div class="project__desc-text">{{ projectsItem?.data.heating_type.title }} </div>
+              <div class="project__desc-text">{{ projectsItem?.data.heating_type.title }}</div>
             </div>
-            <div 
+            <div
               v-if="projectsItem.data.completion_stage.title"
               class="project__desc-item"
             >
               <div class="project__desc-title">}{3 - completion_stage</div>
-              <div class="project__desc-text">{{ projectsItem?.data.completion_stage.title }} </div>
+              <div class="project__desc-text">{{ projectsItem?.data.completion_stage.title }}</div>
             </div>
             <hr>
-            <div 
+            <div
               v-if="projectsItem.data.price_per_project"
               class="project__desc-item"
             >
               <div class="project__desc-title">стоимость проекта</div>
               <div class="project__desc-text">{{ projectsItem?.data.price_per_project }} ₽</div>
             </div>
-            <div 
+            <div
               v-if="projectsItem.data.price_turnkey"
               class="project__desc-item"
             >
               <div class="project__desc-title">стоимость под ключ</div>
               <div class="project__desc-text">{{ projectsItem?.data.price_turnkey }} ₽</div>
             </div>
-            <div 
+            <div
               v-if="projectsItem.data.project_period"
               class="project__desc-item"
             >
               <div class="project__desc-title">срок проектирования</div>
               <div class="project__desc-text">от {{ projectsItem?.data.project_period }} мес.</div>
             </div>
-            <div 
+            <div
               v-if="projectsItem.data.construction_period"
               class="project__desc-item"
             >
@@ -138,45 +158,47 @@
             </div>
           </div>
           <div class="project__contacts">
-            <FormFeedback :title="contactsTitle"/>
+            <FormFeedback :title="contactsTitle" />
           </div>
         </div>
       </div>
       <div class="project__others">
         <h2 class="project__others-title">Похожие проекты</h2>
         <div class="project__others-wrap">
-          <House v-for="(item, index) in projectsList?.data" :key="item.id" :data="item" />
+          <House
+            v-for="(item) in projectsList?.data"
+            :key="item.id"
+            :data="item"
+          />
         </div>
       </div>
     </div>
   </div>
 </template>
-
 <script setup>
-import { ref, reactive } from 'vue';
-import { useProjectsStore } from '@/store/projects-store';
+import { ref } from 'vue'
+import { useProjectsStore } from '@/store/projects-store'
 
-const { getProjectsItem } = useProjectsStore();
-const { getProjectsList } = useProjectsStore();
+const { getProjectsItem } = useProjectsStore()
+const { getProjectsList } = useProjectsStore()
 
-const { projectsItem } = storeToRefs(useProjectsStore());
-const { projectsList } = storeToRefs(useProjectsStore());
+const { projectsItem } = storeToRefs(useProjectsStore())
+const { projectsList } = storeToRefs(useProjectsStore())
 
-const contactsTitle = ref('Задать вопрос:');
+const contactsTitle = ref('Задать вопрос:')
 
-await getProjectsItem(useRoute().params.id);
-await getProjectsList();
+await getProjectsItem(useRoute().params.id)
+await getProjectsList()
 
-
-console.log('projectsItem', projectsItem.value.data);
 </script>
-
-<style 
-scoped
-lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 hr {
   margin: 15px 0 35px;
 }
+
 .project {
   padding-bottom: 70px;
 
@@ -191,7 +213,7 @@ hr {
     flex-grow: 1;
     margin-right: 20px;
   }
-  
+
   &__right {
     width: 37%;
     flex-shrink: 0;
@@ -215,7 +237,7 @@ hr {
     justify-content: space-between;
     align-items: flex-end;
     line-height: 1;
-    
+
     &:not(:last-child) {
       margin-bottom: 20px;
     }
@@ -241,13 +263,13 @@ hr {
       vertical-align: baseline;
     }
   }
-  
+
   &__video {
     position: relative;
     border-radius: 6px;
     overflow: hidden;
     margin-bottom: 40px;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 15px rgba(0,0,0,0.25);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 15px rgba(0, 0, 0, 0.25);
   }
 
   &__video-wrap {
@@ -279,7 +301,7 @@ hr {
     border-radius: 6px;
     overflow: hidden;
     padding: 40px 30px 40px;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 15px rgba(0,0,0,0.25);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 15px rgba(0, 0, 0, 0.25);
   }
 
   &__text-title,

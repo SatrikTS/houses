@@ -64,6 +64,7 @@ const submitMessage = (): void => {
       message: message.value,
       preferConnection: preferConnection.value,
     };
+    console.log(data);
     successMsg.value = 'Cообщение отправлено!';
     setTimeout(() => {
       successMsg.value = null;
