@@ -9,7 +9,6 @@
         </div>
         <h4 class="admin-column__caption">Меню админ-панели</h4>
         <div class="admin-menu">
-          <NuxtLink class="admin-link" to="/admin">Главная</NuxtLink>
           <NuxtLink class="admin-link" to="/admin/projects">Проекты</NuxtLink>
           <NuxtLink class="admin-link" to="/admin/portfolio">Портфолио</NuxtLink>
           <NuxtLink class="admin-link" to="/admin/partners">Партнеры</NuxtLink>

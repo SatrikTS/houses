@@ -12,7 +12,7 @@
       v-model="mainTitle"
       label="Заголовок на главной"
     />
-    <v-text-field
+    <v-textarea
       v-model="mainText"
       label="Текст на главной"
     />
@@ -73,11 +73,12 @@ const successMessage = ref();
 
 const saveData = async (): Promise<void> => {
   const data = {
-    main_title:  aboutPost.value.main_title.title,
     title: aboutPost.value.data.title,
     html_content: content.value,
     company_keywords: keywords.value,
     company_video: videoLinks.value,
+    main_title: mainTitle.value,
+    main_text: mainText.value,
   };
   const response = await putAboutData(data, 1);
   successMessage.value = response;
@@ -103,7 +104,7 @@ const uploadImage = (value: File[]): void => {
 const handleRemoveImage = async (id: number): Promise<void> => {
   const response = await removeImage(id);
   successMessage.value = response;
-  await saveData()
+  await saveData();
   setTimeout(() => location.reload(), 3000);
 };
 

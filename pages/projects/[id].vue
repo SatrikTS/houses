@@ -5,11 +5,22 @@
       :caption="projectsItem?.data.title"
     />
     <div class="container">
+      <v-breadcrumbs :items="breadcrumbs">
+        <template v-slot:divider>
+          <v-icon icon="mdi-chevron-right"></v-icon>
+        </template>
+      </v-breadcrumbs>
       <div class="project__row">
         <div class="project__left">
           <div class="project__images">
             <card-slider
               :images="projectsItem?.data.images"
+            />
+          </div>
+          <div class="project__text">
+            <div
+              class="project__text-body"
+              v-html="projectsItem.data.extende_info"
             />
           </div>
           <div
@@ -27,28 +38,6 @@
                 src="https://www.youtube.com/embed/6W53qbR7fsI"
               ></iframe>
               {# :src="projectsItem?.data.project_video" #}
-            </div>
-          </div>
-          <div class="project__text">
-            <h2 class="project__text-title">{{ projectsItem?.data.description }}</h2>
-            <div class="project__text-body">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam nam obcaecati aliquam sint illo,
-              reiciendis quia a fugit ipsa exercitationem repellat amet. Fugiat, ducimus vero accusamus officia nobis
-              porro minus.
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam nam obcaecati aliquam sint illo,
-              reiciendis quia a fugit ipsa exercitationem repellat amet. Fugiat, ducimus vero accusamus officia nobis
-              porro minus.
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam nam obcaecati aliquam sint illo,
-              reiciendis quia a fugit ipsa exercitationem repellat amet. Fugiat, ducimus vero accusamus officia nobis
-              porro minus.
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam nam obcaecati aliquam sint illo,
-              reiciendis quia a fugit ipsa exercitationem repellat amet. Fugiat, ducimus vero accusamus officia nobis
-              porro minus.
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam nam obcaecati aliquam sint illo,
-              reiciendis quia a fugit ipsa exercitationem repellat amet. Fugiat, ducimus vero accusamus officia nobis
-              porro minus.
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam nam obcaecati aliquam sint illo,
-              reiciendis quia a fugit ipsa exercitationem repellat amet.
             </div>
           </div>
         </div>
@@ -188,8 +177,18 @@ const { projectsList } = storeToRefs(useProjectsStore())
 const contactsTitle = ref('Задать вопрос:')
 
 await getProjectsItem(useRoute().params.id)
-await getProjectsList()
+await getProjectsList(null, 4)
 
+const breadcrumbs = [
+  {
+    title: 'Проекты',
+    disabled: false,
+    href: '/prjects',
+  },
+  {
+    title: projectsItem?.value.data.title,
+  },
+]
 </script>
 <style
   scoped
@@ -246,14 +245,15 @@ hr {
   &__desc-title {
     width: 45%;
     text-transform: uppercase;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 600;
   }
 
   &__desc-text {
     width: 50%;
     text-align: start;
-    font-size: 22px;
+    font-size: 14px;
+    line-height: 1.5;
 
     sup {
       top: -0.5em;
@@ -286,8 +286,6 @@ hr {
   &__contacts {
     flex-shrink: 0;
     padding: 40px 30px 60px;
-    background: rgb(0 0 0 / 70%);
-    color: $bg-main;
     border-radius: 6px;
     box-shadow: 0 25px 30px rgba(0, 0, 0, 0.30), 0 15px 20px rgba(0, 0, 0, 0.25);
   }
