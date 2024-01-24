@@ -1,56 +1,93 @@
 <template>
   <div>
-    <h2>{{ title }}</h2>
-    <div class="row">
+    <h2 v-if="!noneEdit">{{ title }}</h2>
+    <div
+      v-if="!noneEdit"
+      class="row"
+    >
       <div class="column-4">
-        <v-btn color="#27ae60" @click="optionModal = true"
-          >Добавить элемент
+        <v-btn
+          color="#27ae60"
+          @click="optionModal = true"
+        >Добавить элемент
         </v-btn>
       </div>
     </div>
-    <div class="category-list">
-      <div class="category-list__header">
-        <div class="category-list__item category-list__item--id">ID</div>
-        <div class="category-list__item">Название материала</div>
-        <div class="category-list__item">Описание</div>
-        <div class="category-list__item category-list__item--btns">
+    <div class="admin-list">
+      <div class="admin-list__header">
+        <div class="admin-list__item admin-list__item--id">ID</div>
+        <div class="admin-list__item">Название</div>
+        <div v-if="hasImage" class="admin-list__item">Изображения</div>
+        <div v-else class="admin-list__item">Описание</div>
+        <div class="admin-list__item admin-list__item--btns">
           Управление
         </div>
       </div>
       <div
         v-for="(item, index) in list"
         :key="item.title"
-        class="category-list__content"
+        class="admin-list__content"
       >
-        <div class="category-list__item category-list__item--id">
+        <div class="admin-list__item admin-list__item--id">
           {{ item.id }}
         </div>
         <div
           ref="titleElement"
-          class="category-list__item"
-          contenteditable="true"
+          class="admin-list__item"
+          :contenteditable="noneEdit ? false : true"
         >
           {{ item.title }}
         </div>
         <div
+          v-if="hasImage"
+          class="admin-list__item admin-list__item--img"
+        >
+          <div class="admin-list__img">
+            <img
+              :src="MAIN_URL + item.images[0]?.img"
+              alt="img"
+            />
+          </div>
+        </div>
+        <div
+          v-else
           ref="descriptionElement"
-          class="category-list__item"
-          contenteditable="true"
+          class="admin-list__item"
+          :contenteditable="noneEdit ? false : true"
         >
           {{ item.description }}
         </div>
-        <div class="category-list__item category-list__item--btns">
-          <v-btn color="#f1c40f" @click="saveItemOption(item, index)">
+        <div class="admin-list__item admin-list__item--btns">
+          <v-btn
+            v-if="!noneEdit"
+            color="#f1c40f"
+            @click="saveItemOption(item, index)"
+          >
             Сохранить
             <IconEdit />
           </v-btn>
-          <v-btn color="#e74c3c" @click="showRemoveModal(item.id)">
+          <v-btn
+            v-if="noneEdit"
+            color="#f1c40f"
+            @click="emit('handleEdit', item.id)"
+          >
+            Редакт
+            <IconEdit />
+          </v-btn>
+          <v-btn
+            color="#e74c3c"
+            @click="showRemoveModal(item.id)"
+          >
             <IconRemove />
           </v-btn>
         </div>
       </div>
     </div>
-    <v-alert v-if="updateMsg" type="success" class="alert">
+    <v-alert
+      v-if="updateMsg"
+      type="success"
+      class="alert"
+    >
       {{ updateMsg }}
     </v-alert>
     <OptionAddModal
@@ -59,15 +96,21 @@
       v-model:descriptionOption="descriptionOption"
       @confirm="submitNewOption"
     />
-    <RemoveOptionModal v-model="removeModal" @confirm="confirmRemoveModal" />
+    <RemoveOptionModal
+      v-model="removeModal"
+      @confirm="confirmRemoveModal"
+    />
   </div>
 </template>
-<script setup lang="ts">
+<script
+  setup
+  lang="ts"
+>
 import { ref } from 'vue';
 import IconEdit from '@/assets/icons/IconEdit.vue';
 import IconRemove from '@/assets/icons/IconDelete.vue';
-import OptionAddModal from '@/components/dictionaries-modals/option-add-modal.vue';
-import RemoveOptionModal from '@/components/dictionaries-modals/option-remove-modal.vue';
+import OptionAddModal from '@/components/modals/option-add-modal.vue';
+import RemoveOptionModal from '@/components/modals/option-remove-modal.vue';
 
 definePageMeta({
   layout: 'admin',
@@ -93,6 +136,14 @@ interface Props {
    * Список опций
    */
   list: OptionListItem[];
+  /**
+   * не редактируем поля в таблице
+   */
+  noneEdit?: boolean;
+  /**
+   * Отображаем картинки в таблице
+   */
+  hasImage?: boolean
 }
 
 interface IEmits {
@@ -115,6 +166,7 @@ interface IEmits {
    * @param params
    */
   (e: 'createData', params: OptionListItem): void;
+  (e: 'handleEdit', id: number): void;
 }
 
 defineProps<Props>();
@@ -127,7 +179,7 @@ const titleOption = ref();
 const descriptionOption = ref();
 const removeModal = ref(false);
 const removeOptionId = ref();
-
+const MAIN_URL = useRuntimeConfig().public.MAIN_URL;
 /**
  * Подтверждение открытия модалки
  * @param id
@@ -168,8 +220,11 @@ const submitNewOption = (): void => {
   optionModal.value = false;
 };
 </script>
-<style scoped lang="scss">
-.category-list {
+<style
+  scoped
+  lang="scss"
+>
+.admin-list {
   min-height: 600px;
   margin: 0 0 $offset-base;
 
@@ -216,6 +271,23 @@ const submitNewOption = (): void => {
     &--id {
       width: 100px;
       flex: none;
+    }
+
+    &--img {
+      flex: none;
+      width: 110px;
+    }
+  }
+
+  &__img {
+    max-width: 100px;
+    height: 100px;
+    overflow: hidden;
+
+    img {
+      max-width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   }
 }

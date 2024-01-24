@@ -8,11 +8,15 @@ export const menuList = [
     text: 'Проекты',
   },
   {
-    link: '/building',
+    link: '/portfolio',
+    text: 'Наши работы',
+  },
+  {
+    link: '/buildings-posts',
     text: 'Строительство',
   },
   {
-    link: '/engineering',
+    link: '/design',
     text: 'Проектирование',
   },
   {

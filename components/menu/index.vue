@@ -15,7 +15,7 @@
       </div>
       <ul class="menu__list">
         <li v-for="item in menuList" :key="item.text" class="menu-item">
-          <NuxtLink :href="item.link" @click="handleMenu(item)"
+          <NuxtLink :href="item.link"
             >{{ item.text }}
           </NuxtLink>
         </li>

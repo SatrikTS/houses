@@ -11,8 +11,12 @@
         <div class="admin-menu">
           <NuxtLink class="admin-link" to="/admin">Главная</NuxtLink>
           <NuxtLink class="admin-link" to="/admin/projects">Проекты</NuxtLink>
+          <NuxtLink class="admin-link" to="/admin/portfolio">Портфолио</NuxtLink>
+          <NuxtLink class="admin-link" to="/admin/partners">Партнеры</NuxtLink>
           <NuxtLink class="admin-link" to="/admin/contacts">Контакты</NuxtLink>
-          <div class="admin-service-item">Служебные</div>
+          <NuxtLink class="admin-link" to="/admin/about">О Компании</NuxtLink>
+          <NuxtLink class="admin-link" to="/admin/articles-buildings">Статьи</NuxtLink>
+          <div class="admin-service-item"></div>
           <NuxtLink
             class="admin-link admin-link--small"
             to="/admin/roof-materials"
@@ -92,7 +96,7 @@ const logOut = (): void => {
 }
 
 .admin-service-item {
-  background: $danger;
+  background: $bg-dark-3;
   color: $bg-light;
   padding: $offset-base;
 }

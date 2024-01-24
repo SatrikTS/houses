@@ -7,14 +7,14 @@
         >
       </div>
       <div class="card-slider__select">
-        <div 
-          class="card-slider__item"
-          v-for="(item, index) in images" 
+        <div
+          v-for="(item, index) in images"
           :key="item.id"
+          class="card-slider__item"
         >
           <div 
             class="card-slider__img"
-            :class='activeImage?.id === item.id ? "active" : ""'
+            :class="activeImage?.id === item.id ? 'active' : ''"
             @click="setActiveImage(index)"
           >
             <img
@@ -41,7 +41,7 @@ const props = defineProps<Props>();
 const MAIN_URL = useRuntimeConfig().public.MAIN_URL;
 const activeImage = ref(props.images[0]);
 
-const setActiveImage = (index: number) => {
+const setActiveImage = (index: number): void => {
   activeImage.value = props.images[index];
 };
 </script>

@@ -23,6 +23,7 @@
       <v-select
         v-model="preferConnection"
         label="Предпочтительный cпособ связи"
+        :rules="emptyRules"
         :items="['Звонок', 'Telegram', 'WatsApp', 'Viber', 'Email']"
         clearable
       />
@@ -61,8 +62,9 @@ const submitMessage = (): void => {
       email: email.value,
       phone: phone.value,
       message: message.value,
+      preferConnection: preferConnection.value,
     };
-    console.log('data', data);
+    console.log(data);
     successMsg.value = 'Cообщение отправлено!';
     setTimeout(() => {
       successMsg.value = null;
