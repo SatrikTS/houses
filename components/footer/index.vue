@@ -44,6 +44,10 @@ defineProps<Props>();
     display: flex;
     align-items: center;
     border-bottom: 1px solid $bg-base;
+
+    @media (max-width: $laptop-h) {
+      display: none;
+    }
   }
 
   .logo {
@@ -53,6 +57,16 @@ defineProps<Props>();
 
     &__name {
       font-size: 20px;
+
+      @media (max-width: $desktop) {
+        word-break: unset;
+      }
+    }
+
+    &__wrap {
+      @media (max-width: $desktop) {
+        text-align: left;
+      }
     }
 
     &__slogan {
@@ -68,6 +82,11 @@ defineProps<Props>();
     padding: 16px 0;
     color: $bg-base;
 
+    @media (max-width: $laptop-h) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
     .address {
       align-items: flex-start;
 
@@ -80,8 +99,21 @@ defineProps<Props>();
   .menu {
     width: 100%;
 
+    &__list {
+      @media (max-width: $laptop-w) {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+    }
+
     .container {
       width: auto;
+    }
+
+    .menu-item {
+      @media (max-width: $desktop) {
+        margin-right: 12px;
+      }
     }
 
     .menu-item a {

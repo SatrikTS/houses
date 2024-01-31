@@ -29,6 +29,11 @@ defineProps<Props>();
   flex-direction: column;
   align-items: flex-end;
 
+  @media (max-width: $laptop-w) {
+    flex-direction: row;
+    gap: 12px;
+  }
+
   &__label {
     font-size: 0.9em;
     font-weight: 600;

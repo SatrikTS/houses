@@ -41,12 +41,12 @@
   lang="ts"
 >
 import { storeToRefs } from 'pinia';
-import { useArticlesBuildingsStore } from '@/store/articles-buildings-store';
+import { useArticlesStore } from '@/store/articles-store';
 
-const { posts } = storeToRefs(useArticlesBuildingsStore());
-const { getPosts } = useArticlesBuildingsStore();
+const { posts } = storeToRefs(useArticlesStore());
+const { getPosts } = useArticlesStore();
 const MAIN_URL = useRuntimeConfig().public.MAIN_URL;
-await getPosts();
+await getPosts('Строительство');
 </script>
 <style
   scoped
@@ -57,9 +57,20 @@ await getPosts();
 
   &__wrap {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /* Два столбца с равными долями ширины */
-    gap: 40px; /* Расстояние между элементами */
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
     padding: 40px 0;
+
+    @media (max-width: $laptop-h) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+
+    @media (max-width: $mobile) {
+      grid-template-columns: repeat(1, 1fr);
+      gap: 20px;
+    }
   }
 
   .post {

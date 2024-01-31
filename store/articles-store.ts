@@ -4,7 +4,7 @@ import { ref } from 'vue';
 /**
  * About
  */
-export const useArticlesBuildingsStore = defineStore('articlesBuildingsStore', () => {
+export const useArticlesStore = defineStore('articlesStore', () => {
   const posts = ref();
   const article = ref();
   const isLoading = ref();
@@ -15,7 +15,7 @@ export const useArticlesBuildingsStore = defineStore('articlesBuildingsStore', (
    */
   const getPostItem = async (id: number): Promise<void> => {
     isLoading.value = true;
-    const { data } = await $api.get(`/constructions/${id}`);
+    const { data } = await $api.get(`/posts/${id}`);
     article.value = data;
     isLoading.value = false;
   };
@@ -23,9 +23,9 @@ export const useArticlesBuildingsStore = defineStore('articlesBuildingsStore', (
   /**
    * Получить запись
    */
-  const getPosts = async (): Promise<void> => {
+  const getPosts = async (category?: string): Promise<void> => {
     isLoading.value = true;
-    const { data } = await $api.get('/constructions');
+    const { data } = await $api.get(`/posts/?category=${category}`);
     posts.value = data;
     isLoading.value = false;
   };
@@ -36,7 +36,7 @@ export const useArticlesBuildingsStore = defineStore('articlesBuildingsStore', (
    * @param id
    */
   const postPostItem = async (params: any): Promise<any> => {
-    const { data } = await $api.post('/constructions', {
+    const { data } = await $api.post('/posts', {
       ...params,
     });
     return data;
@@ -48,7 +48,7 @@ export const useArticlesBuildingsStore = defineStore('articlesBuildingsStore', (
    * @param id
    */
   const putPostItem = async (params: any, id: number): Promise<string> => {
-    const { data } = await $api.put(`/constructions/${id}`, {
+    const { data } = await $api.put(`/posts/${id}`, {
       ...params,
     });
     return data.message;
@@ -59,7 +59,7 @@ export const useArticlesBuildingsStore = defineStore('articlesBuildingsStore', (
    * @param id
    */
   const removePost = async (id: number): Promise<string> => {
-    const { data } = await $api.delete(`/constructions/${id}`);
+    const { data } = await $api.delete(`/posts/${id}`);
     return data.message;
   };
 
@@ -69,7 +69,7 @@ export const useArticlesBuildingsStore = defineStore('articlesBuildingsStore', (
    */
   const uploadImages = async (files: FormData): Promise<string> => {
     const { data } = await $api.post(
-      '/construction_images',
+      '/post_images',
       files,
       {
         headers: {
@@ -85,7 +85,7 @@ export const useArticlesBuildingsStore = defineStore('articlesBuildingsStore', (
    * @param id
    */
   const removeImage = async (id: number): Promise<string> => {
-    const { data } = await $api.delete(`/construction_images/${id}`);
+    const { data } = await $api.delete(`/post_images/${id}`);
     return data.message;
   };
 

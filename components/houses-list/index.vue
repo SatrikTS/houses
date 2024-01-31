@@ -20,6 +20,10 @@ defineProps<Props>();
   padding: $offset-xlarge 0;
   min-height: 500px;
 
+  @media (max-width: $laptop-h) {
+    padding: 0 0 $offset-xlarge;
+  }
+
   &__wrap {
     display: flex;
     flex-wrap: wrap;

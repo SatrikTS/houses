@@ -3,7 +3,7 @@
     <h2>Статьи</h2>
     <v-btn
       color="#27ae60"
-      @click="navigateTo({ path: `/admin/articles-buildings/add` })"
+      @click="navigateTo({ path: `/admin/articles/add` })"
     >Создать запись
     </v-btn>
     <br>
@@ -12,8 +12,9 @@
       :list="posts.data"
       :noneEdit="true"
       :updateMsg="successMessage"
+      :category="true"
       @removeData="removeData"
-      @handleEdit="(id) => navigateTo({ path: `/admin/articles-buildings/${id}` })"
+      @handleEdit="(id) => navigateTo({ path: `/admin/articles/${id}` })"
     />
     <SuccessAlert :successMessage="successMessage" />
   </div>
@@ -24,15 +25,15 @@
 >
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
-import { useArticlesBuildingsStore } from '@/store/articles-buildings-store';
+import { useArticlesStore } from '@/store/articles-store';
 
 definePageMeta({
   layout: 'admin',
   middleware: 'auth',
 });
 
-const { posts } = storeToRefs(useArticlesBuildingsStore());
-const { getPosts, removePost } = useArticlesBuildingsStore();
+const { posts } = storeToRefs(useArticlesStore());
+const { getPosts, removePost } = useArticlesStore();
 
 const successMessage = ref();
 

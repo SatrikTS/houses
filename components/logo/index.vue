@@ -19,18 +19,39 @@ import LogoIcon from '../../assets/icons/logo-icon.vue';
   display: flex;
   align-items: center;
 
+  svg {
+    fill: $primary;
+
+    @media (max-width: $laptop-h) {
+      fill: white;
+    }
+  }
+
   &__icon {
     font-size: 1.5em;
     font-weight: bold;
     width: 60px;
     height: 70px;
     display: flex;
+
+    @media (max-width: $laptop-h) {
+      width: 35px;
+      height: 35px;
+    }
   }
 
   &__wrap {
     display: flex;
     flex-direction: column;
     padding: 0 8px;
+
+    @media (max-width: $laptop-w) {
+      //text-align: center;
+    }
+
+    @media (max-width: $laptop-h) {
+      //display: none;
+    }
   }
 
   &__name {
@@ -39,6 +60,15 @@ import LogoIcon from '../../assets/icons/logo-icon.vue';
     text-transform: uppercase;
     font-weight: bold;
     color: $danger;
+
+    @media (max-width: $laptop-w) {
+      word-break: break-all;
+      font-size: 28px;
+    }
+
+    @media (max-width: $laptop-h) {
+      color: $bg-base;
+    }
   }
 
   &__slogan {
@@ -46,6 +76,16 @@ import LogoIcon from '../../assets/icons/logo-icon.vue';
     font-size: 11px;
     width: 300px;
     font-weight: bold;
+
+    @media (max-width: $laptop-w) {
+      letter-spacing: -0.3px;
+      font-size: 10px;
+      word-break: break-all;
+    }
+
+    @media (max-width: $laptop-h) {
+      color: $bg-base;
+    }
   }
 }
 </style>

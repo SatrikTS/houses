@@ -246,6 +246,10 @@ watch(totalArea, () => {
     grid-template-columns: repeat(4, 1fr); /* Создает 4 равных столбца */
     grid-gap: $offset-base; /* Отступ между блоками */
 
+    @media (max-width: $laptop-h) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
     &--wide {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -255,6 +259,10 @@ watch(totalArea, () => {
       align-items: flex-end;
       gap: 16px;
       margin: 0 0 22px;
+
+      @media (max-width: $laptop-h) {
+        gap: 16px 0;
+      }
     }
   }
 
@@ -270,6 +278,10 @@ watch(totalArea, () => {
     grid-column: span 1;
     position: relative;
     top: 23px;
+
+    @media (max-width: $laptop-h) {
+      grid-column: 1;
+    }
   }
 
   &__item {

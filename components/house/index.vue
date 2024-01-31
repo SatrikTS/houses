@@ -71,6 +71,14 @@ defineProps<Props>();
   box-shadow 0.3s ease-in-out;
   width: calc(25% - 15px);
 
+  @media (max-width: $laptop-w) {
+    width: calc(50% - 10px);
+  }
+
+  @media (max-width: $laptop-h) {
+    width: 100%
+  }
+
   &:hover {
     box-shadow: 0 0 20px #0003, 0 0 10px #0000001a;
   }
@@ -162,6 +170,10 @@ defineProps<Props>();
     text-decoration: none;
     color: inherit;
     height: 200px;
+
+    @media (max-width: $laptop-w) {
+      height: 270px;
+    }
   }
 
   &-btn {

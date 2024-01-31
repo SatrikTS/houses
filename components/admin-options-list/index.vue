@@ -18,6 +18,7 @@
         <div class="admin-list__item admin-list__item--id">ID</div>
         <div class="admin-list__item">Название</div>
         <div v-if="hasImage" class="admin-list__item">Изображения</div>
+        <div v-else-if="category" class="admin-list__item">Категория</div>
         <div v-else class="admin-list__item">Описание</div>
         <div class="admin-list__item admin-list__item--btns">
           Управление
@@ -48,6 +49,9 @@
               alt="img"
             />
           </div>
+        </div>
+        <div v-else-if="category" class="admin-list__item">
+          {{ item.category.title }}
         </div>
         <div
           v-else
@@ -143,7 +147,11 @@ interface Props {
   /**
    * Отображаем картинки в таблице
    */
-  hasImage?: boolean
+  hasImage?: boolean,
+  /**
+   * Категория в случае статьи
+   */
+  category?: boolean
 }
 
 interface IEmits {

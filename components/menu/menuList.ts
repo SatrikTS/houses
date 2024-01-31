@@ -1,28 +1,32 @@
 export const menuList = [
+  // {
+  //   link: '/',
+  //   text: 'Главная',
+  // },
   {
-    link: '/',
-    text: 'Главная',
+    link: '/about',
+    text: 'О компании',
   },
   {
     link: '/projects',
-    text: 'Проекты',
+    text: 'Проекты домов',
   },
   {
     link: '/portfolio',
-    text: 'Наши работы',
+    text: 'Выполненные работы',
   },
   {
     link: '/buildings-posts',
     text: 'Строительство',
   },
   {
-    link: '/design',
-    text: 'Проектирование',
+    link: '/engineering',
+    text: 'Инженерные системы',
   },
-  {
-    link: '/about',
-    text: 'О компании',
-  },
+  // {
+  //   link: '/design',
+  //   text: 'Проектирование',
+  // },
   {
     link: '/contacts',
     text: 'Контакты',

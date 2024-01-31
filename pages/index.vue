@@ -7,7 +7,7 @@
       <div class="container">
         <v-btn
           color="#e84118"
-          @click="navigateTo({ path: `/projects` })"
+          @click="navigateTo({ path: `/projects` }, { external: true })"
         >
           Смотреть все проекты
         </v-btn>
@@ -19,7 +19,7 @@
       <div class="container">
         <v-btn
           color="#e84118"
-          @click="navigateTo({ path: `/portfolio` })"
+          @click="navigateTo({ path: `/portfolio` }, { external: true })"
         >
           Смотреть все проекты
         </v-btn>

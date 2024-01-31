@@ -1,5 +1,9 @@
 <template>
   <div class="portfolio">
+    <Head>
+      <Title>Монолитстрой | Выполненные работы</Title>
+      <Meta name="description" content="Строительство загородных домов в Санкт-Петербурге. Примеры работ"/>
+    </Head>
     <TitleItem
       class="contacts__caption"
       caption="Наши работы"

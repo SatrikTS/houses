@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="admin">
+    admin
+    <div class="admin"  style="display:flex; height: 100%; min-height: 100vh;">
       <div class="admin-column">
         <div class="admin-top">
           <div class="admin-logo">
@@ -14,8 +15,13 @@
           <NuxtLink class="admin-link" to="/admin/partners">Партнеры</NuxtLink>
           <NuxtLink class="admin-link" to="/admin/contacts">Контакты</NuxtLink>
           <NuxtLink class="admin-link" to="/admin/about">О Компании</NuxtLink>
-          <NuxtLink class="admin-link" to="/admin/articles-buildings">Статьи</NuxtLink>
+          <NuxtLink class="admin-link" to="/admin/articles">Статьи</NuxtLink>
           <div class="admin-service-item"></div>
+          <NuxtLink
+            class="admin-link admin-link--small"
+            to="/admin/category"
+          >Категории
+          </NuxtLink>
           <NuxtLink
             class="admin-link admin-link--small"
             to="/admin/roof-materials"

@@ -1,6 +1,10 @@
 <template>
   <div class="projects">
-    <TitleItem class="contacts__caption" caption="Проекты" />
+    <Head>
+      <Title>Монолитстрой | Проекты домов</Title>
+      <Meta name="description" content="Проектирование и строительство домов, бань, дач в Санкт-Петербурге"/>
+    </Head>
+    <TitleItem class="contacts__caption" caption="Проекты домов" />
     <div class="container">
       <Filters
         class="projects__filters"

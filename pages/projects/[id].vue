@@ -1,5 +1,9 @@
 <template>
   <div class="project">
+    <Head>
+      <Title>Монолитстрой | {{ projectsItem?.data.title }}</Title>
+      <Meta name="description" content="Проектирование и строительство домов, бань, дач в Санкт-Петербурге"/>
+    </Head>
     <TitleItem
       class="contacts__caption"
       :caption="projectsItem?.data.title"
@@ -181,12 +185,13 @@ await getProjectsList(null, 4)
 
 const breadcrumbs = [
   {
-    title: 'Проекты',
+    title: 'Проекты домов',
     disabled: false,
-    href: '/prjects',
+    href: '/projects',
   },
   {
     title: projectsItem?.value.data.title,
+    disabled: true,
   },
 ]
 </script>

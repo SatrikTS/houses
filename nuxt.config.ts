@@ -4,12 +4,18 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify';
 
 export default defineNuxtConfig({
   ssr: true,
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+      failOnError: false,
+    },
+  },
   app: {
     head: {
-      title: 'Дома',
+      title: 'Монолитстрой | Проектирование и строительство',
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Монтаж домов' },
+        { name: 'description', content: 'Проектирование и строительство загородных домов, бань, гаражей в Санкт-Петербурге и области' },
       ],
     },
     pageTransition: { name: 'page', mode: 'out-in' },

@@ -1,5 +1,9 @@
 <template>
   <div class="about">
+    <Head>
+      <Title>Монолитстрой | {{ article?.data.keywords }}</Title>
+      <Meta name="description" content="Проектирование и строительство домов, бань, дач в Санкт-Петербурге"/>
+    </Head>
     <TitleItem
       :caption="article.data.title"
     />
@@ -34,11 +38,11 @@
 <script setup>
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useArticlesBuildingsStore } from '@/store/articles-buildings-store'
+import { useArticlesStore } from '@/store/articles-store'
 import { useRoute } from 'nuxt/app'
 
-const { article } = storeToRefs(useArticlesBuildingsStore())
-const { getPostItem } = useArticlesBuildingsStore()
+const { article } = storeToRefs(useArticlesStore())
+const { getPostItem } = useArticlesStore()
 const MAIN_URL = useRuntimeConfig().public.MAIN_URL
 await getPostItem(useRoute().params.id)
 const images = ref(article.value.data.images)

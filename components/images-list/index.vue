@@ -35,6 +35,10 @@ const MAIN_URL = useRuntimeConfig().public.MAIN_URL;
   &__item {
     width: calc(33% - 10px);
 
+    @media (max-width: $laptop-h) {
+      width: 100%;
+    }
+
     img {
       width: 100%;
       height: 100%;
