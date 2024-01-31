@@ -41,6 +41,18 @@ const MAIN_URL = useRuntimeConfig().public.MAIN_URL;
   width: calc(33% - 15px);
   transition: box-shadow .25s ease-in-out;
 
+  @media (max-width: $desktop) {
+    width: calc(33% - 16px);
+  }
+
+  @media (max-width: $laptop-w) {
+    width: calc(50% - 10px);
+  }
+
+  @media (max-width: $laptop-h) {
+    width: 100%;
+  }
+
   &:hover {
     box-shadow: 0 0 20px #0003, 0 0 10px #0000001a;
   }
@@ -51,6 +63,10 @@ const MAIN_URL = useRuntimeConfig().public.MAIN_URL;
     background: linear-gradient(45deg, #ff7e5f, #feb47b);
     transition: all 0.25s ease-in-out;
     height: 300px;
+
+    @media (max-width: $laptop-h) {
+      height: 360px;
+    }
 
     &::before {
       position: absolute;

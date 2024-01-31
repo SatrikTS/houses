@@ -41,10 +41,10 @@
   lang="ts"
 >
 import { storeToRefs } from 'pinia';
-import { useArticlesBuildingsStore } from '@/store/articles-buildings-store';
+import { useArticlesStore } from '@/store/articles-store';
 
-const { posts } = storeToRefs(useArticlesBuildingsStore());
-const { getPosts } = useArticlesBuildingsStore();
+const { posts } = storeToRefs(useArticlesStore());
+const { getPosts } = useArticlesStore();
 const MAIN_URL = useRuntimeConfig().public.MAIN_URL;
 await getPosts();
 </script>

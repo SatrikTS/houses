@@ -18,7 +18,7 @@ h1, h2, h3, h4, h5 {
   margin: 0 auto;
   position: relative;
 
-  @media (max-width: 1366px) {
+  @media (max-width: $desktop) {
     width: 100%;
     padding: 0 16px;
   }
@@ -161,6 +161,7 @@ ul.special-list {
   width: 100%;
   border: none;
   margin-bottom: 20px;
+  overflow: auto;
 
   table {
     width: 100%;

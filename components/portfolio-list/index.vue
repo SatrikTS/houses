@@ -34,6 +34,10 @@ defineProps<Props>();
     display: flex;
     flex-wrap: wrap;
     gap: 28px;
+
+    @media (max-width: $laptop-w) {
+      gap: 20px;
+    }
   }
 }
 </style>

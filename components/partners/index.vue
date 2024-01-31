@@ -28,7 +28,7 @@ const MAIN_URL = useRuntimeConfig().public.MAIN_URL
 .partners {
   display: flex;
   flex-wrap: wrap;
-  padding: 48px 0 32px;
+  //padding: 48px 0 32px;
 }
 
 .partners-item {
@@ -41,6 +41,14 @@ const MAIN_URL = useRuntimeConfig().public.MAIN_URL
   transition: box-shadow .25s ease-in-out;
   width: 25%;
   border-radius: 8px;
+
+  @media (max-width: $laptop-w) {
+    width: calc(50% - 10px);
+  }
+
+  @media (max-width: $mobile) {
+    width: 100%
+  }
 
   &:hover {
     box-shadow: 0 0 20px #0003, 0 0 10px #0000001a;
@@ -63,6 +71,10 @@ const MAIN_URL = useRuntimeConfig().public.MAIN_URL
     object-fit: contain;
     padding: 8px;
     width: 100%;
+
+    @media (max-width: $laptop-h) {
+      width: 250px;
+    }
   }
 }
 </style>

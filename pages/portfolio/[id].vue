@@ -1,5 +1,9 @@
 <template>
   <div class="portfolio-page">
+    <Head>
+      <Title>Монолитстрой | {{ portfolioItem.title }}</Title>
+      <Meta name="description" content="Проектирование и строительство загородных домов в Ленинградской области"/>
+    </Head>
     <div class="container">
       <h1>{{ portfolioItem.title }}</h1>
       <v-breadcrumbs :items="breadcrumbs">
@@ -108,14 +112,13 @@ await getPortfolioItem(useRoute().params.id);
 
 const breadcrumbs = [
   {
-    title: 'Наши работы',
+    title: 'Выполненные работы',
     disabled: false,
     href: '/portfolio',
   },
   {
     title: portfolioItem.value.title,
     disabled: true,
-    href: 'breadcrumbs_link_2',
   },
 ];
 </script>
@@ -153,8 +156,12 @@ const breadcrumbs = [
 .list {
   margin: $offset-large 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Создает 4 равных столбца */
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: $offset-base;
+
+  @media (max-width: $laptop-h) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 
   i {
     display: none;

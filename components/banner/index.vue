@@ -26,6 +26,10 @@ defineProps<Props>()
     overflow: hidden;
     height: 530px;
 
+    @media (max-width: $laptop-h) {
+      height: 360px;
+    }
+
     &::before {
       position: absolute;
       content: "";
@@ -49,6 +53,15 @@ defineProps<Props>()
     width: 580px;
     max-width: 100%;
     text-shadow: 1px 1px 1px #000;
+
+    @media (max-width: $desktop) {
+      left: 16px;
+    }
+
+    @media (max-width: $laptop-h) {
+      font-size: 24px;
+      width: auto;
+    }
   }
 }
 </style>

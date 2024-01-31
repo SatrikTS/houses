@@ -1,7 +1,13 @@
 <template>
-  <nav class="menu" :class="{ active: isActiveMenu }">
+  <nav
+    class="menu"
+    :class="{ active: isActiveMenu }"
+  >
     <div class="container">
-      <div v-if="isMobileSize" class="menu__service">
+      <div
+        v-if="isMobileSize"
+        class="menu__service"
+      >
         <Button
           buttonStyle="inverse"
           class="menu__btn"
@@ -14,16 +20,24 @@
         <Logo />
       </div>
       <ul class="menu__list">
-        <li v-for="item in menuList" :key="item.text" class="menu-item">
-          <NuxtLink :href="item.link"
-            >{{ item.text }}
+        <li
+          v-for="item in menuList"
+          :key="item.text"
+          class="menu-item"
+        >
+          <NuxtLink
+            :href="item.link"
+          >{{ item.text }}
           </NuxtLink>
         </li>
       </ul>
     </div>
   </nav>
 </template>
-<script setup lang="ts">
+<script
+  setup
+  lang="ts"
+>
 import { ref } from 'vue';
 import { menuList } from './menuList';
 
@@ -35,9 +49,12 @@ defineProps<Props>();
 
 const isActiveMenu = ref(false);
 </script>
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .menu {
-  @media (max-width: $mobile) {
+  @media (max-width: $laptop-h) {
     padding: 8px 0;
   }
 
@@ -49,7 +66,7 @@ const isActiveMenu = ref(false);
     padding: $offset-base 0;
     transition: all 0.55s ease-in-out;
 
-    @media (max-width: $mobile) {
+    @media (max-width: $laptop-h) {
       overflow: hidden;
       max-height: 0;
       flex-direction: column;
@@ -70,7 +87,7 @@ const isActiveMenu = ref(false);
       position: absolute;
       width: 22px;
       height: 2px;
-      background: $danger;
+      background: $bg-main;
       margin: 0 0 4px;
       transition: transform 0.25s ease-in-out;
 
@@ -92,16 +109,14 @@ const isActiveMenu = ref(false);
   &__service {
     display: none;
 
-    @media (max-width: $mobile) {
+    @media (max-width: $laptop-h) {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    .logo {
-      @media (max-width: $mobile) {
-        margin: 0 12px;
-      }
+    @media (max-width: $laptop-h) {
+      flex-direction: row-reverse;
     }
   }
 
@@ -134,7 +149,7 @@ const isActiveMenu = ref(false);
   .menu-item {
     //margin-right: $offset-small;
 
-    @media (max-width: $laptop) {
+    @media (max-width: $laptop-w) {
       display: flex;
     }
 
@@ -143,15 +158,20 @@ const isActiveMenu = ref(false);
       font-size: 18px;
       //color: $text;
 
-      @media (max-width: $laptop) {
-        font-size: 16px;
+      @media (max-width: $laptop-w) {
+        font-size: 14px;
         line-height: 1.5;
       }
 
-      @media (max-width: $mobile) {
+      @media (max-width: $laptop-h) {
         width: 100%;
         padding: 8px 0;
       }
+
+      //@media (max-width: $mobile) {
+      //  width: 100%;
+      //  padding: 8px 0;
+      //}
 
       &:hover {
         color: $bg-main;

@@ -18,6 +18,11 @@ defineProps<Props>();
   align-items: center;
   max-width: 200px;
 
+  @media (max-width: $laptop-w) {
+    flex-direction: row;
+    max-width: max-content;
+  }
+
   &__label {
     font-size: 0.9em;
     font-weight: 600;
