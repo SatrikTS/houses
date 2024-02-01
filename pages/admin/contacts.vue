@@ -53,6 +53,12 @@ const address = ref(contacts.value.address);
 const schedule = ref(contacts.value.schedule);
 const whereabouts = ref(contacts.value.whereabouts);
 
+const getSrcIframe = (html: string) => {
+  const iframeSrcRegex = /<iframe[^>]+src=["'](.*?)["']/i;
+  const match = html.match(iframeSrcRegex);
+  return match ? match[1] : "";
+};
+
 const submitContacts = async (): Promise<void> => {
   const params = {
     phone_1: phone1.value,
@@ -61,7 +67,7 @@ const submitContacts = async (): Promise<void> => {
     email_2: email2.value,
     address: address.value,
     schedule: schedule.value,
-    whereabouts: whereabouts.value,
+    whereabouts: getSrcIframe(whereabouts.value),
   };
   await putContacts(params);
 };
