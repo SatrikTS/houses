@@ -204,16 +204,7 @@ await getProjectsItem(projectID);
 
 const content = ref(projectsItem?.value?.data?.extende_info);
 
-const getIdVideo = (link: string) => {
-  const idVidoRegex = /(?:\?v=|\/embed\/|\/\d\/|\/v\/|https:\/\/youtu.be\/|\/embed\/|\/\d\/|\/v\/|https:\/\/www.youtube.com\/watch?v=)([a-zA-Z0-9_-]{11})/;
-  const match = link.match(idVidoRegex);
-  return match ? match[1] : "";
-};
-
 const handlePutProject = async (): Promise<void> => {
-  const srcYouTubeVido = projectsItem.value.data.project_video;
-  const idYouTubeVido = getIdVideo(srcYouTubeVido);
-
   const data = {
     ...projectsItem.value.data,
     roof_type_id: projectsItem.value.data.roof_type?.id,
@@ -224,7 +215,6 @@ const handlePutProject = async (): Promise<void> => {
     level_type_id: projectsItem.value.data.level_type?.id,
     room_count_id: projectsItem.value.data.room_count?.id,
     extende_info: content.value,
-    project_video: idYouTubeVido,
   };
 
   const response = await putProjectsItem(data, projectID);

@@ -39,7 +39,7 @@
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen
-                :src="'https://www.youtube.com/embed/' + projectsItem?.data.project_video"
+                :src="'https://www.youtube.com/embed/' + idVideo"
               ></iframe>
             </div>
           </div>
@@ -171,16 +171,19 @@
 import { ref } from 'vue'
 import { useProjectsStore } from '@/store/projects-store'
 
-const { getProjectsItem } = useProjectsStore()
-const { getProjectsList } = useProjectsStore()
-
-const { projectsItem } = storeToRefs(useProjectsStore())
-const { projectsList } = storeToRefs(useProjectsStore())
-
-const contactsTitle = ref('Задать вопрос:')
+const { getProjectsItem, getProjectsList } = useProjectsStore()
+const { projectsItem, projectsList } = storeToRefs(useProjectsStore())
 
 await getProjectsItem(useRoute().params.id)
 await getProjectsList(null, 4)
+
+const contactsTitle = ref('Задать вопрос:');
+const getIdVideo = (link) => {
+  const idVidoRegex = /(?:\?v=|\/embed\/|\/\d\/|\/v\/|https:\/\/youtu.be\/|\/embed\/|\/\d\/|\/v\/|https:\/\/www.youtube.com\/watch?v=)([a-zA-Z0-9_-]{11})/;
+  const match = link.match(idVidoRegex);
+  return match ? match[1] : "";
+};
+const idVideo = ref(getIdVideo(projectsItem?.value.data.project_video));
 
 const breadcrumbs = [
   {
