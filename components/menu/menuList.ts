@@ -16,17 +16,17 @@ export const menuList = [
     text: 'Выполненные работы',
   },
   {
-    link: '/buildings-posts',
+    link: '/buildings',
     text: 'Строительство',
   },
   {
     link: '/engineering',
     text: 'Инженерные системы',
   },
-  // {
-  //   link: '/design',
-  //   text: 'Проектирование',
-  // },
+  {
+    link: '/services',
+    text: 'Услуги',
+  },
   {
     link: '/contacts',
     text: 'Контакты',

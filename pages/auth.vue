@@ -38,7 +38,7 @@ const getAuth = async (): Promise<void> => {
 
     const response = await authenticateAdmin(formData);
     if (response?.token && response?.role === 'admin') {
-      navigateTo('/admin');
+      navigateTo('/admin', { external: true });
     }
   }
 };

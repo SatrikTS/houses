@@ -38,11 +38,13 @@
         <v-text-field
           v-model="projectFields.price_turnkey"
           min="0"
+          type="number"
           label="Стоимость под ключ"
         />
         <v-text-field
           v-model="projectFields.price_per_project"
           min="0"
+          type="number"
           label="Стоимость проектирования"
         />
         <v-text-field

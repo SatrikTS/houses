@@ -40,11 +40,13 @@
         />
         <v-text-field
           v-model="projectsItem.data.price_turnkey"
+          type="number"
           min="0"
           label="Стоимость под ключ"
         />
         <v-text-field
           v-model="projectsItem.data.price_per_project"
+          type="number"
           min="0"
           label="Стоимость проектирования"
         />
@@ -59,13 +61,13 @@
           v-model="projectsItem.data.construction_period"
           type="number"
           min="0"
-          label="Сроки строительства"
+          label="Сроки строительства в месяцах"
         />
         <v-text-field
           v-model="projectsItem.data.project_period"
           type="number"
           min="0"
-          label="Сроки проектирования"
+          label="Сроки проектирования в месяцах"
         />
         <v-text-field
           v-model="projectsItem.data.additional_buildings"

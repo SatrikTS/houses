@@ -62,6 +62,7 @@ export const usePortfolioStore = defineStore('portfolioStore', () => {
   const getPortfolioItem = async (id: number): Promise<void> => {
     const { data } = await $api.get(`/portfolios/${id}`);
     portfolioItem.value = data?.data;
+    return data?.data
   };
 
   /**
