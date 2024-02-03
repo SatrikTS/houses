@@ -185,11 +185,18 @@ await getRoomsList();
 await getLevelsList();
 await getRoofsTypeList();
 
+const getSrcIframe = (html: string) => {
+  const iframeSrcRegex = /<iframe[^>]+src=["'](.*?)["']/i;
+  const match = html.match(iframeSrcRegex);
+  return match ? match[1] : "";
+};
+
 const submitPortfolioItem = async (): Promise<void> => {
   if (form.value.isValid) {
 
     const data = {
       ...portfolioItem.value,
+      map_link: getSrcIframe(portfolioItem.value.map_link),
     };
 
     const response = await putPortfolioItem(data, projectID);
