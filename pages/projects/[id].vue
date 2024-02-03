@@ -39,9 +39,8 @@
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen
-                src="https://www.youtube.com/embed/6W53qbR7fsI"
+                :src="'https://www.youtube.com/embed/' + projectsItem?.data.project_video"
               ></iframe>
-              {# :src="projectsItem?.data.project_video" #}
             </div>
           </div>
         </div>
