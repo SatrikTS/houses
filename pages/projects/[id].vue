@@ -22,7 +22,7 @@
             />
           </div>
           <div class="project__desc _laptop">
-            <Project-description :projectsItem="projectsItem" />
+            <Description :projectsItem="projectsItem" />
           </div>
           <div class="project__text">
             <div
@@ -34,22 +34,12 @@
             v-if="projectsItem.data.project_video"
             class="project__video"
           >
-            <div class="project__video-wrap">
-              <iframe
-                width="100%"
-                height="100%"
-                title="RAM Effect Vehicle"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
-                :src="'https://www.youtube.com/embed/' + idVideo"
-              ></iframe>
-            </div>
+            <Video-youtube :linkVideo="projectsItem.data.project_video" />
           </div>
         </div>
         <div class="project__right">
           <div class="project__desc _desktop">
-            <Project-description :projectsItem="projectsItem" />
+            <Description :projectsItem="projectsItem" />
           </div>
           <div class="project__contacts">
             <FormFeedback :title="contactsTitle" />
@@ -80,12 +70,6 @@ await getProjectsItem(useRoute().params.id)
 await getProjectsList(null, 4)
 
 const contactsTitle = ref('Задать вопрос:');
-const getIdVideo = (link) => {
-  const idVidoRegex = /(?:\?v=|\/embed\/|\/\d\/|\/v\/|https:\/\/youtu.be\/|\/embed\/|\/\d\/|\/v\/|https:\/\/www.youtube.com\/watch?v=)([a-zA-Z0-9_-]{11})/;
-  const match = link.match(idVidoRegex);
-  return match ? match[1] : "";
-};
-const idVideo = ref(getIdVideo(projectsItem?.value.data.project_video));
 
 const breadcrumbs = [
   {
@@ -162,22 +146,7 @@ const breadcrumbs = [
   }
 
   &__video {
-    position: relative;
-    border-radius: 6px;
-    overflow: hidden;
     margin-bottom: 40px;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 15px rgba(0, 0, 0, 0.25);
-  }
-
-  &__video-wrap {
-    width: 100%;
-    padding-bottom: 56.25%;
-
-    iframe {
-      position: absolute;
-      width: 100%;
-      height: 101%;
-    }
   }
 
   &__contacts {

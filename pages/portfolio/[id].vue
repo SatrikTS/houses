@@ -81,7 +81,14 @@
         class="portfolio-page__description"
         v-html="portfolioItem.info_house"
       />
+      <div
+        v-if="portfolioItem.video_house"
+        class="portfolio-page__video"
+      >
+        <Video-youtube :linkVideo="portfolioItem.video_house" />
+      </div>
     </div>
+   
     <div v-if="portfolioItem.map_link" class="portfolio-page__map">
       <div class="container">
         <h2>Объект на карте</h2>
@@ -150,6 +157,10 @@ const breadcrumbs = [
     overflow: hidden;
     padding: 40px 30px 40px;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 15px rgba(0, 0, 0, 0.25);
+  }
+
+  &__video {
+    margin-bottom: $offset-large;
   }
 }
 
