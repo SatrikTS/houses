@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="post">
     <Head>
       <Title>Монолитстрой | {{ article?.data.keywords }}</Title>
       <Meta name="description" content="Проектирование и строительство домов, бань, дач в Санкт-Петербурге"/>
@@ -11,7 +11,7 @@
       <img
         v-if="images"
         :src="MAIN_URL +'/'+ images[0]?.img"
-        class="about__img"
+        class="post__img"
         alt="Монолит строй СПб"
       >
       <div
@@ -20,14 +20,14 @@
       ></div>
       <div class="clear">
       </div>
-      <div class="about__images">
+      <div class="post__images">
         <ImagesList
           :images="images.slice(1)"
         />
       </div>
       <div
         v-if="article.data.video "
-        class="about__video"
+        class="post__video"
       >
         <h2>Видео</h2>
         <div v-html="article.data.video"></div>
@@ -51,7 +51,7 @@ const images = ref(article.value.data.images)
   scoped
   lang="scss"
 >
-.about {
+.post {
   position: relative;
 
   &__img {

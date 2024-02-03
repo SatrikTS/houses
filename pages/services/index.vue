@@ -1,8 +1,8 @@
 <template>
   <ArticleList
-    title="Инженерные системы"
+    title="Услуги"
     :list="posts.data"
-    path="engineering"
+    path="services"
   />
 </template>
 <script
@@ -15,5 +15,5 @@ import ArticleList from '/components/articles-list';
 
 const { posts } = storeToRefs(useArticlesStore());
 const { getPosts } = useArticlesStore();
-await getPosts('Инженерные системы');
+await getPosts('Услуги');
 </script>

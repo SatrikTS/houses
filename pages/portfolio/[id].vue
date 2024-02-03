@@ -1,8 +1,11 @@
 <template>
-  <div class="portfolio-page">
+  <div v-if="portfolioItem" class="portfolio-page">
     <Head>
-      <Title>Монолитстрой | {{ portfolioItem.title }}</Title>
-      <Meta name="description" content="Проектирование и строительство загородных домов в Ленинградской области"/>
+      <Title>Монолитстрой | {{ portfolioItem?.title }}</Title>
+      <Meta
+        name="description"
+        content="Проектирование и строительство загородных домов в Ленинградской области"
+      />
     </Head>
     <div class="container">
       <h1>{{ portfolioItem.title }}</h1>
@@ -67,7 +70,10 @@
           </li>
         </ul>
       </div>
-      <div v-if="portfolioItem.description" class="portfolio-page__description">
+      <div
+        v-if="portfolioItem.description"
+        class="portfolio-page__description"
+      >
         {{ portfolioItem.description }}
       </div>
       <h2>Фотогалерея</h2>
@@ -82,7 +88,10 @@
         v-html="portfolioItem.info_house"
       />
     </div>
-    <div v-if="portfolioItem.map_link" class="portfolio-page__map">
+    <div
+      v-if="portfolioItem.map_link"
+      class="portfolio-page__map"
+    >
       <div class="container">
         <h2>Объект на карте</h2>
       </div>
@@ -106,21 +115,28 @@ import { usePortfolioStore } from '~/store/portfolio-store';
 import { storeToRefs } from 'pinia';
 
 const { getPortfolioItem } = usePortfolioStore();
-const { portfolioItem } = storeToRefs(usePortfolioStore());
+// const { portfolioItem } = storeToRefs(usePortfolioStore());
 
-await getPortfolioItem(useRoute().params.id);
+const { data: portfolioItem } = await useAsyncData(
+  'portfolioItem',
+  () => getPortfolioItem(useRoute().params.id),
+);
 
-const breadcrumbs = [
-  {
-    title: 'Выполненные работы',
-    disabled: false,
-    href: '/portfolio',
-  },
-  {
-    title: portfolioItem.value.title,
-    disabled: true,
-  },
-];
+// console.log(posts);
+
+// getPortfolioItem(useRoute().params.id);
+
+// const breadcrumbs = [
+//   {
+//     title: 'Выполненные работы',
+//     disabled: false,
+//     href: '/portfolio',
+//   },
+//   {
+//     title: portfolioItem.value.title,
+//     disabled: true,
+//   },
+// ];
 </script>
 <style
   scoped
