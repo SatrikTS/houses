@@ -12,9 +12,6 @@
     "lint": "yarn lint:js",
     "lintfix": "prettier --write --list-different . && yarn lint:js --fix"
   },
-  "overrides": {
-    "vue": "latest"
-  },
   "devDependencies": {
     "@types/node": "^18.15.3",
     "nuxt": "^3.9.0",

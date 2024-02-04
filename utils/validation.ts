@@ -1,8 +1,9 @@
 import { ref } from "vue";
 
 export const emailRules = ref([
-  (value) => !!value || "Заполните поле.",
+  // (value) => !!value || "Заполните поле.",
   (value) => {
+    if (!value) return true; // Если поле пустое, правило проходит
     const pattern =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return pattern.test(value) || "Невалидный e-mail.";

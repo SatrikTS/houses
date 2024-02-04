@@ -16,12 +16,13 @@
           <NuxtLink class="admin-link" to="/admin/contacts">Контакты</NuxtLink>
           <NuxtLink class="admin-link" to="/admin/about">О Компании</NuxtLink>
           <NuxtLink class="admin-link" to="/admin/articles">Статьи</NuxtLink>
+          <NuxtLink class="admin-link" to="/admin/messages">Сообщения</NuxtLink>
           <div class="admin-service-item"></div>
-          <NuxtLink
-            class="admin-link admin-link--small"
-            to="/admin/category"
-          >Категории
-          </NuxtLink>
+<!--          <NuxtLink-->
+<!--            class="admin-link admin-link&#45;&#45;small"-->
+<!--            to="/admin/category"-->
+<!--          >Категории-->
+<!--          </NuxtLink>-->
           <NuxtLink
             class="admin-link admin-link--small"
             to="/admin/roof-materials"
@@ -81,6 +82,7 @@ const logOut = (): void => {
   logUserOut();
   navigateTo('/');
 };
+const token = useCookie('token');
 </script>
 <style scoped lang="scss">
 .admin {

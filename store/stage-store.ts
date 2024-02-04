@@ -3,14 +3,14 @@ import { ref } from 'vue';
 import type { OptionsListItem } from '@/utils/types';
 
 /**
- * Количетсво комнат в проекте
+ *
  */
 export const useStageStore = defineStore('stageStore', () => {
   const stagesList = ref();
   const { $api } = useNuxtApp();
 
   /**
-   * Получить список материалов
+   * Получить список
    */
   const getStageList = async (): Promise<void> => {
     const { data } = await $api.get('/completion_stages');
@@ -18,7 +18,7 @@ export const useStageStore = defineStore('stageStore', () => {
   };
 
   /**
-   * Изменить материал крыши
+   * Изменить материал
    * @param param
    * @param id
    */
@@ -33,7 +33,7 @@ export const useStageStore = defineStore('stageStore', () => {
   };
 
   /**
-   * Создать материал крыши
+   * Создать материал
    * @param param
    * @param id
    */

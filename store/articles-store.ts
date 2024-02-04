@@ -24,8 +24,21 @@ export const useArticlesStore = defineStore('articlesStore', () => {
    * Получить запись
    */
   const getPosts = async (category?: string): Promise<void> => {
+    const getParams = {
+      categories: category
+    }
+
+    const params = Object.fromEntries(
+      Object.entries(getParams).map(([key, value]) => {
+        if (Array.isArray(value)) {
+          return [key, value.join(',')];
+        }
+        return [key, value];
+      }),
+    );
+
     isLoading.value = true;
-    const { data } = await $api.get(`/posts/?category=${category}`);
+    const { data } = await $api.get('/posts', {params});
     posts.value = data;
     isLoading.value = false;
   };

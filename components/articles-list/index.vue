@@ -1,16 +1,16 @@
 <template>
   <div class="article">
     <TitleItem
-      caption="Статьи о строительстве"
+      :caption="title"
     />
     <div class="container">
       <div class="article__wrap">
         <div
-          v-for="post in posts.data"
+          v-for="post in list"
           :key="post.id"
           class="post"
         >
-          <NuxtLink :to="{ path: `/buildings-posts/${post.id}` }">
+          <NuxtLink :to="{ path: `/${path}/${post.id}` }">
             <div class="post__image">
               <img
                 :src="MAIN_URL +'/'+ post.images[0]?.img"
@@ -19,7 +19,7 @@
             </div>
           </NuxtLink>
           <div class="post__title">
-            <NuxtLink :to="{ path: `/buildings-posts/${post.id}` }">
+            <NuxtLink :to="{ path: `/${path}/${post.id}` }">
               {{ post.title }}
             </NuxtLink>
           </div>
@@ -40,13 +40,13 @@
   setup
   lang="ts"
 >
-import { storeToRefs } from 'pinia';
-import { useArticlesStore } from '@/store/articles-store';
+interface Props {
+  title: string,
+  list: any[],
+  path: string
+}
 
-const { posts } = storeToRefs(useArticlesStore());
-const { getPosts } = useArticlesStore();
-const MAIN_URL = useRuntimeConfig().public.MAIN_URL;
-await getPosts('Строительство');
+const props = defineProps<Props>();
 </script>
 <style
   scoped
@@ -65,7 +65,6 @@ await getPosts('Строительство');
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
     }
-
 
     @media (max-width: $mobile) {
       grid-template-columns: repeat(1, 1fr);

@@ -1,7 +1,11 @@
 <template>
   <div class="form-feedback">
     <h2 class="form-feedback__title">{{ title }}</h2>
-    <v-form ref="form" @submit.prevent @submit="submitMessage">
+    <v-form
+      ref="form"
+      @submit.prevent
+      @submit="submitMessage"
+    >
       <v-text-field
         v-model="name"
         class="form-feedback__input"
@@ -33,20 +37,38 @@
         :rules="emptyRules"
         label="Сообщение"
       />
-      <v-btn color="#27ae60" class="btn submit-btn" block type="submit">
+      <v-btn
+        color="#27ae60"
+        class="btn submit-btn"
+        block
+        type="submit"
+      >
         ОТПРАВИТЬ
       </v-btn>
     </v-form>
-    <v-alert v-if="successMsg" class="alert" type="success"
-      >{{ successMsg }}
+    <v-alert
+      v-if="successMsg"
+      class="alert"
+      type="success"
+    >{{ successMsg }}
     </v-alert>
   </div>
 </template>
-
-<script setup lang="ts">
+<script
+  setup
+  lang="ts"
+>
 import { ref } from 'vue';
+import { useMessagesStore } from '@/store/user-messages-store';
 import { emailRules, emptyRules } from '@/utils/validation';
 
+interface Props {
+  title: string;
+}
+
+defineProps<Props>();
+
+const { postMessagesItem } = useMessagesStore();
 const name = ref();
 const email = ref();
 const phone = ref();
@@ -55,32 +77,34 @@ const form = ref();
 const successMsg = ref();
 const preferConnection = ref();
 
-const submitMessage = (): void => {
+const submitMessage = async (): Promise<void> => {
   if (form.value.isValid) {
     const data = {
       name: name.value,
       email: email.value,
       phone: phone.value,
       message: message.value,
-      preferConnection: preferConnection.value,
+      method_communication: preferConnection.value,
     };
-    console.log(data);
-    successMsg.value = 'Cообщение отправлено!';
+
+    const response = await postMessagesItem(data);
+    successMsg.value = response;
+
+    name.value = null;
+    email.value = null;
+    phone.value = null;
+    message.value = null;
+    preferConnection.value = null;
     setTimeout(() => {
       successMsg.value = null;
     }, 3000);
-    message.value = '';
   }
 };
-
-interface Props {
-  title: string;
-}
-
-defineProps<Props>();
 </script>
-
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .form-feedback {
   &__input {
     margin: 0 0 $offset-small;
