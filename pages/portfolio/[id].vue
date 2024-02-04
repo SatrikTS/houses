@@ -88,7 +88,6 @@
         <Video-youtube :linkVideo="portfolioItem.video_house" />
       </div>
     </div>
-   
     <div 
       v-if="portfolioItem.map_link" 
       class="portfolio-page__map"
