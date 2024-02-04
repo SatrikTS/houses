@@ -89,7 +89,10 @@
       </div>
     </div>
    
-    <div v-if="portfolioItem.map_link" class="portfolio-page__map">
+    <div 
+      v-if="portfolioItem.map_link" 
+      class="portfolio-page__map"
+    >
       <div class="container">
         <h2>Объект на карте</h2>
       </div>
