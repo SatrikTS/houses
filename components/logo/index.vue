@@ -37,6 +37,7 @@ import LogoIcon from '../../assets/icons/logo-icon.vue';
     @media (max-width: $laptop-h) {
       width: 35px;
       height: 35px;
+      flex-shrink: 0;
     }
   }
 
@@ -69,6 +70,12 @@ import LogoIcon from '../../assets/icons/logo-icon.vue';
     @media (max-width: $laptop-h) {
       color: $bg-base;
     }
+
+    @media (max-width: 380px) {
+      font-size: 22px;
+      width: fit-content;
+      white-space: nowrap;
+    }
   }
 
   &__slogan {
@@ -85,6 +92,12 @@ import LogoIcon from '../../assets/icons/logo-icon.vue';
 
     @media (max-width: $laptop-h) {
       color: $bg-base;
+    }
+
+    @media (max-width: 380px) {
+      font-size: 8px;
+      width: fit-content;
+      white-space: nowrap;
     }
   }
 }

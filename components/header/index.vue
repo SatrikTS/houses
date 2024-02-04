@@ -100,6 +100,10 @@ defineProps<Props>();
 
   .address {
     align-items: flex-end;
+
+    @media (max-width: $mobile) {
+      align-items: flex-start;
+    }
   }
 }
 </style>

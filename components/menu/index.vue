@@ -120,6 +120,10 @@ const isActiveMenu = ref(false);
     }
   }
 
+  .logo {
+    max-width: calc(100% - 40px);
+  }
+
   &__cart {
   }
 

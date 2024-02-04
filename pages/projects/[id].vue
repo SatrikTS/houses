@@ -21,6 +21,9 @@
               :images="projectsItem?.data.images"
             />
           </div>
+          <div class="project__desc _laptop">
+            <Description :projectsItem="projectsItem" />
+          </div>
           <div class="project__text">
             <div
               class="project__text-body"
@@ -31,124 +34,12 @@
             v-if="projectsItem.data.project_video"
             class="project__video"
           >
-            <div class="project__video-wrap">
-              <iframe
-                width="100%"
-                height="100%"
-                title="RAM Effect Vehicle"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
-                src="https://www.youtube.com/embed/6W53qbR7fsI"
-              ></iframe>
-              {# :src="projectsItem?.data.project_video" #}
-            </div>
+            <Video-youtube :linkVideo="projectsItem.data.project_video" />
           </div>
         </div>
         <div class="project__right">
-          <div class="project__desc">
-            <div
-              v-if="projectsItem.data.total_area"
-              class="project__desc-item"
-            >
-              <div class="project__desc-title">площадь</div>
-              <div class="project__desc-text">{{ projectsItem?.data.total_area }} м
-                <sup>2</sup>
-              </div>
-            </div>
-            <div
-              v-if="projectsItem.data.level_type.title"
-              class="project__desc-item"
-            >
-              <div class="project__desc-title">этажность</div>
-              <div class="project__desc-text">{{ projectsItem?.data.level_type.title }}</div>
-            </div>
-            <div
-              v-if="projectsItem.data.room_count.title"
-              class="project__desc-item"
-            >
-              <div class="project__desc-title">количество комнат</div>
-              <div class="project__desc-text">{{ projectsItem?.data.room_count.title }}</div>
-            </div>
-            <div
-              v-if="projectsItem.data.additional_buildings"
-              class="project__desc-item"
-            >
-              <div class="project__desc-title">дополнительно</div>
-              <div class="project__desc-text">{{ projectsItem?.data.additional_buildings }}</div>
-            </div>
-            <hr>
-            <div
-              v-if="projectsItem.data.roof_type.title"
-              class="project__desc-item"
-            >
-              <div class="project__desc-title">тип крыши</div>
-              <div class="project__desc-text">{{ projectsItem?.data.roof_type.title }}</div>
-            </div>
-            <div
-              v-if="projectsItem.data.roof_material.title"
-              class="project__desc-item"
-            >
-              <div class="project__desc-title">материал крыши</div>
-              <div class="project__desc-text">{{ projectsItem?.data.roof_material.title }}</div>
-            </div>
-            <div
-              v-if="projectsItem.data.wall_material.title"
-              class="project__desc-item"
-            >
-              <div class="project__desc-title">материал стены</div>
-              <div class="project__desc-text">{{ projectsItem?.data.wall_material.title }}</div>
-            </div>
-            <div
-              v-if="projectsItem.data.foundation_type.title"
-              class="project__desc-item"
-            >
-              <div class="project__desc-title">тип фундамента</div>
-              <div class="project__desc-text">{{ projectsItem?.data.foundation_type.title }}</div>
-            </div>
-            <div
-              v-if="projectsItem.data.heating_type.title"
-              class="project__desc-item"
-            >
-              <div class="project__desc-title">тип отопления</div>
-              <div class="project__desc-text">{{ projectsItem?.data.heating_type.title }}</div>
-            </div>
-            <div
-              v-if="projectsItem.data.completion_stage.title"
-              class="project__desc-item"
-            >
-              <div class="project__desc-title">}{3 - completion_stage</div>
-              <div class="project__desc-text">{{ projectsItem?.data.completion_stage.title }}</div>
-            </div>
-            <hr>
-            <div
-              v-if="projectsItem.data.price_per_project"
-              class="project__desc-item"
-            >
-              <div class="project__desc-title">стоимость проекта</div>
-              <div class="project__desc-text">{{ projectsItem?.data.price_per_project }} ₽</div>
-            </div>
-            <div
-              v-if="projectsItem.data.price_turnkey"
-              class="project__desc-item"
-            >
-              <div class="project__desc-title">стоимость под ключ</div>
-              <div class="project__desc-text">{{ projectsItem?.data.price_turnkey }} ₽</div>
-            </div>
-            <div
-              v-if="projectsItem.data.project_period"
-              class="project__desc-item"
-            >
-              <div class="project__desc-title">срок проектирования</div>
-              <div class="project__desc-text">от {{ projectsItem?.data.project_period }} мес.</div>
-            </div>
-            <div
-              v-if="projectsItem.data.construction_period"
-              class="project__desc-item"
-            >
-              <div class="project__desc-title">срок строительства</div>
-              <div class="project__desc-text">от {{ projectsItem?.data.construction_period }} мес.</div>
-            </div>
+          <div class="project__desc _desktop">
+            <Description :projectsItem="projectsItem" />
           </div>
           <div class="project__contacts">
             <FormFeedback :title="contactsTitle" />
@@ -172,16 +63,13 @@
 import { ref } from 'vue'
 import { useProjectsStore } from '@/store/projects-store'
 
-const { getProjectsItem } = useProjectsStore()
-const { getProjectsList } = useProjectsStore()
-
-const { projectsItem } = storeToRefs(useProjectsStore())
-const { projectsList } = storeToRefs(useProjectsStore())
-
-const contactsTitle = ref('Задать вопрос:')
+const { getProjectsItem, getProjectsList } = useProjectsStore()
+const { projectsItem, projectsList } = storeToRefs(useProjectsStore())
 
 await getProjectsItem(useRoute().params.id)
 await getProjectsList(null, 4)
+
+const contactsTitle = ref('Задать вопрос:');
 
 const breadcrumbs = [
   {
@@ -199,10 +87,6 @@ const breadcrumbs = [
   scoped
   lang="scss"
 >
-hr {
-  margin: 15px 0 35px;
-}
-
 .project {
   padding-bottom: 70px;
 
@@ -211,16 +95,31 @@ hr {
     justify-content: space-between;
     width: 100%;
     padding-top: 40px;
+
+    @media (max-width: $laptop-m) {
+      flex-direction: column;
+    }
   }
 
   &__left {
     flex-grow: 1;
     margin-right: 20px;
+
+    @media (max-width: $laptop-m) {
+      margin-right: 0;
+    }
   }
 
   &__right {
     width: 37%;
+    min-width: 370px;
     flex-shrink: 0;
+
+    @media (max-width: $laptop-m) {
+      flex-direction: column;
+      width: 100%;
+      min-width: 100%;
+    }
   }
 
   &__images {
@@ -228,64 +127,26 @@ hr {
   }
 
   &__desc {
-    padding: 40px 25px 60px;
-    background: rgb(0 0 0 / 70%);
-    color: $bg-main;
-    border-radius: 6px;
     margin-bottom: 40px;
-    box-shadow: 0 25px 30px rgba(0, 0, 0, 0.30), 0 15px 20px rgba(0, 0, 0, 0.25);
-  }
 
-  &__desc-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    line-height: 1;
-
-    &:not(:last-child) {
-      margin-bottom: 20px;
+    &._laptop {
+      display: none;
     }
-  }
 
-  &__desc-title {
-    width: 45%;
-    text-transform: uppercase;
-    font-size: 12px;
-    font-weight: 600;
-  }
+    @media (max-width: $laptop-m) {
+      &._laptop {
+        display: block;
+      }
 
-  &__desc-text {
-    width: 50%;
-    text-align: start;
-    font-size: 14px;
-    line-height: 1.5;
-
-    sup {
-      top: -0.5em;
-      position: relative;
-      font-size: 0.75em;
-      line-height: 0;
-      vertical-align: baseline;
+      &._desktop {
+        display: none;
+      }
     }
+    
   }
 
   &__video {
-    position: relative;
-    border-radius: 6px;
-    overflow: hidden;
     margin-bottom: 40px;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 15px rgba(0, 0, 0, 0.25);
-  }
-
-  &__video-wrap {
-    width: 100%;
-    padding-bottom: 56.25%;
-
-    iframe {
-      position: absolute;
-      width: 100%;
-      height: 101%;
-    }
   }
 
   &__contacts {

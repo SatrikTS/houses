@@ -76,21 +76,39 @@ const contact2 = reactive({
   &__wrap {
     display: flex;
     justify-content: space-between;
+
+    @media (max-width: $laptop-h) {
+      flex-direction: column;
+    }
   }
 
   &__info {
     width: 55%;
+
+    @media (max-width: $laptop-h) {
+      width: 100%;
+    }
   }
 
   &__row {
     display: flex;
     justify-content: space-between;
     margin-bottom: $offset-large-2;
+
+    @media (max-width: $mobile) {
+      flex-direction: column;
+    }
   }
 
   &__item {
     &:not(:last-child) {
       margin-right: 90px;
+    }
+
+    @media (max-width: $mobile) {
+      &:not(:last-child) {
+        margin-bottom: $offset-large-2;
+      }
     }
   }
 
@@ -100,6 +118,10 @@ const contact2 = reactive({
 
   &__form {
     width: 30%;
+
+    @media (max-width: $laptop-h) {
+      width: 100%;
+    }
   }
 }
 </style>
