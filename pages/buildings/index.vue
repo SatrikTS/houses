@@ -1,5 +1,6 @@
 <template>
   <ArticleList
+    v-if="posts"
     title="Статьи о строительстве"
     :list="posts.data"
     path="buildings"
@@ -15,5 +16,5 @@ import ArticleList from '/components/articles-list';
 
 const { posts } = storeToRefs(useArticlesStore());
 const { getPosts } = useArticlesStore();
-await getPosts('Строительство');
+getPosts('Строительство');
 </script>

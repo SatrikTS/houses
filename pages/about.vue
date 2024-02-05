@@ -26,7 +26,17 @@
         class="about__video"
       >
         <h2>Видео</h2>
-        <div v-html="aboutPost.data.company_video"></div>
+        <div v-if="aboutPost.data.company_video" style="height: 500px">
+          <iframe
+            width="100%"
+            height="100%"
+            title="RAM Effect Vehicle"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            :src="'https://www.youtube.com/embed/' + getIdVideo(aboutPost.data.company_video)"
+          ></iframe>
+        </div>
       </div>
     </div>
   </div>
@@ -41,6 +51,12 @@ const { getAboutData } = useAboutStore()
 const MAIN_URL = useRuntimeConfig().public.MAIN_URL
 await getAboutData()
 const images = ref(aboutPost.value.data.images)
+
+const getIdVideo = (link) => {
+  const idVidoRegex = /(?:\?v=|\/embed\/|\/\d\/|\/v\/|https:\/\/youtu.be\/|\/embed\/|\/\d\/|\/v\/|https:\/\/www.youtube.com\/watch?v=)([a-zA-Z0-9_-]{11})/;
+  const match = link.match(idVidoRegex);
+  return match ? match[1] : "";
+};
 </script>
 <style
   scoped

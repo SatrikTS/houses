@@ -9,7 +9,17 @@
     </Head>
     <div class="container">
       <h1>{{ portfolioItem.title }}</h1>
-      <v-breadcrumbs :items="breadcrumbs">
+      <v-breadcrumbs :items="[
+          {
+            title: 'Выполненные работы',
+            disabled: false,
+            href: '/portfolio',
+          },
+          {
+            title: portfolioItem.title,
+            disabled: true,
+          },
+      ]">
         <template v-slot:divider>
           <v-icon icon="mdi-chevron-right"></v-icon>
         </template>
@@ -102,7 +112,7 @@
         <h2>Объект на карте</h2>
       </div>
       <iframe
-        :src="portfolioItem.map_link"
+        :src="getSrcIframe(portfolioItem.map_link)"
         width="100%"
         height="450"
         frameborder="1"
@@ -121,28 +131,22 @@ import { usePortfolioStore } from '~/store/portfolio-store';
 import { storeToRefs } from 'pinia';
 
 const { getPortfolioItem } = usePortfolioStore();
-// const { portfolioItem } = storeToRefs(usePortfolioStore());
+const { portfolioItem } = storeToRefs(usePortfolioStore());
 
-const { data: portfolioItem } = await useAsyncData(
-  'portfolioItem',
-  () => getPortfolioItem(useRoute().params.id),
-);
+// TODO: сделать ssr загрузку
+// const { data: portfolioItem } = await useAsyncData(
+//   'portfolioItem',
+//   () => getPortfolioItem(useRoute().params.id),
+// );
 
-// console.log(posts);
+const getSrcIframe = (html: string) => {
+  const iframeSrcRegex = /<iframe[^>]+src=["'](.*?)["']/i;
+  const match = html.match(iframeSrcRegex);
+  return match ? match[1] : "";
+};
 
-// getPortfolioItem(useRoute().params.id);
+getPortfolioItem(useRoute().params.id);
 
-// const breadcrumbs = [
-//   {
-//     title: 'Выполненные работы',
-//     disabled: false,
-//     href: '/portfolio',
-//   },
-//   {
-//     title: portfolioItem.value.title,
-//     disabled: true,
-//   },
-// ];
 </script>
 <style
   scoped

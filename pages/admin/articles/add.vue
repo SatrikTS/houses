@@ -21,7 +21,7 @@
       />
       <v-text-field
         v-model="keywords"
-        label="Ключевые слова"
+        label="Ключевое описание для СЕО"
       />
       <v-select
         v-if="category.data"
@@ -31,10 +31,6 @@
         label="Категория"
         return-object
       ></v-select>
-      <v-text-field
-        v-model="videoLinks"
-        label="Ссылка на видео"
-      />
       <h3>Загрузка изображений:</h3>
       <Uploader
         v-if="!isLoading"

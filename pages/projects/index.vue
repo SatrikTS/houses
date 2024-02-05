@@ -1,5 +1,5 @@
 <template>
-  <div class="projects">
+  <div v-if="projectsList" class="projects">
     <Head>
       <Title>Монолитстрой | Проекты домов</Title>
       <Meta name="description" content="Проектирование и строительство домов, бань, дач в Санкт-Петербурге"/>
@@ -51,14 +51,14 @@ const { levelsList } = storeToRefs(useLevelsStore());
 const { roofTypesList } = storeToRefs(useRoofsTypeStore());
 const { projectsList } = storeToRefs(useProjectsStore());
 
-await getProjectsList();
-await getWallsMaterials();
-await getRoofMaterials();
-await getFoundationsTypes();
-await getHeatingList();
-await getRoomsList();
-await getLevelsList();
-await getRoofsTypeList();
+getProjectsList();
+getWallsMaterials();
+getRoofMaterials();
+getFoundationsTypes();
+getHeatingList();
+getRoomsList();
+getLevelsList();
+getRoofsTypeList();
 
 const filtersProjects = async (params: FiltersList): Promise<void> => {
   await getProjectsList(params);

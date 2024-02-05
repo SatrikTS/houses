@@ -30,10 +30,6 @@
         :rules="requiredRules"
         return-object
       ></v-select>
-      <v-text-field
-        v-model="videoLinks"
-        label="Ссылка на видео"
-      />
       <h3>Загрузка изображений:</h3>
       <Uploader
         v-if="!isLoading"

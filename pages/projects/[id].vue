@@ -1,15 +1,33 @@
 <template>
-  <div class="project">
+  <div
+    v-if="projectsItem"
+    class="project"
+  >
     <Head>
       <Title>Монолитстрой | {{ projectsItem?.data.title }}</Title>
-      <Meta name="description" content="Проектирование и строительство домов, бань, дач в Санкт-Петербурге"/>
+      <Meta
+        name="description"
+        content="Проектирование и строительство домов, бань, дач в Санкт-Петербурге"
+      />
     </Head>
     <TitleItem
       class="contacts__caption"
       :caption="projectsItem?.data.title"
     />
     <div class="container">
-      <v-breadcrumbs :items="breadcrumbs">
+      <v-breadcrumbs
+        :items="[
+          {
+            title: 'Проекты домов',
+            disabled: false,
+            href: '/projects',
+          },
+          {
+            title: projectsItem.data.title,
+            disabled: true,
+          },
+      ]"
+      >
         <template v-slot:divider>
           <v-icon icon="mdi-chevron-right"></v-icon>
         </template>
@@ -66,10 +84,10 @@ import { useProjectsStore } from '@/store/projects-store'
 const { getProjectsItem, getProjectsList } = useProjectsStore()
 const { projectsItem, projectsList } = storeToRefs(useProjectsStore())
 
-await getProjectsItem(useRoute().params.id)
-await getProjectsList(null, 4)
+getProjectsItem(useRoute().params.id)
+getProjectsList(null, 4)
 
-const contactsTitle = ref('Задать вопрос:');
+const contactsTitle = ref('Задать вопрос:')
 
 const breadcrumbs = [
   {
@@ -78,7 +96,7 @@ const breadcrumbs = [
     href: '/projects',
   },
   {
-    title: projectsItem?.value.data.title,
+    title: projectsItem?.value?.data.title,
     disabled: true,
   },
 ]
@@ -142,7 +160,7 @@ const breadcrumbs = [
         display: none;
       }
     }
-    
+
   }
 
   &__video {
