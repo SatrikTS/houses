@@ -23,7 +23,7 @@
             <h3 class="subtitle">{{ contacts.address }}</h3>
           </div>
           <iframe
-            :src="mapLink"
+            :src="getSrcIframe(mapLink)"
             width="100%"
             height="400"
             frameborder="1"
@@ -60,6 +60,12 @@ const contact2 = reactive({
   phone: contacts.value.phone_2,
   email: contacts.value.email_2,
 });
+
+const getSrcIframe = (html: string) => {
+  const iframeSrcRegex = /<iframe[^>]+src=["'](.*?)["']/i;
+  const match = html.match(iframeSrcRegex);
+  return match ? match[1] : "";
+};
 </script>
 <style scoped lang="scss">
 .contacts {
