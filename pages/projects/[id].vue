@@ -60,7 +60,7 @@
             <Description :projectsItem="projectsItem" />
           </div>
           <div class="project__contacts">
-            <FormFeedback :title="contactsTitle" />
+            <FormFeedback title="Задать вопрос" />
           </div>
         </div>
       </div>
@@ -78,7 +78,6 @@
   </div>
 </template>
 <script setup>
-import { ref } from 'vue'
 import { useProjectsStore } from '@/store/projects-store'
 
 const { getProjectsItem, getProjectsList } = useProjectsStore()
@@ -87,19 +86,6 @@ const { projectsItem, projectsList } = storeToRefs(useProjectsStore())
 getProjectsItem(useRoute().params.id)
 getProjectsList(null, 4)
 
-const contactsTitle = ref('Задать вопрос:')
-
-const breadcrumbs = [
-  {
-    title: 'Проекты домов',
-    disabled: false,
-    href: '/projects',
-  },
-  {
-    title: projectsItem?.value?.data.title,
-    disabled: true,
-  },
-]
 </script>
 <style
   scoped

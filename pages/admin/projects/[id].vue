@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="projectsItem"
     :class="{ 'is-loading': isLoading }"
     class="admin-projects-add">
     <v-form
@@ -195,14 +196,14 @@ const successMessage = ref();
 const form = ref();
 const projectID = useRoute().params.id;
 
-await getWallsMaterials();
-await getRoofMaterials();
-await getFoundationsTypes();
-await getHeatingList();
-await getRoomsList();
-await getLevelsList();
-await getRoofsTypeList();
-await getProjectsItem(projectID);
+getWallsMaterials();
+getRoofMaterials();
+getFoundationsTypes();
+getHeatingList();
+getRoomsList();
+getLevelsList();
+getRoofsTypeList();
+getProjectsItem(projectID);
 
 const content = ref(projectsItem?.value?.data?.extende_info);
 

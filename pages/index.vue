@@ -2,7 +2,7 @@
   <div class="main-page">
     <Banner :title="aboutPost?.data?.main_title" />
     <TitleItem caption="Проекты" />
-    <div class="project-list">
+    <div v-if="projectsList" class="project-list">
       <HousesList :projects="projectsList" />
       <div class="container">
         <v-btn
@@ -14,7 +14,7 @@
       </div>
     </div>
     <TitleItem caption="Наши работы" />
-    <div class="project-list">
+    <div v-if="portfolioList" class="project-list">
       <PortfolioList :list="portfolioList" />
       <div class="container">
         <v-btn
@@ -28,6 +28,7 @@
     <TitleItem caption="Партнеры" />
     <div class="container">
       <Partners
+        v-if="partnersList"
         :data="partnersList?.data"
       />
     </div>
@@ -60,9 +61,9 @@ const { partnersList } = storeToRefs(usePartnersStore());
 const { aboutPost } = storeToRefs(useAboutStore());
 const { getAboutData } = useAboutStore();
 
-await getProjectsList(null, 4);
-await getPortfolioList(3);
-await getPartnersList();
+getProjectsList(null, 4);
+getPortfolioList(3);
+getPartnersList();
 await getAboutData();
 </script>
 <style
