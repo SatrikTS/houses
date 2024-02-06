@@ -27,6 +27,7 @@
         >
           <NuxtLink
             :href="item.link"
+            @click="closeMenu"
           >{{ item.text }}
           </NuxtLink>
         </li>
@@ -48,6 +49,10 @@ interface Props {
 defineProps<Props>();
 
 const isActiveMenu = ref(false);
+
+const closeMenu = (): void => {
+  isActiveMenu.value = false
+}
 </script>
 <style
   scoped
@@ -56,6 +61,11 @@ const isActiveMenu = ref(false);
 .menu {
   @media (max-width: $laptop-h) {
     padding: 8px 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
   }
 
   &__list {
@@ -159,7 +169,7 @@ const isActiveMenu = ref(false);
 
     a {
       text-decoration: none;
-      font-size: 18px;
+      font-size: 16px;
       //color: $text;
 
       @media (max-width: $laptop-w) {

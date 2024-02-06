@@ -101,7 +101,6 @@ const showRemoveModal = (id: string): void => {
 
 const confirmRemoveModal = async (): Promise<void> => {
   const response = await deleteMessage(removeOptionId.value);
-  console.log(response);
   setTimeout(() => {
     updateMsgStatus(response);
   });

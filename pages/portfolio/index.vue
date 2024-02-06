@@ -1,5 +1,5 @@
 <template>
-  <div v-if="portfolioList" class="portfolio">
+  <div class="portfolio">
     <Head>
       <Title>Монолитстрой | Выполненные работы</Title>
       <Meta name="description" content="Строительство загородных домов в Санкт-Петербурге. Примеры работ"/>
@@ -21,7 +21,7 @@ import { storeToRefs } from 'pinia';
 const { getPortfolioList } = usePortfolioStore();
 const { portfolioList } = storeToRefs(usePortfolioStore());
 
-getPortfolioList();
+await getPortfolioList();
 </script>
 <style scoped>
 </style>

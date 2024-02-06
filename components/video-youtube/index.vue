@@ -23,10 +23,10 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const getIdVideo = (link) => {
+const getIdVideo = (link): string => {
   const idVidoRegex = /(?:\?v=|\/embed\/|\/\d\/|\/v\/|https:\/\/youtu.be\/|\/embed\/|\/\d\/|\/v\/|https:\/\/www.youtube.com\/watch?v=)([a-zA-Z0-9_-]{11})/;
   const match = link.match(idVidoRegex);
-  return match ? match[1] : "";
+  return match ? match[1] : '';
 };
 
 const idVideo = ref(getIdVideo(props.linkVideo));

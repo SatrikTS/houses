@@ -17,11 +17,6 @@
           />
         </NuxtLink>
       </div>
-      <div class="house__btn-group">
-        <v-btn class="house-btn">
-          <IconHeart />
-        </v-btn>
-      </div>
       <div class="house__char">
         <div class="house__char-item">
           <span class="house__char-key">Площадь: </span>
@@ -49,8 +44,6 @@
   setup
   lang="ts"
 >
-import IconHeart from '@/assets/icons/icon-heart.vue';
-
 const MAIN_URL = useRuntimeConfig().public.MAIN_URL;
 
 interface Props {

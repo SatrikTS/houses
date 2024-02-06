@@ -25,7 +25,7 @@ export const useArticlesStore = defineStore('articlesStore', () => {
    */
   const getPosts = async (category?: string): Promise<void> => {
     const getParams = {
-      categories: category
+      categories: category,
     }
 
     const params = Object.fromEntries(

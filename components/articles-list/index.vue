@@ -25,10 +25,10 @@
           </div>
           <div class="post__keywords">
             <span
-              v-for="word in post.keywords.split(',')"
+              v-for="word in post.keywords"
               :key="word"
             >
-              {{ word }} /
+              {{ word }}
             </span>
           </div>
         </div>
@@ -46,7 +46,8 @@ interface Props {
   path: string
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
+const MAIN_URL = useRuntimeConfig().public.MAIN_URL
 </script>
 <style
   scoped
@@ -62,7 +63,7 @@ const props = defineProps<Props>();
     padding: 40px 0;
 
     @media (max-width: $laptop-h) {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(1, 1fr);
       gap: 20px;
     }
 

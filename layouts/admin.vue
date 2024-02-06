@@ -82,7 +82,7 @@ const logOut = (): void => {
   logUserOut();
   navigateTo('/');
 };
-const token = useCookie('token');
+
 </script>
 <style scoped lang="scss">
 .admin {
