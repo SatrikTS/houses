@@ -49,6 +49,10 @@ defineProps<Props>();
     padding: 10px 0;
   }
 
+  @media (max-width: $laptop-h) {
+    margin-top: 60px;
+  }
+
   &.is-loading {
     @include skeleton(100%, 90px);
   }

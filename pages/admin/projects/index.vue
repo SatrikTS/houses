@@ -10,6 +10,7 @@
     <br>
     <br>
     <AdminOptionsList
+      v-if="projectsList"
       title="Проекты"
       :list="projectsList.data"
       :noneEdit="true"
@@ -37,7 +38,7 @@ const { getProjectsList, deleteProjectsItem } = useProjectsStore();
 const { projectsList } = storeToRefs(useProjectsStore());
 const updateMsg = ref();
 
-await getProjectsList();
+getProjectsList();
 
 const removeData = async (id: number): Promise<void> => {
   const response = await deleteProjectsItem(id);

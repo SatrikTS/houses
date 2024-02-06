@@ -171,6 +171,9 @@
         </template>
       </v-select>
     </div>
+    <b>
+      Всего найдено проектов: {{ count }} шт.
+    </b>
   </div>
 </template>
 <script
@@ -190,6 +193,7 @@ interface Props {
   roomsOptions: OptionsListItem[];
   levelsOptions: OptionsListItem[];
   roofsTypeOptions: OptionsListItem[];
+  count: number;
 }
 
 interface IEmits {

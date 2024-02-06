@@ -62,7 +62,7 @@ const props = defineProps<Props>();
     padding: 40px 0;
 
     @media (max-width: $laptop-h) {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(1, 1fr);
       gap: 20px;
     }
 
