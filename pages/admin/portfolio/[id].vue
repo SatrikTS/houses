@@ -191,7 +191,7 @@ const submitPortfolioItem = async (): Promise<void> => {
 
     const data = {
       ...portfolioItem.value,
-      map_link: portfolioItem.value.map_link
+      map_link: portfolioItem.value.map_link,
     };
 
     const response = await putPortfolioItem(data, projectID);

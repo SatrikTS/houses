@@ -1,6 +1,5 @@
 <template>
   <ArticleList
-    v-if="posts"
     title="Инженерные системы"
     :list="posts.data"
     path="engineering"
@@ -12,9 +11,9 @@
 >
 import { storeToRefs } from 'pinia';
 import { useArticlesStore } from '@/store/articles-store';
-import ArticleList from '/components/articles-list';
+import ArticleList from '~/components/articles-list';
 
 const { posts } = storeToRefs(useArticlesStore());
 const { getPosts } = useArticlesStore();
-getPosts('Инженерные системы');
+await getPosts('Инженерные системы');
 </script>

@@ -16,17 +16,7 @@
     />
     <div class="container">
       <v-breadcrumbs
-        :items="[
-          {
-            title: 'Проекты домов',
-            disabled: false,
-            href: '/projects',
-          },
-          {
-            title: projectsItem.data.title,
-            disabled: true,
-          },
-      ]"
+        :items="breadcrumbs"
       >
         <template v-slot:divider>
           <v-icon icon="mdi-chevron-right"></v-icon>
@@ -60,7 +50,7 @@
             <Description :projectsItem="projectsItem" />
           </div>
           <div class="project__contacts">
-            <FormFeedback :title="contactsTitle" />
+            <FormFeedback title="Задать вопрос" />
           </div>
         </div>
       </div>
@@ -78,16 +68,13 @@
   </div>
 </template>
 <script setup>
-import { ref } from 'vue'
 import { useProjectsStore } from '@/store/projects-store'
 
 const { getProjectsItem, getProjectsList } = useProjectsStore()
 const { projectsItem, projectsList } = storeToRefs(useProjectsStore())
 
-getProjectsItem(useRoute().params.id)
-getProjectsList(null, 4)
-
-const contactsTitle = ref('Задать вопрос:')
+await getProjectsItem(useRoute().params.id)
+await getProjectsList(null, 4)
 
 const breadcrumbs = [
   {

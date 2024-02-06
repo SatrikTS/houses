@@ -1,10 +1,19 @@
 <template>
-  <div v-if="projectsList" class="projects">
+  <div
+    v-if="projectsList"
+    class="projects"
+  >
     <Head>
       <Title>Монолитстрой | Проекты домов</Title>
-      <Meta name="description" content="Проектирование и строительство домов, бань, дач в Санкт-Петербурге"/>
+      <Meta
+        name="description"
+        content="Проектирование и строительство домов, бань, дач в Санкт-Петербурге"
+      />
     </Head>
-    <TitleItem class="contacts__caption" caption="Проекты домов" />
+    <TitleItem
+      class="contacts__caption"
+      caption="Проекты домов"
+    />
     <div class="container">
       <Filters
         class="projects__filters"
@@ -15,13 +24,21 @@
         :roomsOptions="roomList.data"
         :levelsOptions="levelsList.data"
         :roofsTypeOptions="roofTypesList.data"
+        :count="projectsList?.total"
         @filters="filtersProjects"
       />
     </div>
-    <HousesList class="projects__list" :projects="projectsList" />
+    <HousesList
+      class="projects__list"
+      :projects="projectsList"
+      :loader="isProjectsLoading"
+    />
   </div>
 </template>
-<script setup lang="ts">
+<script
+  setup
+  lang="ts"
+>
 import type { FiltersList } from '@/utils/types';
 import { storeToRefs } from 'pinia';
 import { useWallsStore } from '@/store/wall-store';
@@ -49,25 +66,28 @@ const { heatingList } = storeToRefs(useHeatingStore());
 const { roomList } = storeToRefs(useRoomsStore());
 const { levelsList } = storeToRefs(useLevelsStore());
 const { roofTypesList } = storeToRefs(useRoofsTypeStore());
-const { projectsList } = storeToRefs(useProjectsStore());
+const { projectsList, isProjectsLoading } = storeToRefs(useProjectsStore());
 
-getProjectsList();
-getWallsMaterials();
-getRoofMaterials();
-getFoundationsTypes();
-getHeatingList();
-getRoomsList();
-getLevelsList();
-getRoofsTypeList();
+await getWallsMaterials();
+await getRoofMaterials();
+await getFoundationsTypes();
+await getHeatingList();
+await getRoomsList();
+await getLevelsList();
+await getRoofsTypeList();
+await getProjectsList();
 
-const filtersProjects = async (params: FiltersList): Promise<void> => {
-  await getProjectsList(params);
+const filtersProjects = (params: FiltersList): void => {
+  getProjectsList(params);
 };
 </script>
-<style scoped lang="scss">
+<style
+  scoped
+  lang="scss"
+>
 .projects {
   &__filters {
-    margin: $offset-large-2 0;
+    margin: $offset-large-2 0 0;
   }
 }
 </style>

@@ -13,7 +13,7 @@
         </v-btn>
       </div>
     </div>
-    <TitleItem caption="Наши работы" />
+    <TitleItem caption="Выполненные работы" />
     <div class="project-list">
       <PortfolioList :list="portfolioList" />
       <div class="container">
@@ -34,7 +34,9 @@
     <TitleItem caption="О Компании" />
     <div class="container">
       <ContentBlock>
-        <p><div v-html="aboutPost.data?.main_text" /></p>
+        <p>
+          <div v-html="aboutPost.data?.main_text" />
+        </p>
       </ContentBlock>
     </div>
   </div>

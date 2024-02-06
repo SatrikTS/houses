@@ -10,11 +10,13 @@ export const useProjectsStore = defineStore('projectsStore', () => {
   const projectsItem = ref();
   const isLoading = ref();
   const { $api } = useNuxtApp();
+  const isProjectsLoading = ref()
 
   /**
    * Получить список
    */
   const getProjectsList = async (args?: FiltersList | null, limit?: number): Promise<void> => {
+    isProjectsLoading.value = true
     const getParams = {
       page: 1,
       limit: limit || 100,
@@ -40,9 +42,12 @@ export const useProjectsStore = defineStore('projectsStore', () => {
         return [key, value];
       }),
     );
-
-    const { data } = await $api.get('/projects', { params });
-    projectsList.value = data;
+    try {
+      const { data } = await $api.get('/projects', { params });
+      projectsList.value = data;
+    } finally {
+      isProjectsLoading.value = false
+    }
   };
 
   /**
@@ -123,5 +128,6 @@ export const useProjectsStore = defineStore('projectsStore', () => {
     projectsList,
     projectsItem,
     isLoading,
+    isProjectsLoading,
   };
 });

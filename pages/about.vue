@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <TitleItem
-      :caption="aboutPost.data.title"
+      caption="О компании"
     />
     <div class="container">
       <img
@@ -26,7 +26,10 @@
         class="about__video"
       >
         <h2>Видео</h2>
-        <div v-if="aboutPost.data.company_video" style="height: 500px">
+        <div
+          v-if="aboutPost.data.company_video"
+          style="height: 500px"
+        >
           <iframe
             width="100%"
             height="100%"
@@ -41,21 +44,24 @@
     </div>
   </div>
 </template>
-<script setup>
-import { ref } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useAboutStore } from '@/store/about-store'
+<script
+  setup
+  lang="ts"
+>
+import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useAboutStore } from '@/store/about-store';
 
-const { aboutPost } = storeToRefs(useAboutStore())
-const { getAboutData } = useAboutStore()
-const MAIN_URL = useRuntimeConfig().public.MAIN_URL
-await getAboutData()
-const images = ref(aboutPost.value.data.images)
+const { aboutPost } = storeToRefs(useAboutStore());
+const { getAboutData } = useAboutStore();
+const MAIN_URL = useRuntimeConfig().public.MAIN_URL;
+await getAboutData();
+const images = ref(aboutPost.value.data.images);
 
-const getIdVideo = (link) => {
+const getIdVideo = (link): string => {
   const idVidoRegex = /(?:\?v=|\/embed\/|\/\d\/|\/v\/|https:\/\/youtu.be\/|\/embed\/|\/\d\/|\/v\/|https:\/\/www.youtube.com\/watch?v=)([a-zA-Z0-9_-]{11})/;
   const match = link.match(idVidoRegex);
-  return match ? match[1] : "";
+  return match ? match[1] : '';
 };
 </script>
 <style

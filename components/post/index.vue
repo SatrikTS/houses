@@ -25,13 +25,6 @@
           :images="images.slice(1)"
         />
       </div>
-      <div
-        v-if="article.data.video "
-        class="post__video"
-      >
-        <h2>Видео</h2>
-        <div v-html="article.data.video"></div>
-      </div>
     </div>
   </div>
 </template>

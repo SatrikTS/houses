@@ -1,5 +1,5 @@
 <template>
-  <div v-if="portfolioItem" class="portfolio-page">
+  <div class="portfolio-page">
     <Head>
       <Title>Монолитстрой | {{ portfolioItem?.title }}</Title>
       <Meta
@@ -9,17 +9,7 @@
     </Head>
     <div class="container">
       <h1>{{ portfolioItem.title }}</h1>
-      <v-breadcrumbs :items="[
-          {
-            title: 'Выполненные работы',
-            disabled: false,
-            href: '/portfolio',
-          },
-          {
-            title: portfolioItem.title,
-            disabled: true,
-          },
-      ]">
+      <v-breadcrumbs :items="breadcrumbs">
         <template v-slot:divider>
           <v-icon icon="mdi-chevron-right"></v-icon>
         </template>
@@ -112,7 +102,7 @@
         <h2>Объект на карте</h2>
       </div>
       <iframe
-        :src="getSrcIframe(portfolioItem.map_link)"
+        :src="getSourceIframe(portfolioItem.map_link)"
         width="100%"
         height="450"
         frameborder="1"
@@ -128,24 +118,32 @@
   lang="ts"
 >
 import { usePortfolioStore } from '~/store/portfolio-store';
-import { storeToRefs } from 'pinia';
-
 const { getPortfolioItem } = usePortfolioStore();
-const { portfolioItem } = storeToRefs(usePortfolioStore());
 
 // TODO: сделать ssr загрузку
-// const { data: portfolioItem } = await useAsyncData(
-//   'portfolioItem',
-//   () => getPortfolioItem(useRoute().params.id),
-// );
+const { data: portfolioItem } = await useAsyncData(
+  'portfolioItem',
+  () => getPortfolioItem(useRoute().params.id),
+);
 
-const getSrcIframe = (html: string) => {
-  const iframeSrcRegex = /<iframe[^>]+src=["'](.*?)["']/i;
-  const match = html.match(iframeSrcRegex);
-  return match ? match[1] : "";
+const getSourceIframe = (html: string): string => {
+  const iframeSourceRegex = /<iframe[^>]+src=["'](.*?)["']/i;
+  const match = html.match(iframeSourceRegex);
+  return match ? match[1] : '';
 };
 
-getPortfolioItem(useRoute().params.id);
+const breadcrumbs = [
+  {
+    title: 'Выполненные работы',
+    disabled: false,
+    href: '/portfolio',
+  },
+  {
+    title: portfolioItem.title,
+    disabled: true,
+  },
+]
+// getPortfolioItem(useRoute().params.id);
 
 </script>
 <style
