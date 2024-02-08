@@ -16,7 +16,7 @@
       :updateMsg="updateMsg"
       :hasImage="true"
       @removeData="removeData"
-      @handleEdit="(id) => navigateTo({ path: `/admin/projects/${id}` })"
+      @handleEdit="(id) => navigateTo({ path: `/admin/projects/${id}` }, { external: true })"
     />
   </div>
 </template>

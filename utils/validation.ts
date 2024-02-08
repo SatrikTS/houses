@@ -34,3 +34,4 @@ export const numbersRules = ref([
 export const requiredRules = ref([(value) => !!value || "Поле обязательно"]);
 
 export const emptyRules = ref([(value) => !!value || "Заполните поле."]);
+export const emptyCheckbox = ref([(value) => !!value || "Для отправки необходимо дать согласие."]);

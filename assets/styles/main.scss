@@ -120,7 +120,7 @@ p {
 
 ul.special-list {
   list-style: none;
-  padding: 0;
+  padding: 0 0 20px;
   margin: 0;
 
   /* Стили для элементов списка */
@@ -130,12 +130,13 @@ ul.special-list {
     border-radius: 5px;
     background-color: #f2f2f2;
     transition: background-color 0.3s ease;
+    font-size: 14px;
   }
 
   /* Эффект при наведении на элемент списка */
-  li:hover {
-    background-color: #e0e0e0;
-  }
+  //li:hover {
+  //  background-color: #e0e0e0;
+  //}
 }
 
 .alert-message {

@@ -45,6 +45,29 @@
       >
         ОТПРАВИТЬ
       </v-btn>
+      <v-checkbox
+        label="Согласие на обработку персональных данных"
+        :rules="emptyCheckbox "
+      >
+        <template v-slot:label>
+          <div class="form-feedback__checkbox">
+            Согласие на обработку
+            <v-tooltip location="bottom">
+              <template v-slot:activator="{ props }">
+                <NuxtLink
+                  target="_blank"
+                  href="/policy"
+                  v-bind="props"
+                  @click.stop
+                >
+                  персональных данных
+                </NuxtLink>
+              </template>
+              Открытие в новом окне
+            </v-tooltip>
+          </div>
+        </template>
+      </v-checkbox>
     </v-form>
     <v-alert
       v-if="successMsg"
@@ -60,7 +83,7 @@
 >
 import { ref } from 'vue';
 import { useMessagesStore } from '@/store/user-messages-store';
-import { emailRules, emptyRules } from '@/utils/validation';
+import { emailRules, emptyRules, emptyCheckbox } from '@/utils/validation';
 
 interface Props {
   title: string;
@@ -112,6 +135,19 @@ const submitMessage = async (): Promise<void> => {
 
   &__title {
     margin-bottom: $offset-base;
+  }
+
+  &__checkbox {
+    width: 100%;
+    font-size: 12px;
+
+    a {
+      color: $active;
+
+      &:hover {
+        color: $danger;
+      }
+    }
   }
 }
 </style>
