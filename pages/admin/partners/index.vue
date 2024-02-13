@@ -3,7 +3,7 @@
     <h2>Партнеры</h2>
     <v-btn
       color="#27ae60"
-      @click="navigateTo({ path: `/admin/partners/add` })"
+      @click="navigateTo({ path: `/admin/partners/add` }, { external: true })"
     >
       Добавить новый элемент
     </v-btn>
@@ -15,7 +15,7 @@
       :hasImage="true"
       :updateMsg="updateMsg"
       @removeData="removeData"
-      @handleEdit="(id) => navigateTo({ path: `/admin/partners/${id}` })"
+      @handleEdit="(id) => navigateTo({ path: `/admin/partners/${id}` }, { external: true })"
     />
   </div>
 </template>

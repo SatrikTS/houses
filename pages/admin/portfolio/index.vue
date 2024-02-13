@@ -3,7 +3,7 @@
     <h2>Проекты из портфолио</h2>
     <v-btn
       color="#27ae60"
-      @click="navigateTo({ path: `/admin/portfolio/add` })"
+      @click="navigateTo({ path: `/admin/portfolio/add` }, { external: true })"
     >
       Добавить новый проект в портфолио
     </v-btn>
@@ -15,7 +15,7 @@
       :hasImage="true"
       :updateMsg="updateMsg"
       @removeData="removeData"
-      @handleEdit="(id) => navigateTo({ path: `/admin/portfolio/${id}` })"
+      @handleEdit="(id) => navigateTo({ path: `/admin/portfolio/${id}` }, { external: true })"
     />
   </div>
 </template>

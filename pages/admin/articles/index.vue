@@ -3,7 +3,7 @@
     <h2>Статьи</h2>
     <v-btn
       color="#27ae60"
-      @click="navigateTo({ path: `/admin/articles/add` })"
+      @click="navigateTo({ path: `/admin/articles/add` }, { external: true })"
     >Создать запись
     </v-btn>
     <br>
@@ -14,7 +14,7 @@
       :updateMsg="successMessage"
       :category="true"
       @removeData="removeData"
-      @handleEdit="(id) => navigateTo({ path: `/admin/articles/${id}` })"
+      @handleEdit="(id) => navigateTo({ path: `/admin/articles/${id}` }, { external: true })"
     />
     <SuccessAlert :successMessage="successMessage" />
   </div>
