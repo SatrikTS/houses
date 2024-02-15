@@ -5,7 +5,7 @@
       <v-select
         v-model="filtersList.roof_types"
         label="Тип крыши"
-        :items="roofsTypeOptions"
+        :items="filtersArray.roofTypes"
         clearable
         multiple
         density="compact"
@@ -69,7 +69,7 @@
       <v-select
         v-model="filtersList.wall_materials"
         label="Материалы стен"
-        :items="wallsOptions"
+        :items="filtersArray.wallMaterials"
         density="compact"
         clearable
         multiple
@@ -86,7 +86,7 @@
       <v-select
         v-model="filtersList.roof_materials"
         label="Материалы крыши"
-        :items="roofsOptions"
+        :items="filtersArray.roofMaterials"
         clearable
         multiple
         density="compact"
@@ -103,7 +103,7 @@
       <v-select
         v-model="filtersList.foundation_types"
         label="Тип фундамента"
-        :items="foundationsOptions"
+        :items="filtersArray.foundationTypes"
         clearable
         multiple
         density="compact"
@@ -120,7 +120,7 @@
       <v-select
         v-model="filtersList.room_counts"
         label="Количество комнат"
-        :items="roomsOptions"
+        :items="filtersArray.roomCounts"
         clearable
         multiple
         density="compact"
@@ -139,7 +139,7 @@
       <v-select
         v-model="filtersList.heating_types"
         label="Тип отопления"
-        :items="heatingOptions"
+        :items="filtersArray.heatingTypes"
         clearable
         multiple
         density="compact"
@@ -156,7 +156,7 @@
       <v-select
         v-model="filtersList.level_types"
         label="Кол-во этажей"
-        :items="levelsOptions"
+        :items="filtersArray.levelTypes"
         clearable
         multiple
         density="compact"
@@ -186,14 +186,16 @@ import FiltersSelectChip from './filters-select-chip.vue';
 import debounce from '~/utils/debounce';
 
 interface Props {
-  wallsOptions: OptionsListItem[];
-  roofsOptions: OptionsListItem[];
-  foundationsOptions: OptionsListItem[];
-  heatingOptions: OptionsListItem[];
-  roomsOptions: OptionsListItem[];
-  levelsOptions: OptionsListItem[];
-  roofsTypeOptions: OptionsListItem[];
   count: number;
+  filtersArray: {
+    wallMaterials: OptionsListItem[];
+    roofMaterials: OptionsListItem[];
+    foundationTypes: OptionsListItem[];
+    heatingTypes: OptionsListItem[];
+    roomCounts: OptionsListItem[];
+    levelTypes: OptionsListItem[];
+    roofTypes: OptionsListItem[];
+  }
 }
 
 interface IEmits {

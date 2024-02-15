@@ -16,13 +16,13 @@ export const passwordRules = ref([
 ]);
 
 export const phoneRules = ref([
-  (value) => !!value || "Заполните поле.",
-  (value) => {
-    const pattern =
-      /^(\+7|7|8)?[\s\-]?\(?[0-9]{3}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
-    return pattern.test(value) || "Невалидный телефон";
-  },
-]);
+    (v) => !!v || 'Поле обязательно',
+    value => {
+      const valid = /^((\+7|7|8)+([0-9]){10})$/.test(value);
+      return valid || 'Введите правильный формат телефона 7(***)******* (11 цифр)';
+    },
+  ],
+);
 
 export const numbersRules = ref([
   (value) => {

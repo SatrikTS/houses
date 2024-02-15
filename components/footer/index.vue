@@ -1,5 +1,5 @@
 <template>
-  <footer :class="{ 'is-loading': isLoading }" class="footer">
+  <footer class="footer">
     <div class="container">
       <div class="footer__top">
         <Logo />
@@ -26,7 +26,6 @@ interface Contacts {
 
 interface Props {
   contacts: Contacts;
-  isLoading: boolean;
 }
 
 defineProps<Props>();

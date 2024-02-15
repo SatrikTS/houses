@@ -1,7 +1,6 @@
 <template>
   <div>
     <Header
-      :isLoading="isLoading"
       :contacts="contacts"
       :isMobileSize="isMobileSize"
     />
@@ -13,7 +12,6 @@
       <slot />
     </main>
     <Footer
-      :isLoading="isLoading"
       :contacts="contacts"
     />
   </div>

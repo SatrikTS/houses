@@ -66,51 +66,45 @@
       <h3>Опции проекта</h3>
       <div class="admin-projects-add__options">
         <v-select
-          v-if="roofTypesList?.data"
           v-model="portfolioItem.roof_type"
           label="Тип крыши"
-          :items="roofTypesList.data"
+          :items="filtersList.roofTypes"
           clearable
         />
         <v-select
           v-model="portfolioItem.roof_material"
           label="Материал крыши"
-          :items="roofMaterials.data"
+          :items="filtersList.roofMaterials"
           clearable
         />
         <v-select
-          v-if="wallMaterials?.data"
           v-model="portfolioItem.wall_material"
           label="Материал стен"
-          :items="wallMaterials.data"
+          :items="filtersList.wallMaterials"
           clearable
         />
         <v-select
-          v-if="foundationsTypes?.data"
           v-model="portfolioItem.foundation_type"
           label="Тип фундамента"
-          :items="foundationsTypes.data"
+          :items="filtersList.foundationTypes"
           clearable
         />
         <v-select
-          v-if="heatingList?.data"
           v-model="portfolioItem.heating_type"
           label="Тип отопления"
-          :items="heatingList.data"
+          :items="filtersList.heatingTypes"
           clearable
         />
         <v-select
-          v-if="levelsList?.data"
           v-model="portfolioItem.level_type"
           label="Кол-во этажей"
-          :items="levelsList.data"
+          :items="filtersList.levelTypes"
           clearable
         />
         <v-select
-          v-if="roomList?.data"
           v-model="portfolioItem.room_count"
           label="Кол-во комнат"
-          :items="roomList.data"
+          :items="filtersList.roomCounts"
           clearable
         />
       </div>
@@ -139,52 +133,28 @@
 >
 import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
-import { useWallsStore } from '@/store/wall-store';
-import { useRoofsStore } from '@/store/roofs-store';
-import { useFoundationsStore } from '@/store/foundation-store';
-import { useHeatingStore } from '@/store/heating-store';
-import { useRoomsStore } from '@/store/rooms-store';
-import { useLevelsStore } from '@/store/levels-store';
-import { useRoofsTypeStore } from '@/store/roofs-type-store';
 import { requiredRules } from '@/utils/validation';
 import { usePortfolioStore } from '@/store/portfolio-store';
+import { useFiltersStore } from '@/store/filters-store';
 
 definePageMeta({
   layout: 'admin',
   middleware: 'auth',
 });
 
-const { getWallsMaterials } = useWallsStore();
-const { getRoofMaterials } = useRoofsStore();
-const { getFoundationsTypes } = useFoundationsStore();
-const { getHeatingList } = useHeatingStore();
-const { getRoomsList } = useRoomsStore();
-const { getLevelsList } = useLevelsStore();
-const { getRoofsTypeList } = useRoofsTypeStore();
 const { getPortfolioItem, putPortfolioItem, uploadPortfolioImages, deletePortfolioImage } = usePortfolioStore();
+const { getFiltersList } = useFiltersStore();
 
-const { wallMaterials } = storeToRefs(useWallsStore());
-const { roofMaterials } = storeToRefs(useRoofsStore());
-const { foundationsTypes } = storeToRefs(useFoundationsStore());
-const { heatingList } = storeToRefs(useHeatingStore());
-const { roomList } = storeToRefs(useRoomsStore());
-const { levelsList } = storeToRefs(useLevelsStore());
-const { roofTypesList } = storeToRefs(useRoofsTypeStore());
 const { portfolioItem } = storeToRefs(usePortfolioStore());
+const { filtersList } = storeToRefs(useFiltersStore());
+
 const newImagesList = ref();
 const successMessage = ref();
 const form = ref();
 
 const projectID = useRoute().params.id;
 await getPortfolioItem(projectID);
-await getWallsMaterials();
-await getRoofMaterials();
-await getFoundationsTypes();
-await getHeatingList();
-await getRoomsList();
-await getLevelsList();
-await getRoofsTypeList();
-
+await getFiltersList();
 
 const submitPortfolioItem = async (): Promise<void> => {
   if (form.value.isValid) {

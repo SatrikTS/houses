@@ -74,57 +74,51 @@
       <h3>Опции проекта</h3>
       <div class="admin-projects-add__options">
         <v-select
-          v-if="roofTypesList?.data"
           v-model="projectFields.roof_type_id"
           label="Тип крыши"
-          :items="roofTypesList.data"
+          :items="filtersList.roofTypes"
           clearable
           return-object
         />
         <v-select
           v-model="projectFields.roof_material_id"
           label="Материал крыши"
-          :items="roofMaterials.data"
+          :items="filtersList.roofMaterials"
           return-object
           clearable
         />
         <v-select
-          v-if="wallMaterials?.data"
           v-model="projectFields.wall_material_id"
           label="Материал стен"
-          :items="wallMaterials.data"
+          :items="filtersList.wallMaterials"
           return-object
           clearable
         />
         <v-select
-          v-if="foundationsTypes?.data"
           v-model="projectFields.foundation_type_id"
           label="Тип фундамента"
-          :items="foundationsTypes.data"
+          :items="filtersList.foundationTypes"
           return-object
           clearable
         />
         <v-select
-          v-if="heatingList?.data"
           v-model="projectFields.heating_type_id"
           label="Тип отопления"
-          :items="heatingList.data"
+          :items="filtersList.heatingTypes"
           return-object
           clearable
         />
         <v-select
-          v-if="levelsList?.data"
           v-model="projectFields.level_type_id"
           label="Кол-во этажей"
-          :items="levelsList.data"
+          :items="filtersList.levelTypes"
           return-object
           clearable
         />
         <v-select
-          v-if="roomList?.data"
           v-model="projectFields.room_count_id"
           label="Кол-во комнат"
-          :items="roomList.data"
+          :items="filtersList.roomCounts"
           return-object
           clearable
         />
@@ -155,49 +149,25 @@
 >
 import { reactive, ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
-import { useWallsStore } from '@/store/wall-store';
-import { useRoofsStore } from '@/store/roofs-store';
-import { useFoundationsStore } from '@/store/foundation-store';
-import { useHeatingStore } from '@/store/heating-store';
-import { useRoomsStore } from '@/store/rooms-store';
-import { useLevelsStore } from '@/store/levels-store';
-import { useRoofsTypeStore } from '@/store/roofs-type-store';
 import { useProjectsStore } from '@/store/projects-store';
 import { requiredRules } from '@/utils/validation';
+import { useFiltersStore } from '@/store/filters-store';
 
 definePageMeta({
   layout: 'admin',
   middleware: 'auth',
 });
 
-const { getWallsMaterials } = useWallsStore();
-const { getRoofMaterials } = useRoofsStore();
-const { getFoundationsTypes } = useFoundationsStore();
-const { getHeatingList } = useHeatingStore();
-const { getRoomsList } = useRoomsStore();
-const { getLevelsList } = useLevelsStore();
-const { getRoofsTypeList } = useRoofsTypeStore();
 const { postProjectsItem, uploadProjectImages, deleteProjectImage } = useProjectsStore();
+const { getFiltersList } = useFiltersStore();
 
-const { wallMaterials } = storeToRefs(useWallsStore());
-const { roofMaterials } = storeToRefs(useRoofsStore());
-const { foundationsTypes } = storeToRefs(useFoundationsStore());
-const { heatingList } = storeToRefs(useHeatingStore());
-const { roomList } = storeToRefs(useRoomsStore());
-const { levelsList } = storeToRefs(useLevelsStore());
-const { roofTypesList } = storeToRefs(useRoofsTypeStore());
+const { filtersList } = storeToRefs(useFiltersStore());
 const newImagesList = ref();
 const successMessage = ref();
 const form = ref();
 const content = ref()
 
-await getWallsMaterials();
-await getRoofMaterials();
-await getFoundationsTypes();
-await getHeatingList();
-await getRoomsList();
-await getLevelsList();
-await getRoofsTypeList();
+await getFiltersList();
 
 const projectFields = reactive({
   title: '',

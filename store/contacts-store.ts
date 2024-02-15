@@ -11,10 +11,8 @@ export const useContactsStore = defineStore('contactsStore', () => {
    * получение контактов для отображения сайте
    */
   const getContacts = async (): Promise<void> => {
-    isLoading.value = true;
     const { data } = await $api.get('/contacts');
     contacts.value = data;
-    isLoading.value = false;
   };
 
   const putContacts = async (params: any): Promise<void> => {

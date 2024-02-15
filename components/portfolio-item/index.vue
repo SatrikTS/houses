@@ -1,7 +1,8 @@
 <template>
   <div class="portfolio-item">
-    <NuxtLink
-      :to="{ path: `/portfolio/${data.id}` }"
+    <div
+      class="portfolio-item__link"
+      @click="navigateTo({ path: `/portfolio/${data.id}` }, { external: true })"
     >
       <div
         class="portfolio-item__image"
@@ -14,7 +15,7 @@
       <div class="portfolio-item__title">
         {{ data.title }}
       </div>
-    </NuxtLink>
+    </div>
   </div>
 </template>
 <script
@@ -40,6 +41,10 @@ const MAIN_URL = useRuntimeConfig().public.MAIN_URL;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   width: calc(33% - 15px);
   transition: box-shadow .25s ease-in-out;
+
+  &__link {
+    cursor: pointer;
+  }
 
   @media (max-width: $desktop) {
     width: calc(33% - 16px);

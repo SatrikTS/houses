@@ -17,13 +17,7 @@
     <div class="container">
       <Filters
         class="projects__filters"
-        :wallsOptions="wallMaterials.data"
-        :roofsOptions="roofMaterials.data"
-        :foundationsOptions="foundationsTypes.data"
-        :heatingOptions="heatingList.data"
-        :roomsOptions="roomList.data"
-        :levelsOptions="levelsList.data"
-        :roofsTypeOptions="roofTypesList.data"
+        :filtersArray="filtersList"
         :count="projectsList?.total"
         @filters="filtersProjects"
       />
@@ -41,41 +35,18 @@
 >
 import type { FiltersList } from '@/utils/types';
 import { storeToRefs } from 'pinia';
-import { useWallsStore } from '@/store/wall-store';
-import { useRoofsStore } from '@/store/roofs-store';
-import { useFoundationsStore } from '@/store/foundation-store';
-import { useHeatingStore } from '@/store/heating-store';
-import { useRoomsStore } from '@/store/rooms-store';
-import { useLevelsStore } from '@/store/levels-store';
-import { useRoofsTypeStore } from '@/store/roofs-type-store';
 import { useProjectsStore } from '@/store/projects-store';
+import { useFiltersStore } from '@/store/filters-store';
 
-const { getWallsMaterials } = useWallsStore();
-const { getRoofMaterials } = useRoofsStore();
-const { getFoundationsTypes } = useFoundationsStore();
-const { getHeatingList } = useHeatingStore();
-const { getRoomsList } = useRoomsStore();
-const { getLevelsList } = useLevelsStore();
-const { getRoofsTypeList } = useRoofsTypeStore();
 const { getProjectsList } = useProjectsStore();
+const { getFiltersList } = useFiltersStore();
 
-const { wallMaterials } = storeToRefs(useWallsStore());
-const { roofMaterials } = storeToRefs(useRoofsStore());
-const { foundationsTypes } = storeToRefs(useFoundationsStore());
-const { heatingList } = storeToRefs(useHeatingStore());
-const { roomList } = storeToRefs(useRoomsStore());
-const { levelsList } = storeToRefs(useLevelsStore());
-const { roofTypesList } = storeToRefs(useRoofsTypeStore());
 const { projectsList, isProjectsLoading } = storeToRefs(useProjectsStore());
+const { filtersList } = storeToRefs(useFiltersStore());
 
-await getWallsMaterials();
-await getRoofMaterials();
-await getFoundationsTypes();
-await getHeatingList();
-await getRoomsList();
-await getLevelsList();
-await getRoofsTypeList();
-await getProjectsList();
+getProjectsList();
+await getFiltersList();
+
 
 const filtersProjects = (params: FiltersList): void => {
   getProjectsList(params);

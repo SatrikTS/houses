@@ -1,7 +1,8 @@
 <template>
   <div
     :class="{ 'is-loading': isLoading }"
-    class="admin-projects-add">
+    class="admin-projects-add"
+  >
     <v-form
       ref="form"
       @submit.prevent
@@ -79,54 +80,49 @@
         <v-select
           v-model="projectsItem.data.roof_type"
           label="Тип крыши"
-          :items="roofTypesList.data"
+          :items="filtersList.roofTypes"
           clearable
           return-object
         />
         <v-select
           v-model="projectsItem.data.roof_material"
           label="Материал крыши"
-          :items="roofMaterials.data"
+          :items="filtersList.roofMaterials"
           return-object
           clearable
         />
         <v-select
-          v-if="wallMaterials?.data"
           v-model="projectsItem.data.wall_material"
           label="Материал стен"
-          :items="wallMaterials.data"
+          :items="filtersList.wallMaterials"
           return-object
           clearable
         />
         <v-select
-          v-if="foundationsTypes?.data"
           v-model="projectsItem.data.foundation_type"
           label="Тип фундамента"
-          :items="foundationsTypes.data"
+          :items="filtersList.foundationTypes"
           return-object
           clearable
         />
         <v-select
-          v-if="heatingList?.data"
           v-model="projectsItem.data.heating_type"
           label="Тип отопления"
-          :items="heatingList.data"
+          :items="filtersList.heatingTypes"
           return-object
           clearable
         />
         <v-select
-          v-if="levelsList?.data"
           v-model="projectsItem.data.level_type"
           label="Кол-во этажей"
-          :items="levelsList.data"
+          :items="filtersList.levelTypes"
           return-object
           clearable
         />
         <v-select
-          v-if="roomList?.data"
           v-model="projectsItem.data.room_count"
           label="Кол-во комнат"
-          :items="roomList.data"
+          :items="filtersList.roomCounts"
           return-object
           clearable
         />
@@ -157,51 +153,26 @@
 >
 import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
-import { useWallsStore } from '@/store/wall-store';
-import { useRoofsStore } from '@/store/roofs-store';
-import { useFoundationsStore } from '@/store/foundation-store';
-import { useHeatingStore } from '@/store/heating-store';
-import { useRoomsStore } from '@/store/rooms-store';
-import { useLevelsStore } from '@/store/levels-store';
-import { useRoofsTypeStore } from '@/store/roofs-type-store';
 import { useProjectsStore } from '@/store/projects-store';
 import { requiredRules } from '@/utils/validation';
+import { useFiltersStore } from '@/store/filters-store';
 
 definePageMeta({
   layout: 'admin',
   middleware: 'auth',
 });
 
-const { getWallsMaterials } = useWallsStore();
-const { getRoofMaterials } = useRoofsStore();
-const { getFoundationsTypes } = useFoundationsStore();
-const { getHeatingList } = useHeatingStore();
-const { getRoomsList } = useRoomsStore();
-const { getLevelsList } = useLevelsStore();
-const { getRoofsTypeList } = useRoofsTypeStore();
 const { putProjectsItem, uploadProjectImages, getProjectsItem, deleteProjectImage } = useProjectsStore();
-
-const { wallMaterials } = storeToRefs(useWallsStore());
-const { roofMaterials } = storeToRefs(useRoofsStore());
-const { foundationsTypes } = storeToRefs(useFoundationsStore());
-const { heatingList } = storeToRefs(useHeatingStore());
-const { roomList } = storeToRefs(useRoomsStore());
-const { levelsList } = storeToRefs(useLevelsStore());
-const { roofTypesList } = storeToRefs(useRoofsTypeStore());
+const { getFiltersList } = useFiltersStore();
 const { projectsItem, isLoading } = storeToRefs(useProjectsStore());
+const { filtersList } = storeToRefs(useFiltersStore());
 
 const newImagesList = ref();
 const successMessage = ref();
 const form = ref();
 const projectID = useRoute().params.id;
 
-await getWallsMaterials();
-await getRoofMaterials();
-await getFoundationsTypes();
-await getHeatingList();
-await getRoomsList();
-await getLevelsList();
-await getRoofsTypeList();
+await getFiltersList();
 await getProjectsItem(projectID);
 
 const content = ref(projectsItem?.value?.data?.extende_info);
@@ -238,16 +209,16 @@ const saveImage = async (message: string): Promise<void> => {
   setTimeout(() => location.reload(), 3000);
 };
 
-const uploadImage = (value: File[]): void=> {
+const uploadImage = (value: File[]): void => {
   newImagesList.value = value;
 };
 
 const handleRemoveImage = async (id: number): Promise<void> => {
-  const response = await deleteProjectImage(id)
-  successMessage.value = response
-  await handlePutProject()
+  const response = await deleteProjectImage(id);
+  successMessage.value = response;
+  await handlePutProject();
   setTimeout(() => location.reload(), 3000);
-}
+};
 
 watch(successMessage, () => {
   setTimeout(() => successMessage.value = null, 3000);

@@ -157,11 +157,11 @@ const closeMenu = (): void => {
     .menu__list {
       max-height: 1000px;
       opacity: 1;
+      padding: 16px 0 0;
     }
   }
 
   .menu-item {
-    //margin-right: $offset-small;
 
     @media (max-width: $laptop-w) {
       display: flex;
@@ -170,22 +170,16 @@ const closeMenu = (): void => {
     a {
       text-decoration: none;
       font-size: 16px;
-      //color: $text;
 
       @media (max-width: $laptop-w) {
-        font-size: 14px;
-        line-height: 1.5;
+        font-size: 22px;
+        line-height: 2;
       }
 
       @media (max-width: $laptop-h) {
         width: 100%;
         padding: 8px 0;
       }
-
-      //@media (max-width: $mobile) {
-      //  width: 100%;
-      //  padding: 8px 0;
-      //}
 
       &:hover {
         color: $bg-main;

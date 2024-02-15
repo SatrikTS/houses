@@ -13,6 +13,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'Монолитстрой | Проектирование и строительство',
+      link: [{ rel: 'icon', type: 'image/png', href: '/favicon.png' }],
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'description', content: 'Проектирование и строительство загородных домов, бань, гаражей в Санкт-Петербурге и области' },

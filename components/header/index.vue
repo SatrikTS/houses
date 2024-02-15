@@ -1,5 +1,5 @@
 <template>
-  <header :class="{ 'is-loading': isLoading }" class="header">
+  <header class="header">
     <div class="container">
       <div class="header__wrap">
         <div v-if="!isMobileSize" class="header__logo">
@@ -33,7 +33,6 @@ interface Contacts {
 
 interface Props {
   contacts: Contacts;
-  isLoading: boolean;
   isMobileSize: boolean
 }
 

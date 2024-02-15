@@ -22,13 +22,15 @@
         v-model="phone"
         class="form-feedback__input"
         :rules="phoneRules"
+        type="number"
+        hide-spin-buttons
         label="Номер телефона"
       />
       <v-select
         v-model="preferConnection"
         label="Предпочтительный cпособ связи"
         :rules="emptyRules"
-        :items="['Звонок', 'Telegram', 'WatsApp', 'Viber', 'Email']"
+        :items="['Звонок', 'Telegram', 'WatsApp']"
         clearable
       />
       <v-textarea
@@ -83,7 +85,7 @@
 >
 import { ref } from 'vue';
 import { useMessagesStore } from '@/store/user-messages-store';
-import { emailRules, emptyRules, emptyCheckbox } from '@/utils/validation';
+import { emailRules, emptyRules, emptyCheckbox, phoneRules } from '@/utils/validation';
 
 interface Props {
   title: string;
